@@ -1,0 +1,137 @@
+[
+  {
+    "products": [
+      "59f70cef9f833375061b15eb",
+      "59f70cef4bd3e4c5262d3659",
+      "59f70cef7a1c0938b6ee3a05",
+      "59f70cefe3ef120edeec8c11",
+      "59f70cef447d8072fa2fcd93",
+      "59f70cef8ca0a0a54ea1d39f",
+      "59f70cef07e5bda4a4a064e1",
+      "59f70cef078fbc852244a656"
+    ],
+    "location": {
+      "longitude": "10.3917159",
+      "latitude": "63.4146139"
+    },
+    "phone": "+47-973-59-133",
+    "email": "douglas@yang.org",
+    "password": "123456",
+    "username": "douglas16",
+    "name": {
+      "surname": "Yang",
+      "firstName": "Douglas"
+    },
+    "age": "24",
+    "img": "http://www.fillmurray.com/200/200",
+    "_id": "59f70cb5b3521e6e28a3f42a"
+  },
+  {
+    "products": [
+      "59f70cefd2b53679babb8604",
+      "59f70cef040107f174907914",
+      "59f70cef122d406742166318",
+      "59f70cef03e8c439d29342d8",
+      "59f70cefc908981b84ac4eef",
+      "59f70cef31a6200e9ca08286",
+      "59f70cefce6ab418ede7600c",
+      "59f70cefa7ca8c6aa6a142b0"
+    ],
+    "location": {
+      "longitude": "10.3963055",
+      "latitude": "63.4139574"
+    },
+    "phone": "+47-921-57-432",
+    "email": "salinas@booker.co.uk",
+    "password": "123456",
+    "username": "salinas11",
+    "name": {
+      "surname": "Booker",
+      "firstName": "Salinas"
+    },
+    "age": "28",
+    "img": "http://www.fillmurray.com/300/300",
+    "_id": "59f70cb5c14bf52e40077bbc"
+  },
+  {
+    "products": [
+      "59f70ceff724a5d5ca6f04e4",
+      "59f70cef8273942b6be6a560",
+      "59f70cef7525aa382db386ab",
+      "59f70cef1644cc08c0e4aa3c",
+      "59f70cef9bd4e05eff574f52",
+      "59f70cef9cae307a4f510618",
+      "59f70cef3d033eb849a1774d",
+      "59f70cef89bf0e5a302935dd"
+    ],
+    "location": {
+      "longitude": "10.3969801",
+      "latitude": "63.412392"
+    },
+    "phone": "+47-951-50-625",
+    "email": "middleton@conway.biz",
+    "password": "123456",
+    "username": "middleton19",
+    "name": {
+      "surname": "Conway",
+      "firstName": "Middleton"
+    },
+    "age": "29",
+    "img": "http://www.fillmurray.com/200/200",
+    "_id": "59f70cb57d4cf785ab7725fb"
+  },
+  {
+    "products": [
+      "59f70ceff4061ac30ad3e07f",
+      "59f70cef50cfc6eddd376ffd",
+      "59f70cef23e33f1d3663854e",
+      "59f70cefa5cdacb9cd6320f0",
+      "59f70cef09c2fb1956414126",
+      "59f70cefe06fda5e02273baa",
+      "59f70cef48398ed36559d040",
+      "59f70cef0eb2c30aa199251c",
+      "59f70cef35e7b919ffa9ae53"
+    ],
+    "location": {
+      "longitude": "10.3968134",
+      "latitude": "63.4164469"
+    },
+    "phone": "+47-989-49-638",
+    "email": "edwards@hurley.com",
+    "password": "123456",
+    "username": "edwards14",
+    "name": {
+      "surname": "Hurley",
+      "firstName": "Edwards"
+    },
+    "age": "39",
+    "img": "http://www.fillmurray.com/200/300",
+    "_id": "59f70cb54ddd8205b0143cb3"
+  },
+  {
+    "products": [
+      "59f70cef66e71a9ed8a95adc",
+      "59f70cefbcc99f53f6b2d2d3",
+      "59f70cef17d06c73bc124272",
+      "59f70cefbf391173967041c5",
+      "59f70cef06035c01646b724c",
+      "59f70cef3c759a72b702a7eb",
+      "59f70cefedc5db70dd3b702a"
+    ],
+    "location": {
+      "longitude": "10.3980096",
+      "latitude": "63.4146129"
+    },
+    "phone": "+47-858-57-925",
+    "email": "lorena@holloway.net",
+    "password": "123456",
+    "username": "lorena20",
+    "name": {
+      "surname": "Holloway",
+      "firstName": "Lorena"
+    },
+    "age": "22",
+    "img": "http://www.fillmurray.com/300/200",
+    "_id": "59f70cb58e7cb1e0a76f69b6"
+  }
+]
