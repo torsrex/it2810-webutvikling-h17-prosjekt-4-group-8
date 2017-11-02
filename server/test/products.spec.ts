@@ -3,21 +3,21 @@ import * as chaiHttp from 'chai-http';
 
 process.env.NODE_ENV = 'test';
 import { app } from '../app';
-import Cat from '../models/cat';
+import Product from '../models/product';
 
 const should = chai.use(chaiHttp).should();
 
-describe('Cats', () => {
+describe('Product', () => {
 
   beforeEach(done => {
-    Cat.remove({}, err => {
+    Product.remove({}, err => {
       done();
     });
   });
 
-  describe('Backend tests for cats', () => {
+  describe('Backend tests for products', () => {
 
-    it('should get all the cats', done => {
+    it('should get all the products', done => {
       chai.request(app)
         .get('/api/cats')
         .end((err, res) => {
@@ -28,7 +28,7 @@ describe('Cats', () => {
         });
     });
 
-    it('should get cats count', done => {
+    it('should get products count', done => {
       chai.request(app)
         .get('/api/cats/count')
         .end((err, res) => {
@@ -39,44 +39,44 @@ describe('Cats', () => {
         });
     });
 
-    it('should create new cat', done => {
-      const cat = { name: 'Fluffy', weight: 4, age: 2 };
+    it('should create new product', done => {
+      const product = { name: 'Fluffy', description: "yolo product", price: 2 };
       chai.request(app)
         .post('/api/cat')
-        .send(cat)
+        .send(product)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.a.property('name');
-          res.body.should.have.a.property('weight');
-          res.body.should.have.a.property('age');
+          res.body.should.have.a.property('description');
+          res.body.should.have.a.property('price');
           done();
         });
     });
 
-    it('should get a cat by its id', done => {
-      const cat = new Cat({ name: 'Cat', weight: 2, age: 4 });
-      cat.save((error, newCat) => {
+    it('should get a product by its id', done => {
+      const product = new Product({ name: 'FancyProduct', description: "yolo desc", price: 4 });
+      product.save((error, newProduct) => {
         chai.request(app)
-          .get(`/api/cat/${newCat.id}`)
+          .get(`/api/cat/${newProduct.id}`)
           .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
             res.body.should.have.property('name');
-            res.body.should.have.property('weight');
-            res.body.should.have.property('age');
-            res.body.should.have.property('_id').eql(newCat.id);
+            res.body.should.have.property('description');
+            res.body.should.have.property('price');
+            res.body.should.have.property('_id').eql(newProduct.id);
             done();
           });
       });
     });
 
-    it('should update a cat by its id', done => {
-      const cat = new Cat({ name: 'Cat', weight: 2, age: 4 });
-      cat.save((error, newCat) => {
+    it('should update a product by its id', done => {
+      const product = new Product({ name: 'FancyProduct', description: "yolo desc", price: 4 });
+      product.save((error, newProduct) => {
         chai.request(app)
-          .put(`/api/cat/${newCat.id}`)
-          .send({ weight: 5 })
+          .put(`/api/cat/${newProduct.id}`)
+          .send({ price: 5 })
           .end((err, res) => {
             res.should.have.status(200);
             done();
@@ -84,11 +84,11 @@ describe('Cats', () => {
       });
     });
 
-    it('should delete a cat by its id', done => {
-      const cat = new Cat({ name: 'Cat', weight: 2, age: 4 });
-      cat.save((error, newCat) => {
+    it('should delete a product by its id', done => {
+      const product = new Product({ name: 'FancyProduct', description: "yolo desc", price: 4 });
+      product.save((error, newProduct) => {
         chai.request(app)
-          .delete(`/api/cat/${newCat.id}`)
+          .delete(`/api/cat/${newProduct.id}`)
           .end((err, res) => {
             res.should.have.status(200);
             done();
@@ -98,5 +98,3 @@ describe('Cats', () => {
   });
 
 });
-
-
