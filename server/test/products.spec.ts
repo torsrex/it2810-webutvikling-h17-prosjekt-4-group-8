@@ -19,7 +19,7 @@ describe('Product', () => {
 
     it('should get all the products', done => {
       chai.request(app)
-        .get('/api/cats')
+        .get('/api/products')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -30,7 +30,7 @@ describe('Product', () => {
 
     it('should get products count', done => {
       chai.request(app)
-        .get('/api/cats/count')
+        .get('/api/products/count')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('number');
@@ -42,7 +42,7 @@ describe('Product', () => {
     it('should create new product', done => {
       const product = { name: 'Fluffy', description: "yolo product", price: 2 };
       chai.request(app)
-        .post('/api/cat')
+        .post('/api/product')
         .send(product)
         .end((err, res) => {
           res.should.have.status(200);
@@ -58,7 +58,7 @@ describe('Product', () => {
       const product = new Product({ name: 'FancyProduct', description: "yolo desc", price: 4 });
       product.save((error, newProduct) => {
         chai.request(app)
-          .get(`/api/cat/${newProduct.id}`)
+          .get(`/api/product/${newProduct.id}`)
           .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
@@ -75,7 +75,7 @@ describe('Product', () => {
       const product = new Product({ name: 'FancyProduct', description: "yolo desc", price: 4 });
       product.save((error, newProduct) => {
         chai.request(app)
-          .put(`/api/cat/${newProduct.id}`)
+          .put(`/api/product/${newProduct.id}`)
           .send({ price: 5 })
           .end((err, res) => {
             res.should.have.status(200);
@@ -88,7 +88,7 @@ describe('Product', () => {
       const product = new Product({ name: 'FancyProduct', description: "yolo desc", price: 4 });
       product.save((error, newProduct) => {
         chai.request(app)
-          .delete(`/api/cat/${newProduct.id}`)
+          .delete(`/api/product/${newProduct.id}`)
           .end((err, res) => {
             res.should.have.status(200);
             done();
