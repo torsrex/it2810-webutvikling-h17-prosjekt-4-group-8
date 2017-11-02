@@ -11,6 +11,7 @@
           <th>Name</th>
           <th>Description</th>
           <th>Price</th>
+          <th>Created at</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -24,6 +25,7 @@
           <td>{{product.name}}</td>
           <td>{{product.description}}</td>
           <td>{{product.price}}</td>
+          <td>{{product.createdAt}}</td>
           <td>
             <button class="btn btn-sm btn-warning" (click)="enableEditing(product)"><i class="fa fa-pencil"></i> Edit</button>
             <button class="btn btn-sm btn-danger" (click)="deleteProduct(product)"><i class="fa fa-trash"></i> Delete</button>
