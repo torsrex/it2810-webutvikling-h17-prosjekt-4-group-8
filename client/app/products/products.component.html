@@ -3,15 +3,41 @@
 <app-toast [message]="toast.message"></app-toast>
 
 <div class="card" *ngIf="!isLoading">
-  <h4 class="card-header">Current products ({{products.length}})</h4>
+  <h4 class="card-header">Current products ({{filteredProducts.length}})</h4>
+  <div class="card-block">
+    <input
+    placeholder="Search for a product"
+    [(ngModel)]="query"
+    (input)="filterProducts()"
+    >
+    <label>Min price:</label>
+    <input
+    type="number"
+    min="0"
+    step="100"
+    placeholder="0"
+    [(ngModel)]="minPrice"
+    (input)="filterProducts()"
+    >
+    <label>Max price:</label>
+    <input
+    type="number"
+    min="0"
+    step="100"
+    placeholder="0"
+    [(ngModel)]="maxPrice"
+    (input)="filterProducts()"
+    >
+  </div>
+
   <div class="card-block">
     <table class="table table-bordered table-striped">
       <thead class="thead-default">
         <tr>
-          <th>Name</th>
+          <th>Name <button (click)="sortBy('name')">¤</button></th>
           <th>Description</th>
-          <th>Price</th>
-          <th>Created at</th>
+          <th>Price <button (click)="sortBy('price')">¤</button></th>
+          <th>Created at <button (click)="sortBy('createdAt')">¤</button></th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -21,10 +47,10 @@
         </tr>
       </tbody>
       <tbody *ngIf="!isEditing">
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of filteredProducts">
           <td>{{product.name}}</td>
           <td>{{product.description}}</td>
-          <td>{{product.price}}</td>
+          <td>{{product.price}} NOK</td>
           <td>{{product.createdAt}}</td>
           <td>
             <button class="btn btn-sm btn-warning" (click)="enableEditing(product)"><i class="fa fa-pencil"></i> Edit</button>
