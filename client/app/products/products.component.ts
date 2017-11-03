@@ -12,8 +12,13 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 })
 export class ProductsComponent implements OnInit {
 
+  query = "";
   product = {};
   products = [];
+  filteredProducts = [];
+  minPrice = 0;
+  maxPrice = Infinity;
+  isIncreasing = true;
   isLoading = true;
   isEditing = false;
 
@@ -37,7 +42,10 @@ export class ProductsComponent implements OnInit {
 
   getProducts() {
     this.productService.getProducts().subscribe(
-      data => this.products = data,
+      data => {
+        this.products = data
+        this.filteredProducts = data
+      },
       error => console.log(error),
       () => this.isLoading = false
     );
@@ -91,5 +99,33 @@ export class ProductsComponent implements OnInit {
       );
     }
   }
+
+  filterProducts() {
+    this.filteredProducts = this.products
+    .filter(product => product.name.includes(this.query))
+    .filter(product => product.price > this.minPrice && product.price < this.maxPrice)
+  }
+
+
+  sortBy(type) {
+    this.filteredProducts = this.products.sort((a,b) => {
+      if(this.isIncreasing) {
+        if(typeof a[type] === "number") {
+          return a[type] - b[type]
+        } else {
+          return a[type].localeCompare(b[type])
+        }
+      } else {
+        if(typeof a[type] === "number") {
+          return b[type] - a[type]
+        } else {
+          return b[type].localeCompare(a[type])
+        }
+      }
+    })
+    this.isIncreasing = !this.isIncreasing
+    this.filterProducts()
+  }
+
 
 }
