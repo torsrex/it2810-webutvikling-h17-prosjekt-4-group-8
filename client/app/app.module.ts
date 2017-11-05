@@ -9,7 +9,7 @@ import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductDetailsComponent } from './product-details/product-details.component'
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -23,7 +23,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
   declarations: [
     AppComponent,
     ProductsComponent,
-    ProductDetailsComponent,
     HomeComponent,
     RegisterComponent,
     LoginComponent,
@@ -31,17 +30,22 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AccountComponent,
     AdminComponent,
     NotFoundComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     RoutingModule,
-    SharedModule
+    SharedModule,
+  ],
+  exports: [
+    ProductDetailsComponent,
   ],
   providers: [
     AuthService,
     AuthGuardLogin,
     AuthGuardAdmin,
     ProductService,
-    UserService
+    UserService,
+    ProductDetailsComponent //Needed to use component in other components
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

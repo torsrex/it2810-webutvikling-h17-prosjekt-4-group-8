@@ -2,8 +2,7 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-
-<app-product-details></app-product-details>
+<app-product-details [product]="productDetails.product"></app-product-details>
 
 <div class="card" *ngIf="!isLoading">
   <h4 class="card-header">Current products ({{filteredProducts.length}})</h4>
@@ -50,7 +49,7 @@
         </tr>
       </tbody>
       <tbody *ngIf="!isEditing">
-        <tr *ngFor="let product of filteredProducts">
+        <tr *ngFor="let product of filteredProducts" (click)="updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
           <td>{{product.name}}</td>
           <td>{{product.description}}</td>
           <td>{{product.price}} NOK</td>
