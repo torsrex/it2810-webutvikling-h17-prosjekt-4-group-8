@@ -17,12 +17,16 @@ import { LogoutComponent } from './logout/logout.component';
 import { AccountComponent } from './account/account.component';
 import { AdminComponent } from './admin/admin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import {GoogleMapsComponent} from './google-maps/google-maps.component';
+
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
+    GoogleMapsComponent,
     HomeComponent,
     RegisterComponent,
     LoginComponent,
@@ -35,9 +39,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
   imports: [
     RoutingModule,
     SharedModule,
-  ],
-  exports: [
-    ProductDetailsComponent,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD8IMQPEn0qiIw144Sv7hrYDtcGcb7mcvk'
+    })
   ],
   providers: [
     AuthService,
