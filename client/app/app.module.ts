@@ -9,6 +9,7 @@ import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
+import { ProductDetailsComponent } from './product-details/product-details.component'
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -19,6 +20,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {GoogleMapsComponent} from './google-maps/google-maps.component';
 
 import { AgmCoreModule } from '@agm/core';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { AgmCoreModule } from '@agm/core';
     LogoutComponent,
     AccountComponent,
     AdminComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     RoutingModule,
@@ -45,7 +48,8 @@ import { AgmCoreModule } from '@agm/core';
     AuthGuardLogin,
     AuthGuardAdmin,
     ProductService,
-    UserService
+    UserService,
+    ProductDetailsComponent //Needed to use component in other components
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

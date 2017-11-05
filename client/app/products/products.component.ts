@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { ProductService } from '../services/product.service';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { ToastComponent } from '../shared/toast/toast.component';
+
 
 @Component({
   selector: 'app-products',
@@ -28,6 +30,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private formBuilder: FormBuilder,
+              public productDetails: ProductDetailsComponent,
               public toast: ToastComponent) { }
 
   ngOnInit() {
@@ -38,6 +41,13 @@ export class ProductsComponent implements OnInit {
       price: this.price
     });
   }
+
+updateDetailView(product){
+  //Get the same product from filteredproducts
+  //this.productDetails.setProduct
+  const pos = this.products.map(elem => elem._id).indexOf(product._id);
+  this.productDetails.setProduct(this.filteredProducts[pos]);
+}
 
   getProducts() {
     this.productService.getProducts().subscribe(
