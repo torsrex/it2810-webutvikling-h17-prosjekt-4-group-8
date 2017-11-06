@@ -3,3 +3,26 @@
   text-align: center;
   width: 25%;
 }
+.table {
+  width: 50%;
+}
+
+
+.productsAllComponents{
+  display: flex;
+}
+
+.productList{
+  display: flex;
+  flex: 1;
+  table{
+    width: 100%; //nice
+  }
+}
+.detailsComponents{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+
+}
