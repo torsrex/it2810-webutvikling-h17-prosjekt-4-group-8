@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 
 import { ProductService } from '../services/product.service';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
+import {GoogleMapsComponent } from '../google-maps/google-maps.component'
 import { ToastComponent } from '../shared/toast/toast.component';
 
 

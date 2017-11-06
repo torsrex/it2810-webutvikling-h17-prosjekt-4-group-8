@@ -1,18 +1,23 @@
 <div *ngIf="product.title"  class="card">
-  <div>
-    <strong>Title:</strong> {{product.title}}
-    <span>{{product.description}}</span>
-    <br><br>
+  <div class="cardHeader">
+    <p>EDIT</p>
+    <h3>{{product.title}}</h3>
+    <p>DELETE</p>
   </div>
+
   <div>
-    <span>Seller</span>
-    <span>Tlf</span>
-    <span>email</span>
-    <br><br>
+    <strong>Description:</strong>{{product.description}} <br>
   </div>
+
   <div>
-    <span>{{product.price}}</span>
-    <!-- <img src={{product.image}} alt="no image available"> -->
+    <span>Seller, </span>
+    <span>Tlf,</span>
+    <span>email</span> <br>
+  </div>
+
+  <div>
+    <strong>Price:</strong>{{product.price}} <br>
+    <strong>Image:</strong><!-- <img src={{product.image}} alt="no image available"> -->
   </div>
 
 </div>
