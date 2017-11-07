@@ -3,8 +3,11 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 
 import { ProductService } from '../services/product.service';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
+import {MessageService} from '../services/message.service'
 import {GoogleMapsComponent } from '../google-maps/google-maps.component'
 import { ToastComponent } from '../shared/toast/toast.component';
+
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -13,6 +16,9 @@ import { ToastComponent } from '../shared/toast/toast.component';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
+  //Observer vars
+  message: any;
+  subscription: Subscription;
 
   query = "";
   product = {};
@@ -30,9 +36,13 @@ export class ProductsComponent implements OnInit {
   price = new FormControl('', Validators.required);
 
   constructor(private productService: ProductService,
+              private messageService: MessageService,
               private formBuilder: FormBuilder,
               public productDetails: ProductDetailsComponent,
-              public toast: ToastComponent) { }
+              public toast: ToastComponent) {
+                //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
+                this.subscription = this.messageService.getMessage().subscribe(message => { this.getProducts(); this.message = message.text; });
+              }
 
   ngOnInit() {
     this.getProducts();
@@ -44,10 +54,7 @@ export class ProductsComponent implements OnInit {
   }
 
 updateDetailView(product){
-  //Get the same product from filteredproducts
-  //this.productDetails.setProduct
-  const pos = this.products.map(elem => elem._id).indexOf(product._id);
-  this.productDetails.setProduct(this.filteredProducts[pos]);
+  this.productDetails.setProduct(product);
 }
 
   getProducts() {
@@ -91,6 +98,7 @@ updateDetailView(product){
       res => {
         this.isEditing = false;
         this.product = product;
+        console.log(product);
         this.toast.setMessage('item edited successfully.', 'success');
       },
       error => console.log(error)

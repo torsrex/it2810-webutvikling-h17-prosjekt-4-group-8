@@ -33,6 +33,7 @@ export class ProductService {
   }
 
   deleteProduct(product): Observable<any> {
+    console.log(product)
     return this.http.delete(`/api/product/${product._id}`, this.options);
   }
 
