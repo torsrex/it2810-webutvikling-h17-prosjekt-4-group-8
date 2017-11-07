@@ -8,8 +8,6 @@ const productSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  lat: Number,
-  long: Number,
   img: String
 });
 
