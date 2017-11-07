@@ -14,8 +14,7 @@ export default function setRoutes(app) {
 
   // Cats
   router.route('/products').get(productCtrl.getAll);
-  router.route('/products/count').get(productCtrl.count);
-  router.route('/products/getsome/:pageNum').get(productCtrl.getSome);
+  router.route('/products/getsome/:pageNum').get(productCtrl.getSomeProducts);
   router.route('/product').post(productCtrl.insert);
   router.route('/product/:id').get(productCtrl.get);
   router.route('/product/:id').put(productCtrl.update);

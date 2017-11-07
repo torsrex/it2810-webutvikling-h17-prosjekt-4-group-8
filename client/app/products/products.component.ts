@@ -3,14 +3,16 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 
 import { ProductService } from '../services/product.service';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
-import {GoogleMapsComponent } from '../google-maps/google-maps.component'
 import { ToastComponent } from '../shared/toast/toast.component';
+import { GoogleMapsComponent } from '../google-maps/google-maps.component'
+import { PaginationComponent } from '../pagination/pagination.component'
+
 
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
 
@@ -25,6 +27,8 @@ export class ProductsComponent implements OnInit {
   isEditing = false;
   pageNum = 1; //this must be >0
   totalPageNum = 0;
+  totalListings = 0;
+  listingsPerPage = 10;
 
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -57,6 +61,7 @@ updateDetailView(product){
       data => {
         this.products = data.docs
         this.totalPageNum = data.pages
+        this.totalListings = data.total
         this.filteredProducts = data.docs
       },
       error => console.log(error),
@@ -140,5 +145,19 @@ updateDetailView(product){
     this.filterProducts()
   }
 
+  //Functions called by pagination component
+  goToPage(n: number): void {
+      this.pageNum = n;
+      this.getProducts(this.pageNum);
+    }
 
+    onNext(): void {
+      this.pageNum++;
+      this.getProducts(this.pageNum);
+    }
+
+    onPrev(): void {
+      this.pageNum--;
+      this.getProducts(this.pageNum);
+    }
 }

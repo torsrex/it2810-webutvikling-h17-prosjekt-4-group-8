@@ -20,6 +20,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {GoogleMapsComponent} from './google-maps/google-maps.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { AgmCoreModule } from '@agm/core';
     AdminComponent,
     NotFoundComponent,
     ProductDetailsComponent,
+    PaginationComponent,
   ],
   imports: [
     RoutingModule,

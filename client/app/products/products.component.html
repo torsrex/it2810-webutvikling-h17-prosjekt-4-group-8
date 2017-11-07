@@ -84,7 +84,6 @@
             </td>
           </tr>
         </tbody>
-        <input class="form-control" type="number" name="page" [(ngModel)]="pageNum" placeholder="Price" (input)="getProducts()" required>
         <tbody *ngIf="isEditing">
           <tr>
             <td colspan="4">
@@ -117,3 +116,14 @@
 
   </div>
 </div>
+<!-- Pagination component -->
+<div>
+  <app-pagination
+    (goPage)="goToPage($event)"
+    (goNext)="onNext()"
+    (goPrev)="onPrev()"
+    [pagesToShow]="totalPageNum"
+    [page]="pageNum"
+    [perPage]="listingsPerPage"
+    [count]="totalListings"></app-pagination>
+  </div>
