@@ -16,3 +16,9 @@ Vi ønsker å basere oss på en MVC arkitektur, med Angular på front end, og Ex
 
 ### Skjematisk oppsett av frontend og backend
 ![alt text](https://i.imgur.com/dDgB3wK.png "Diagram som viser rollene til client, server og databasen")
+
+### Planlagt utseende på nettisden
+#### Brukersiden:
+![alt text](https://i.imgur.com/PeHgDpj.png "Brukersiden")
+#### Produktlisting:
+![alt text](https://i.imgur.com/mUCJXcj.png "Produktlisting")
