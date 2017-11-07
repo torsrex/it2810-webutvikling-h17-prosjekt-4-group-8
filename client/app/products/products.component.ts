@@ -23,6 +23,8 @@ export class ProductsComponent implements OnInit {
   isIncreasing = true;
   isLoading = true;
   isEditing = false;
+  pageNum = 1; //this must be >0
+  totalPageNum = 0;
 
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -35,7 +37,7 @@ export class ProductsComponent implements OnInit {
               public toast: ToastComponent) { }
 
   ngOnInit() {
-    this.getProducts();
+    this.getProducts(this.pageNum);
     this.addProductForm = this.formBuilder.group({
       name: this.name,
       description: this.description,
@@ -50,11 +52,12 @@ updateDetailView(product){
   this.productDetails.setProduct(this.filteredProducts[pos]);
 }
 
-  getProducts() {
-    this.productService.getProducts().subscribe(
+  getProducts(pageNum) {
+    this.productService.getProducts(this.pageNum).subscribe(
       data => {
-        this.products = data
-        this.filteredProducts = data
+        this.products = data.docs
+        this.totalPageNum = data.pages
+        this.filteredProducts = data.docs
       },
       error => console.log(error),
       () => this.isLoading = false
@@ -83,7 +86,7 @@ updateDetailView(product){
     this.product = {};
     this.toast.setMessage('item editing cancelled.', 'warning');
     // reload the products to reset the editing
-    this.getProducts();
+    this.getProducts(this.pageNum);
   }
 
   editProduct(product) {

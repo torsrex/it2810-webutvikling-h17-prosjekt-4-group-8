@@ -84,6 +84,7 @@
             </td>
           </tr>
         </tbody>
+        <input class="form-control" type="number" name="page" [(ngModel)]="pageNum" placeholder="Price" (input)="getProducts()" required>
         <tbody *ngIf="isEditing">
           <tr>
             <td colspan="4">
