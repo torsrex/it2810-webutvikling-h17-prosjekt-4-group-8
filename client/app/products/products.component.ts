@@ -82,7 +82,7 @@ updateDetailView(product){
     this.isEditing = false;
     this.product = {};
     this.toast.setMessage('item editing cancelled.', 'warning');
-    // reload the cats to reset the editing
+    // reload the products to reset the editing
     this.getProducts();
   }
 
