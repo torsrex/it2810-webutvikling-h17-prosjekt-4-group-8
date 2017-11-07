@@ -34,10 +34,6 @@ export class GoogleMapsComponent implements OnInit {
     );
   }
 
-  private convertStringToNumber(value: string): number {
-    return +value;
-  }
-
   getLocations() {
     for (let i = 0; i < this.users.length; i++) {
       const loc = this.users[i].location

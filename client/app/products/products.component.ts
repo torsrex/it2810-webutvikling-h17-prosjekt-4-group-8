@@ -6,6 +6,9 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 import {MessageService} from '../services/message.service'
 import {GoogleMapsComponent } from '../google-maps/google-maps.component'
 import { ToastComponent } from '../shared/toast/toast.component';
+import { GoogleMapsComponent } from '../google-maps/google-maps.component'
+import { PaginationComponent } from '../pagination/pagination.component'
+
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -13,7 +16,7 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
   //Observer vars
@@ -29,6 +32,10 @@ export class ProductsComponent implements OnInit {
   isIncreasing = true;
   isLoading = true;
   isEditing = false;
+  pageNum = 1; //this must be >0
+  totalPageNum = 0;
+  totalListings = 0;
+  listingsPerPage = 10;
 
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -45,7 +52,7 @@ export class ProductsComponent implements OnInit {
               }
 
   ngOnInit() {
-    this.getProducts();
+    this.getProducts(this.pageNum);
     this.addProductForm = this.formBuilder.group({
       name: this.name,
       description: this.description,
@@ -57,11 +64,13 @@ updateDetailView(product){
   this.productDetails.setProduct(product);
 }
 
-  getProducts() {
-    this.productService.getProducts().subscribe(
+  getProducts(pageNum) {
+    this.productService.getProducts(this.pageNum).subscribe(
       data => {
-        this.products = data
-        this.filteredProducts = data
+        this.products = data.docs
+        this.totalPageNum = data.pages
+        this.totalListings = data.total
+        this.filteredProducts = data.docs
       },
       error => console.log(error),
       () => this.isLoading = false
@@ -89,8 +98,8 @@ updateDetailView(product){
     this.isEditing = false;
     this.product = {};
     this.toast.setMessage('item editing cancelled.', 'warning');
-    // reload the cats to reset the editing
-    this.getProducts();
+    // reload the products to reset the editing
+    this.getProducts(this.pageNum);
   }
 
   editProduct(product) {
@@ -145,5 +154,19 @@ updateDetailView(product){
     this.filterProducts()
   }
 
+  //Functions called by pagination component
+  goToPage(n: number): void {
+      this.pageNum = n;
+      this.getProducts(this.pageNum);
+    }
 
+    onNext(): void {
+      this.pageNum++;
+      this.getProducts(this.pageNum);
+    }
+
+    onPrev(): void {
+      this.pageNum--;
+      this.getProducts(this.pageNum);
+    }
 }

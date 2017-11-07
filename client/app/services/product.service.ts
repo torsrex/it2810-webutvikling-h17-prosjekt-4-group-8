@@ -12,12 +12,8 @@ export class ProductService {
 
   constructor(private http: Http) { }
 
-  getProducts(): Observable<any> {
-    return this.http.get('/api/products').map(res => res.json());
-  }
-
-  countProducts(): Observable<any> {
-    return this.http.get('/api/products/count').map(res => res.json());
+  getProducts(pageNum): Observable<any> {
+    return this.http.get(`/api/products/getsome/${pageNum}`).map(res => res.json());
   }
 
   addProduct(product): Observable<any> {

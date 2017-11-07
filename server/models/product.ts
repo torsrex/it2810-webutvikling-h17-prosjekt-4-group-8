@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import * as mongoosePaginate from 'mongoose-paginate'
 
 const productSchema = new mongoose.Schema({
   name: String,
@@ -8,10 +9,10 @@ const productSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  lat: Number,
-  long: Number,
   img: String
 });
+
+productSchema.plugin(mongoosePaginate)
 
 const Product = mongoose.model('Product', productSchema);
 
