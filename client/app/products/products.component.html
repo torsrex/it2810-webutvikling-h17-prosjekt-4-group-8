@@ -63,7 +63,6 @@
             <!-- <th>Description</th> -->
             <th>Price <button (click)="sortBy('price')">¤</button></th>
             <!-- <th>Created at <button (click)="sortBy('createdAt')">¤</button></th> -->
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody *ngIf="products.length === 0">
@@ -77,13 +76,13 @@
             <!-- <td>{{product.description}}</td> -->
             <td>{{product.price}} NOK</td>
             <!-- <td>{{product.createdAt}}</td> -->
-            <td>
+            <!--  <td>
               <button class="btn btn-sm btn-warning" (click)="enableEditing(product)"><i class="fa fa-pencil"></i> Edit</button>
               <button class="btn btn-sm btn-danger" (click)="deleteProduct(product)"><i class="fa fa-trash"></i> Delete</button>
-            </td>
+            </td> -->
           </tr>
         </tbody>
-        <tbody *ngIf="isEditing">
+        <!-- <tbody *ngIf="isEditing">
           <tr>
             <td colspan="4">
               <form class="form-inline" #form="ngForm" (ngSubmit)="editProduct(product)" style="display:inline">
@@ -101,7 +100,7 @@
               <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
             </td>
           </tr>
-        </tbody>
+        </tbody> -->
       </table>
     </div>
 
