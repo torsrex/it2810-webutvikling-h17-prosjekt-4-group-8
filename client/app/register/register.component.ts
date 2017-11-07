@@ -31,6 +31,8 @@ export class RegisterComponent implements OnInit {
   ]);
   img = new FormControl('',[
     Validators.required,
+  ]);
+  age = new FormControl('', [
   ])
 
   constructor(private formBuilder: FormBuilder,
@@ -44,7 +46,8 @@ export class RegisterComponent implements OnInit {
       email: this.email,
       password: this.password,
       role: this.role,
-      img: this.img
+      img: this.img,
+      age: this.age
     });
   }
 

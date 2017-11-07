@@ -28,6 +28,10 @@
         <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
         <input class="form-control" type="text" name="img" formControlName="img" placeholder="image link">
       </div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <input class="form-control" type="number" name="age" formControlName="age" placeholder="age">
+      </div>
 
       <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button>
     </form>
