@@ -4,6 +4,7 @@ import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
 import { ProductService } from './services/product.service';
 import { UserService } from './services/user.service';
+import { MessageService } from './services/message.service'
 import { AuthService } from './services/auth.service';
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
@@ -51,6 +52,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     AuthGuardAdmin,
     ProductService,
     UserService,
+    MessageService,
     ProductDetailsComponent //Needed to use component in other components
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
