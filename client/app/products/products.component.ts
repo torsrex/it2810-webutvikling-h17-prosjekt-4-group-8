@@ -4,7 +4,6 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { ProductService } from '../services/product.service';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import {MessageService} from '../services/message.service'
-import {GoogleMapsComponent } from '../google-maps/google-maps.component'
 import { ToastComponent } from '../shared/toast/toast.component';
 import { GoogleMapsComponent } from '../google-maps/google-maps.component'
 import { PaginationComponent } from '../pagination/pagination.component'
@@ -48,7 +47,7 @@ export class ProductsComponent implements OnInit {
               public productDetails: ProductDetailsComponent,
               public toast: ToastComponent) {
                 //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
-                this.subscription = this.messageService.getMessage().subscribe(message => { this.getProducts(); this.message = message.text; });
+                this.subscription = this.messageService.getMessage().subscribe(message => { this.getProducts(this.pageNum); this.message = message.text; });
               }
 
   ngOnInit() {
