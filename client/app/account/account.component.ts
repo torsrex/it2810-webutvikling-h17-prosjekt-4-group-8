@@ -8,7 +8,7 @@ import { UserService } from '../services/user.service';
   templateUrl: './account.component.html'
 })
 export class AccountComponent implements OnInit {
-
+  //TODO: Add validation just like in register page
   user = {};
   isLoading = true;
 

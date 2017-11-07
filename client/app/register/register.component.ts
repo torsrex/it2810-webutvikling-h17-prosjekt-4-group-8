@@ -29,6 +29,9 @@ export class RegisterComponent implements OnInit {
   role = new FormControl('', [
     Validators.required
   ]);
+  img = new FormControl('',[
+    Validators.required,
+  ])
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -40,7 +43,8 @@ export class RegisterComponent implements OnInit {
       username: this.username,
       email: this.email,
       password: this.password,
-      role: this.role
+      role: this.role,
+      img: this.img
     });
   }
 

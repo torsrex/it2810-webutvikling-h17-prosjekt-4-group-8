@@ -18,7 +18,6 @@ const userSchema = new mongoose.Schema({
     firstName: String
   },
   age: Number,
-
 });
 
 // Before saving the user, hash the password
