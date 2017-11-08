@@ -8,6 +8,9 @@ import { ToastComponent } from '../shared/toast/toast.component';
 import { GoogleMapsComponent } from '../google-maps/google-maps.component'
 import { PaginationComponent } from '../pagination/pagination.component'
 
+import { AuthGuardLogin } from '../services/auth-guard-login.service';
+
+
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -35,6 +38,8 @@ export class ProductsComponent implements OnInit {
   totalPageNum = 0;
   totalListings = 0;
   listingsPerPage = 10;
+  canActivate = false
+  authenticated = false
 
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -45,7 +50,8 @@ export class ProductsComponent implements OnInit {
               private messageService: MessageService,
               private formBuilder: FormBuilder,
               public productDetails: ProductDetailsComponent,
-              public toast: ToastComponent) {
+              public toast: ToastComponent,
+              private auth: AuthGuardLogin) {
                 //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
                 this.subscription = this.messageService.getMessage().subscribe(message => { this.getProducts(this.pageNum); this.message = message.text; });
               }
@@ -57,6 +63,7 @@ export class ProductsComponent implements OnInit {
       description: this.description,
       price: this.price
     });
+    this.authenticated = this.auth.canActivate()
   }
 
 updateDetailView(product){
