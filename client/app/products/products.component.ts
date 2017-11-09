@@ -38,7 +38,6 @@ export class ProductsComponent implements OnInit {
   totalPageNum = 0;
   totalListings = 0;
   listingsPerPage = 10;
-  canActivate = false
   authenticated = false
 
   addProductForm: FormGroup;
@@ -51,7 +50,8 @@ export class ProductsComponent implements OnInit {
               private formBuilder: FormBuilder,
               public productDetails: ProductDetailsComponent,
               public toast: ToastComponent,
-              private auth: AuthGuardLogin) {
+              private auth: AuthGuardLogin
+              ) {
                 //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
                 this.subscription = this.messageService.getMessage().subscribe(message => { this.getProducts(this.pageNum); this.message = message.text; });
               }

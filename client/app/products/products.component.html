@@ -5,7 +5,7 @@
 <div class="card" *ngIf="!isLoading">
 
   <!-- Add new product  -->
-  <div class="card" *ngIf="!isEditing">
+  <div class="card" *ngIf="!isEditing && authenticated">
     <h4 class="card-header">Add new product</h4>
     <div class="card-block">
       <form class="form-inline" [formGroup]="addProductForm" (ngSubmit)="addProduct()" style="text-align:center">
