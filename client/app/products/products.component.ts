@@ -8,7 +8,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 import { GoogleMapsComponent } from '../google-maps/google-maps.component'
 import { PaginationComponent } from '../pagination/pagination.component'
 
-import { AuthGuardLogin } from '../services/auth-guard-login.service';
+import { AuthService } from '../services/auth.service';
 
 
 
@@ -39,6 +39,7 @@ export class ProductsComponent implements OnInit {
   totalListings = 0;
   listingsPerPage = 10;
   authenticated = false
+  userId: string
 
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -50,7 +51,7 @@ export class ProductsComponent implements OnInit {
               private formBuilder: FormBuilder,
               public productDetails: ProductDetailsComponent,
               public toast: ToastComponent,
-              private auth: AuthGuardLogin
+              private auth: AuthService
               ) {
                 //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
                 this.subscription = this.messageService.getMessage().subscribe(message => { this.getProducts(this.pageNum); this.message = message.text; });
@@ -63,7 +64,8 @@ export class ProductsComponent implements OnInit {
       description: this.description,
       price: this.price
     });
-    this.authenticated = this.auth.canActivate()
+    this.authenticated = this.auth.loggedIn
+    this.userId = this.auth.currentUser['_id']
   }
 
 updateDetailView(product){
