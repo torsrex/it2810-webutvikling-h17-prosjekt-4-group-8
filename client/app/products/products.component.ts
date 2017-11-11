@@ -221,6 +221,7 @@ updateDetailView(product){
   this.searchProducts(1)
 }
   searchProducts(pageNum){
+    //TODO: Add sorting in backend
     if(this.query === ""){
       this.toast.setMessage('Search cannot be empty', 'warning');
       return
