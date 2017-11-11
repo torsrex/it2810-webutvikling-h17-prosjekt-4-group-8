@@ -22,13 +22,29 @@ export default class ProductCtrl extends BaseCtrl {
   }
 
   search = (req, res) => {
-    this.model.find({$text: { $search: req.params.query}},
-      { score : { $meta: 'textScore' } }, (err, docs) => {
+
+    const options = {
+    page: req.params.pageNum,
+    limit: 10,
+    sort: {
+        score: {
+            $meta: 'textScore'
+        }
+    },
+    select: {
+        score: {
+            $meta: 'textScore'
+        }
+    },
+    lean: true,
+    leanWithId: true
+  };
+    this.model.paginate({$text: { $search: req.params.query}},
+    options,
+        (err, docs) => {
         if (err) { return console.error(err); }
         res.json(docs);
       })
-      .sort({
-        score: { $meta : 'textScore' }
-      })
   }
+
 }

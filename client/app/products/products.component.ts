@@ -29,7 +29,6 @@ export class ProductsComponent implements OnInit {
   query = "";
   product = {};
   products = [];
-  filteredProducts = [];
   minPrice = 0;
   maxPrice = Infinity;
   isIncreasing = true;
@@ -82,7 +81,6 @@ updateDetailView(product){
         this.products = data.docs
         this.totalPageNum = data.pages
         this.totalListings = data.total
-        this.filteredProducts = data.docs
       },
       error => console.log(error),
       () => this.isLoading = false
@@ -207,9 +205,15 @@ updateDetailView(product){
 
   //code used to handle searches
   searchProducts(){
-    this.productService.searchProduct(this.query).subscribe(
+  if(this.query === ""){
+    this.toast.setMessage('Search cannot be empty', 'warning');
+    return
+  }
+    this.productService.searchProduct(this.query, 1).subscribe(
       data => {
-        this.products = data
+        this.products = data.docs
+        this.totalPageNum = data.pages
+        this.totalListings = data.total
       },
       error => console.log(error),
   )

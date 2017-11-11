@@ -32,8 +32,8 @@ export class ProductService {
     return this.http.delete(`/api/product/${product._id}`, this.options);
   }
 
-  searchProduct(query): Observable<any> {
-    return this.http.get(`/api/products/search/${query}`, this.options).map(res => res.json());
+  searchProduct(query, pageNum): Observable<any> {
+    return this.http.get(`/api/products/search/${query}/${pageNum}`, this.options).map(res => res.json());
 
   }
 

@@ -15,7 +15,7 @@ export default function setRoutes(app) {
   // Products
   router.route('/products').get(productCtrl.getAll);
   router.route('/products/getsome/:pageNum').get(productCtrl.getSomeProducts);
-  router.route('/products/search/:query').get(productCtrl.search);
+  router.route('/products/search/:query/:pagenum').get(productCtrl.search);
   router.route('/product').post(productCtrl.insert);
   router.route('/product/:id').get(productCtrl.get);
   router.route('/product/:id').put(productCtrl.update);
