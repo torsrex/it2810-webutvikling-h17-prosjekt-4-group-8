@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
-import { ProductService } from '../services/product.service';
 
 
 
@@ -18,30 +17,16 @@ export class MyProductsComponent implements OnInit {
   isLoading = true;
 
   constructor(private auth: AuthService,
-  private userService: UserService,
-  private productService: ProductService) { }
+  private userService: UserService
+  ) { }
 
   ngOnInit() {
-    this.getUser();
-    this.getProducts()
+    this.getUserWithProducts();
   }
 
 
-  getProducts(){
-    this.auth.currentUser.products.map( (id,index) =>
-    this.productService.getProduct(id).subscribe(
-      data => {
-        this.productList.push(data)
-      },
-      error => console.log(error),
-      () => this.isLoading = false
-    )
-  )
-  }
-
-
-  getUser() {
-    this.userService.getUser(this.auth.currentUser).subscribe(
+  getUserWithProducts() {
+    this.userService.getUserWithProducts(this.auth.currentUser).subscribe(
       data => this.user = data,
       error => console.log(error),
       () => this.isLoading = false

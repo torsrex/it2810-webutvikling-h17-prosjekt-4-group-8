@@ -92,7 +92,7 @@ updateDetailView(product){
   addProduct() {
     //Code to add userid to product
     let productToAdd = this.addProductForm.value
-    productToAdd.userId = this.userId
+    productToAdd.user = this.userId
     //Adds product to the database
     this.productService.addProduct(productToAdd).subscribe(
       res => {

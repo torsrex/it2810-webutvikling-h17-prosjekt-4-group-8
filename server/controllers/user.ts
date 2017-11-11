@@ -7,6 +7,15 @@ import BaseCtrl from './base';
 export default class UserCtrl extends BaseCtrl {
   model = User;
 
+
+  // Get by id, and fetches related products
+  getUserWithProducts = (req, res) => {
+    this.model.findOne({ _id: req.params.id }, (err, obj) => {
+      if (err) { return console.error(err); }
+      res.json(obj);
+    }).populate('products');
+  }
+
   login = (req, res) => {
     this.model.findOne({ email: req.body.email }, (err, user) => {
       if (!user) { return res.sendStatus(403); }

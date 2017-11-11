@@ -10,13 +10,13 @@
           <th>Price</th>
         </tr>
       </thead>
-      <tbody *ngIf="productList.length === 0">
+      <tbody *ngIf="user.products.length === 0">
         <tr>
           <td colspan="4">You don't have any products.</td>
         </tr>
       </tbody>
       <tbody>
-        <tr *ngFor="let product of productList"> <!-- Generates a tr for each product in the db. -->
+        <tr *ngFor="let product of user.products"> <!-- Generates a tr for each product in the db. -->
           <td>{{product.name}}</td>
           <td>{{product.price}} NOK</td>
         </tr>
