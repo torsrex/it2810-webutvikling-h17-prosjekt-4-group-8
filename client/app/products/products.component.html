@@ -5,7 +5,7 @@
 <div class="card" *ngIf="!isLoading">
 
   <!-- Add new product  -->
-  <div class="card" *ngIf="!isEditing">
+  <div class="card" *ngIf="!isEditing && authenticated">
     <h4 class="card-header">Add new product</h4>
     <div class="card-block">
       <form class="form-inline" [formGroup]="addProductForm" (ngSubmit)="addProduct()" style="text-align:center">
@@ -63,6 +63,7 @@
             <!-- <th>Description</th> -->
             <th>Price <button (click)="sortBy('price')">¤</button></th>
             <!-- <th>Created at <button (click)="sortBy('createdAt')">¤</button></th> -->
+            <th>Added by </th>
           </tr>
         </thead>
         <tbody *ngIf="products.length === 0">
@@ -80,6 +81,8 @@
               <button class="btn btn-sm btn-warning" (click)="enableEditing(product)"><i class="fa fa-pencil"></i> Edit</button>
               <button class="btn btn-sm btn-danger" (click)="deleteProduct(product)"><i class="fa fa-trash"></i> Delete</button>
             </td> -->
+            <!-- TODO: Remove ngif when database updated -->
+            <td *ngIf="product.user">{{product.user.username}}</td>
           </tr>
         </tbody>
         <!-- <tbody *ngIf="isEditing">
@@ -107,7 +110,7 @@
     <!-- Product Details (all product details components) component________________________ -->
     <div class="detailsComponents">
       <!-- Product details card -->
-      <app-product-details [product]="productDetails.product" class="detailsCard"></app-product-details>
+      <app-product-details [authenticated]="authenticated" [product]="productDetails.product" class="detailsCard"></app-product-details>
       <!-- Google maps Map -->
       <app-google-maps></app-google-maps>
     </div>

@@ -20,8 +20,8 @@ export class ProductService {
     return this.http.post('/api/product', JSON.stringify(product), this.options);
   }
 
-  getProduct(product): Observable<any> {
-    return this.http.get(`/api/product/${product._id}`).map(res => res.json());
+  getProduct(id): Observable<any> {
+    return this.http.get(`/api/product/${id}`).map(res => res.json());
   }
 
   editProduct(product): Observable<any> {

@@ -1,0 +1,25 @@
+<app-loading [condition]="isLoading"></app-loading>
+<div class="productsAllComponents">
+
+  <!-- Product list component _________________________________________________________ -->
+  <div class="card-block" class="productList">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-default">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="user.products.length === 0">
+        <tr>
+          <td colspan="4">You don't have any products.</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr *ngFor="let product of user.products"> <!-- Generates a tr for each product in the db. -->
+          <td>{{product.name}}</td>
+          <td>{{product.price}} NOK</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

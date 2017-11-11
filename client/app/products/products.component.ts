@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
-import { ProductService } from '../services/product.service';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
-import {MessageService} from '../services/message.service'
 import { ToastComponent } from '../shared/toast/toast.component';
 import { GoogleMapsComponent } from '../google-maps/google-maps.component'
 import { PaginationComponent } from '../pagination/pagination.component'
 
-import { AuthGuardLogin } from '../services/auth-guard-login.service';
+import { ProductService } from '../services/product.service';
+import { AuthService } from '../services/auth.service';
+import {MessageService} from '../services/message.service'
+import { UserService } from '../services/user.service'
 
 
 
@@ -38,8 +39,9 @@ export class ProductsComponent implements OnInit {
   totalPageNum = 0;
   totalListings = 0;
   listingsPerPage = 10;
-  canActivate = false
   authenticated = false
+  userId: string
+  user = {}
 
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -51,7 +53,9 @@ export class ProductsComponent implements OnInit {
               private formBuilder: FormBuilder,
               public productDetails: ProductDetailsComponent,
               public toast: ToastComponent,
-              private auth: AuthGuardLogin) {
+              private auth: AuthService,
+              private userService: UserService
+              ) {
                 //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
                 this.subscription = this.messageService.getMessage().subscribe(message => { this.getProducts(this.pageNum); this.message = message.text; });
               }
@@ -63,7 +67,9 @@ export class ProductsComponent implements OnInit {
       description: this.description,
       price: this.price
     });
-    this.authenticated = this.auth.canActivate()
+    this.authenticated = this.auth.loggedIn
+    this.userId = this.auth.currentUser['_id']
+    this.getUser()
   }
 
 updateDetailView(product){
@@ -84,12 +90,27 @@ updateDetailView(product){
   }
 
   addProduct() {
-    this.productService.addProduct(this.addProductForm.value).subscribe(
+    //Code to add userid to product
+    let productToAdd = this.addProductForm.value
+    productToAdd.user = this.userId
+    //Adds product to the database
+    this.productService.addProduct(productToAdd).subscribe(
       res => {
         const newProduct = res.json();
+        //Code to add the new product to current listings
         this.products.push(newProduct);
         this.addProductForm.reset();
         this.toast.setMessage('item added successfully.', 'success');
+        //Creates a list of the current user details
+        let newList = this.user
+        //pushes product id onto the list
+        newList['products'].push(newProduct._id)
+        //sets the current user to the list
+        this.user = newList
+        //updates current user to this.user
+        this.userService.editUser(this.user).subscribe(
+          error => console.log(error)
+        )
       },
       error => console.log(error)
     );
@@ -113,7 +134,6 @@ updateDetailView(product){
       res => {
         this.isEditing = false;
         this.product = product;
-        console.log(product);
         this.toast.setMessage('item edited successfully.', 'success');
       },
       error => console.log(error)
@@ -175,4 +195,13 @@ updateDetailView(product){
       this.pageNum--;
       this.getProducts(this.pageNum);
     }
+
+  //Code used to add productId to user
+  getUser(){
+  this.userService.getUser(this.auth.currentUser).subscribe(
+    data => this.user = data,
+    error => console.log(error)
+    )
+  }
+
 }

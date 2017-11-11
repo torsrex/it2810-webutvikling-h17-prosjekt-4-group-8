@@ -14,6 +14,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 export class ProductDetailsComponent {
   //Needed to bind the product from the parent class to this class.
   @Input() product = {_id: '', name: '', description: '', price: '', date: '', image: '', userId: ''};
+  @Input() authenticated: boolean
   //Local variables
   isEditing = false;
   //Form variables

@@ -1,8 +1,8 @@
 <div *ngIf="!isEditing"  class="card">
   <div class="cardHeader">
-    <button (click)="enableEditing()">Edit</button>
+    <button *ngIf="authenticated" (click)="enableEditing()">Edit</button>
     <h3>{{product.name}}</h3>
-    <button (click)="deleteProduct()">Delete</button>
+    <button *ngIf="authenticated" (click)="deleteProduct()">Delete</button>
   </div>
 
   <div>
@@ -18,9 +18,6 @@
     <span>Seller, </span>
     <span>Tlf,</span>
     <span>email</span> <br>
-    <div *ngIf="authenticated">
-    <p>Yolo</p>
-  </div>
   </div>
 
 </div>

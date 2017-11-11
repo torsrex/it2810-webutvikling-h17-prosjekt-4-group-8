@@ -12,7 +12,7 @@ export default function setRoutes(app) {
   const productCtrl = new ProductCtrl();
   const userCtrl = new UserCtrl();
 
-  // Cats
+  // Products
   router.route('/products').get(productCtrl.getAll);
   router.route('/products/getsome/:pageNum').get(productCtrl.getSomeProducts);
   router.route('/product').post(productCtrl.insert);
@@ -26,6 +26,7 @@ export default function setRoutes(app) {
   router.route('/users/count').get(userCtrl.count);
   router.route('/user').post(userCtrl.insert);
   router.route('/user/:id').get(userCtrl.get);
+  router.route('/user/getuserwithproducts/:id').get(userCtrl.getUserWithProducts);
   router.route('/user/:id').put(userCtrl.update);
   router.route('/user/:id').delete(userCtrl.delete);
 
