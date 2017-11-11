@@ -29,9 +29,9 @@
     <input
     placeholder="Search for a product"
     [(ngModel)]="query"
-    (keyup.enter)="searchProducts()"
+    (keyup.enter)="searchFromBox()"
     >
-    <button (click)="searchProducts()">Search</button>
+    <button (click)="searchFromBox()">Search</button>
     <label>Min price:</label>
     <input
     type="number"

@@ -41,6 +41,7 @@ export class ProductsComponent implements OnInit {
   authenticated = false
   userId: string
   user = {}
+  searching = false
 
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -182,17 +183,29 @@ updateDetailView(product){
   //Functions called by pagination component
   goToPage(n: number): void {
       this.pageNum = n;
-      this.getProducts(this.pageNum);
+      if (this.searching){
+        this.searchProducts(this.pageNum)
+      }else{
+        this.getProducts(this.pageNum);
+      }
     }
 
     onNext(): void {
       this.pageNum++;
-      this.getProducts(this.pageNum);
+      if (this.searching){
+        this.searchProducts(this.pageNum)
+      }else{
+        this.getProducts(this.pageNum);
+      }
     }
 
     onPrev(): void {
       this.pageNum--;
-      this.getProducts(this.pageNum);
+      if (this.searching){
+        this.searchProducts(this.pageNum)
+      }else{
+        this.getProducts(this.pageNum);
+      }
     }
 
   //Code used to add productId to user
@@ -204,12 +217,16 @@ updateDetailView(product){
   }
 
   //code used to handle searches
-  searchProducts(){
-  if(this.query === ""){
-    this.toast.setMessage('Search cannot be empty', 'warning');
-    return
-  }
-    this.productService.searchProduct(this.query, 1).subscribe(
+  searchFromBox(){
+  this.searchProducts(1)
+}
+  searchProducts(pageNum){
+    if(this.query === ""){
+      this.toast.setMessage('Search cannot be empty', 'warning');
+      return
+    }
+    this.searching = true
+    this.productService.searchProduct(this.query, this.pageNum).subscribe(
       data => {
         this.products = data.docs
         this.totalPageNum = data.pages

@@ -22,7 +22,6 @@ export default class ProductCtrl extends BaseCtrl {
   }
 
   search = (req, res) => {
-
     const options = {
     page: req.params.pageNum,
     limit: 10,
@@ -36,7 +35,7 @@ export default class ProductCtrl extends BaseCtrl {
             $meta: 'textScore'
         }
     },
-    lean: true,
+    lean: false,
     leanWithId: true
   };
     this.model.paginate({$text: { $search: req.params.query}},
