@@ -90,15 +90,24 @@ updateDetailView(product){
   }
 
   addProduct() {
-    this.productService.addProduct(this.addProductForm.value).subscribe(
+    //Code to add userid to product
+    let productToAdd = this.addProductForm.value
+    productToAdd.userId = this.userId
+    //Adds product to the database
+    this.productService.addProduct(productToAdd).subscribe(
       res => {
         const newProduct = res.json();
+        //Code to add the new product to current listings
         this.products.push(newProduct);
         this.addProductForm.reset();
         this.toast.setMessage('item added successfully.', 'success');
+        //Creates a list of the current user details
         let newList = this.user
+        //pushes product id onto the list
         newList['products'].push(newProduct._id)
+        //sets the current user to the list
         this.user = newList
+        //updates current user to this.user
         this.userService.editUser(this.user).subscribe(
           error => console.log(error)
         )

@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
   name: String,
   description: String,
   price: Number,
-  user: String,
+  userId: String,
   createdAt: {
     type: Date,
     default: Date.now
