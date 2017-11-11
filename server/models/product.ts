@@ -13,7 +13,14 @@ const productSchema = new mongoose.Schema({
   img: String
 });
 
+//Adds pagination plugin to schema, to allow for paginated requests
 productSchema.plugin(mongoosePaginate)
+
+//Adds an index to make search faster
+productSchema.index({'name': 'text', 'description': 'text'},
+                    {weights: {name: 2, description: 1}}
+                  )
+
 
 const Product = mongoose.model('Product', productSchema);
 

@@ -29,8 +29,13 @@ export class ProductService {
   }
 
   deleteProduct(product): Observable<any> {
-    console.log(product)
     return this.http.delete(`/api/product/${product._id}`, this.options);
+  }
+
+  searchProduct(query, pageNum, min, max): Observable<any> {
+    return this.http.get(`/api/products/search/${query}/${pageNum}/${min}/${max}`,
+      this.options).map(res => res.json());
+
   }
 
 }

@@ -29,8 +29,7 @@ export class ProductsComponent implements OnInit {
   query = "";
   product = {};
   products = [];
-  filteredProducts = [];
-  minPrice = 0;
+  minPrice = 0
   maxPrice = Infinity;
   isIncreasing = true;
   isLoading = true;
@@ -42,6 +41,7 @@ export class ProductsComponent implements OnInit {
   authenticated = false
   userId: string
   user = {}
+  searching = false
 
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -82,7 +82,6 @@ updateDetailView(product){
         this.products = data.docs
         this.totalPageNum = data.pages
         this.totalListings = data.total
-        this.filteredProducts = data.docs
       },
       error => console.log(error),
       () => this.isLoading = false
@@ -153,12 +152,12 @@ updateDetailView(product){
     }
   }
 
+/*
   filterProducts() {
     this.filteredProducts = this.products
     .filter(product => product.name.includes(this.query))
     .filter(product => product.price > this.minPrice && product.price < this.maxPrice)
   }
-
 
   sortBy(type) {
     this.filteredProducts = this.products.sort((a,b) => {
@@ -179,21 +178,34 @@ updateDetailView(product){
     this.isIncreasing = !this.isIncreasing
     this.filterProducts()
   }
+  */
 
   //Functions called by pagination component
   goToPage(n: number): void {
       this.pageNum = n;
-      this.getProducts(this.pageNum);
+      if (this.searching){
+        this.searchProducts(this.pageNum)
+      }else{
+        this.getProducts(this.pageNum);
+      }
     }
 
     onNext(): void {
       this.pageNum++;
-      this.getProducts(this.pageNum);
+      if (this.searching){
+        this.searchProducts(this.pageNum)
+      }else{
+        this.getProducts(this.pageNum);
+      }
     }
 
     onPrev(): void {
       this.pageNum--;
-      this.getProducts(this.pageNum);
+      if (this.searching){
+        this.searchProducts(this.pageNum)
+      }else{
+        this.getProducts(this.pageNum);
+      }
     }
 
   //Code used to add productId to user
@@ -204,4 +216,28 @@ updateDetailView(product){
     )
   }
 
+  //code used to handle searches
+  searchFromBox(){
+  this.searchProducts(1)
+}
+  searchProducts(pageNum){
+    //TODO: Add sorting in backend
+    if(this.query === ""){
+      this.pageNum = 1
+      this.getProducts(this.pageNum)
+      this.searching = false
+      return
+    }
+    this.pageNum = 1
+    this.searching = true
+    this.productService.searchProduct(this.query, this.pageNum,
+      this.minPrice, this.maxPrice).subscribe(
+      data => {
+        this.products = data.docs
+        this.totalPageNum = data.pages
+        this.totalListings = data.total
+      },
+      error => console.log(error),
+  )
+}
 }

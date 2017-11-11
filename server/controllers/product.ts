@@ -20,4 +20,30 @@ export default class ProductCtrl extends BaseCtrl {
       res.json(docs);
     })
   }
+
+  search = (req, res) => {
+    const options = {
+    page: req.params.pageNum,
+    limit: 10,
+    sort: {
+        score: {
+            $meta: 'textScore'
+        }
+    },
+    select: {
+        score: {
+            $meta: 'textScore'
+        },
+    },
+    lean: false,
+    leanWithId: true,
+  };
+    this.model.paginate({$text: { $search: req.params.query },
+                        price: {$gte: req.params.min, $lte: req.params.max}},
+    options,
+        (err, docs) => {
+        if (err) { return console.error(err); }
+        res.json(docs);
+      })
+  }
 }
