@@ -35,6 +35,7 @@ export default class ProductCtrl extends BaseCtrl {
             $meta: 'textScore'
         },
     },
+    populate: "user",
     lean: false,
     leanWithId: true,
   };
