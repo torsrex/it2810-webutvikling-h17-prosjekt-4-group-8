@@ -7,9 +7,7 @@
       <thead class="thead-default">
         <tr>
           <th>Name</th>
-          <!-- <th>Description</th> -->
           <th>Price</th>
-          <!-- <th>Created at <button (click)="sortBy('createdAt')">¤</button></th> -->
         </tr>
       </thead>
       <tbody *ngIf="productList.length === 0">
@@ -18,7 +16,7 @@
         </tr>
       </tbody>
       <tbody>
-        <tr *ngFor="let product of productList" (click)="updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
+        <tr *ngFor="let product of productList"> <!-- Generates a tr for each product in the db. -->
           <td>{{product.name}}</td>
           <td>{{product.price}} NOK</td>
         </tr>
