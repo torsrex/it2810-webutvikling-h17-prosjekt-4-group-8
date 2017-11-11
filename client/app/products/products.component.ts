@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit {
   query = "";
   product = {};
   products = [];
-  minPrice = 0;
+  minPrice = 0
   maxPrice = Infinity;
   isIncreasing = true;
   isLoading = true;
@@ -223,11 +223,15 @@ updateDetailView(product){
   searchProducts(pageNum){
     //TODO: Add sorting in backend
     if(this.query === ""){
-      this.toast.setMessage('Search cannot be empty', 'warning');
+      this.pageNum = 1
+      this.getProducts(this.pageNum)
+      this.searching = false
       return
     }
+    this.pageNum = 1
     this.searching = true
-    this.productService.searchProduct(this.query, this.pageNum).subscribe(
+    this.productService.searchProduct(this.query, this.pageNum,
+      this.minPrice, this.maxPrice).subscribe(
       data => {
         this.products = data.docs
         this.totalPageNum = data.pages

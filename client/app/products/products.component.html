@@ -30,6 +30,7 @@
     placeholder="Search for a product"
     [(ngModel)]="query"
     (keyup.enter)="searchFromBox()"
+    type="text"
     >
     <button (click)="searchFromBox()">Search</button>
     <label>Min price:</label>
@@ -39,16 +40,16 @@
     step="100"
     placeholder="0"
     [(ngModel)]="minPrice"
-    (input)="filterProducts()"
+    (keyup.enter)="searchFromBox()"
     >
     <label>Max price:</label>
     <input
     type="number"
     min="0"
     step="100"
-    placeholder="0"
+    placeholder="Infinity"
     [(ngModel)]="maxPrice"
-    (input)="filterProducts()"
+    (keyup.enter)="searchFromBox()"
     >
   </div>
 

@@ -33,17 +33,17 @@ export default class ProductCtrl extends BaseCtrl {
     select: {
         score: {
             $meta: 'textScore'
-        }
+        },
     },
     lean: false,
-    leanWithId: true
+    leanWithId: true,
   };
-    this.model.paginate({$text: { $search: req.params.query}},
+    this.model.paginate({$text: { $search: req.params.query },
+                        price: {$gte: req.params.min, $lte: req.params.max}},
     options,
         (err, docs) => {
         if (err) { return console.error(err); }
         res.json(docs);
       })
   }
-
 }
