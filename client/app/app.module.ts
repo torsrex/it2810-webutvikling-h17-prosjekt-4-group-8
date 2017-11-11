@@ -23,6 +23,7 @@ import {GoogleMapsComponent} from './google-maps/google-maps.component';
 import { AgmCoreModule } from '@agm/core';
 import { PaginationComponent } from './pagination/pagination.component';
 import { MyProductsComponent } from './my-products/my-products.component';
+import { SearchProductsComponent } from './search-products/search-products.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { MyProductsComponent } from './my-products/my-products.component';
     ProductDetailsComponent,
     PaginationComponent,
     MyProductsComponent,
+    SearchProductsComponent,
   ],
   imports: [
     RoutingModule,

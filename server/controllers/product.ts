@@ -20,4 +20,15 @@ export default class ProductCtrl extends BaseCtrl {
       res.json(docs);
     })
   }
+
+  search = (req, res) => {
+    this.model.find({$text: { $search: req.params.query}},
+      { score : { $meta: 'textScore' } }, (err, docs) => {
+        if (err) { return console.error(err); }
+        res.json(docs);
+      })
+      .sort({
+        score: { $meta : 'textScore' }
+      })
+  }
 }
