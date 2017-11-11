@@ -29,8 +29,9 @@
     <input
     placeholder="Search for a product"
     [(ngModel)]="query"
-    (input)="filterProducts()"
+    (keyup.enter)="searchProducts()"
     >
+    <button (click)="searchProducts()">Search</button>
     <label>Min price:</label>
     <input
     type="number"
@@ -72,7 +73,7 @@
           </tr>
         </tbody>
         <tbody *ngIf="!isEditing">
-          <tr *ngFor="let product of filteredProducts" (click)="updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
+          <tr *ngFor="let product of products" (click)="updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
             <td>{{product.name}}</td>
             <!-- <td>{{product.description}}</td> -->
             <td>{{product.price}} NOK</td>

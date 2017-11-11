@@ -153,12 +153,12 @@ updateDetailView(product){
     }
   }
 
+/*
   filterProducts() {
     this.filteredProducts = this.products
     .filter(product => product.name.includes(this.query))
     .filter(product => product.price > this.minPrice && product.price < this.maxPrice)
   }
-
 
   sortBy(type) {
     this.filteredProducts = this.products.sort((a,b) => {
@@ -179,6 +179,7 @@ updateDetailView(product){
     this.isIncreasing = !this.isIncreasing
     this.filterProducts()
   }
+  */
 
   //Functions called by pagination component
   goToPage(n: number): void {
@@ -204,4 +205,13 @@ updateDetailView(product){
     )
   }
 
+  //code used to handle searches
+  searchProducts(){
+    this.productService.searchProduct(this.query).subscribe(
+      data => {
+        this.products = data
+      },
+      error => console.log(error),
+  )
+}
 }
