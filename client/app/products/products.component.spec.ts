@@ -17,6 +17,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'
 
+import { By } from '@angular/platform-browser';
+
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
@@ -49,21 +51,3 @@ describe('ProductsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-/*describe('Component: Cats', () => {
-  it('should create an instance', () => {
-    let component = new CatsComponent();
-    expect(component).toBeTruthy();
-  });
-});*/
