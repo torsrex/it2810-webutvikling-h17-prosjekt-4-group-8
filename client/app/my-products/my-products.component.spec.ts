@@ -1,11 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MyProductsComponent } from './my-products.component';
-import { SharedModule } from '../shared/shared.module'
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import { HttpModule } from '@angular/http'
 
-/*
+
 
 describe('MyProductsComponent', () => {
   let component: MyProductsComponent;
@@ -14,8 +16,9 @@ describe('MyProductsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MyProductsComponent ],
-      imports: [SharedModule],
-      providers: [ AuthService, UserService ]
+      imports: [HttpModule, RouterTestingModule],
+      providers: [ AuthService, UserService ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
@@ -30,4 +33,3 @@ describe('MyProductsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-*/
