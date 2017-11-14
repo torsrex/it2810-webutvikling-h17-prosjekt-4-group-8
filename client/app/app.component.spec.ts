@@ -75,7 +75,7 @@ describe('Component: App', () => {
     const de = fixture.debugElement.queryAll(By.css('a'));
     expect(de.length).toBe(6);
     expect(de[0].nativeElement.textContent).toContain('Home');
-    expect(de[1].nativeElement.textContent).toContain('Cats');
+    expect(de[1].nativeElement.textContent).toContain('Products');
     expect(de[2].nativeElement.textContent).toContain('Account (Tester)');
     expect(de[3].nativeElement.textContent).toContain('Admin');
     expect(de[4].nativeElement.textContent).toContain('My products');
