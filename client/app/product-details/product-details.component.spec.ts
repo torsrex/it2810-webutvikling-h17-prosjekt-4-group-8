@@ -1,6 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ToastComponent } from '../shared/toast/toast.component';
+
 import { ProductDetailsComponent } from './product-details.component';
+import { ReactiveFormsModule } from '@angular/forms'
+import { ProductService } from '../services/product.service'
+import { MessageService } from '../services/message.service'
+import { HttpModule } from '@angular/http'
+
+
 
 describe('ProductDetailsComponent', () => {
   let component: ProductDetailsComponent;
@@ -8,7 +16,9 @@ describe('ProductDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductDetailsComponent ]
+      imports: [ReactiveFormsModule, HttpModule],
+      declarations: [ ProductDetailsComponent ],
+      providers: [ProductService, MessageService, ToastComponent]
     })
     .compileComponents();
   }));

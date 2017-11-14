@@ -13,14 +13,14 @@ export default class ProductCtrl extends BaseCtrl {
     //Populate fetches from the other collection
   }
 
-
+  //pagination function
   getSomeProducts = (req, res) => {
     this.model.paginate({}, {page: req.params.pageNum, limit:10, sort: {createdAt: -1}, populate: "user"}, (err, docs) => {
       if (err) { return console.error(err); }
       res.json(docs);
     })
   }
-
+//search function
   search = (req, res) => {
     const options = {
     page: req.params.pageNum,
