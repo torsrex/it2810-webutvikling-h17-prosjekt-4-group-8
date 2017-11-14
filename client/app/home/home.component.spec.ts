@@ -23,11 +23,8 @@ describe('Component: Home', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-//TODO: Update this test once we figure out what to put on the homepage
-/*
-  it('should display the string "About" in h4', () => {
-    const el = fixture.debugElement.query(By.css('h4')).nativeElement;
-    expect(el.textContent).toContain('About');
+  it('should display the string "Welcome to BestProducts" in h1', () => {
+    const el = fixture.debugElement.query(By.css('h1')).nativeElement;
+    expect(el.textContent).toContain('Welcome to BestProducts!');
   });
-*/
 });
