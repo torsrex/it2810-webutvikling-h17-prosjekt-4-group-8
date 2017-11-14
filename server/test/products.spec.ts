@@ -28,6 +28,7 @@ describe('Product', () => {
         });
     });
 
+    /*
     it('should get products count', done => {
       chai.request(app)
         .get('/api/products/count')
@@ -38,7 +39,7 @@ describe('Product', () => {
           done();
         });
     });
-
+    */
     it('should create new product', done => {
       const product = { name: 'Fluffy', description: "yolo product", price: 2 };
       chai.request(app)
