@@ -166,11 +166,7 @@ updateDetailView(product){
 
   sortBy(value){
     this.sortingParam = value
-    if(this.sortingOrder === -1){
-      this.sortingOrder = 1
-    }else{
-      this.sortingOrder = -1
-    }
+    this.sortingOrder === -1 ? this.sortingOrder = 1 : this.sortingOrder = -1
     this.sortQuery = "?sortby="+this.sortingParam+"&increasing="+this.sortingOrder
     if(this.searching){
       this.searchProducts()
@@ -226,6 +222,17 @@ updateDetailView(product){
       this.searching = false
       return
     }
+    let history = []
+    let object = {query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice};
+    if(JSON.parse(localStorage.getItem('searches'))){
+      history = JSON.parse(localStorage.getItem('searches'))
+      history.unshift(object)
+    }else{
+      history.unshift(object)
+    }
+    history.splice(10)
+    localStorage.setItem('searches', JSON.stringify(history));
+
     this.pageNum = 1
     this.searching = true
     this.productService.searchProduct(this.query, this.pageNum,

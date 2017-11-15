@@ -14,13 +14,14 @@ export class MyProductsComponent implements OnInit {
   productList = []
   user = { _id: '', username: '', role: '', products: []};
   isLoading = true;
-
+  searches = []
   constructor(private auth: AuthService,
   private userService: UserService
   ) { }
 
   ngOnInit() {
     this.getUserWithProducts();
+    this.searches = JSON.parse(localStorage.getItem('searches'))
   }
 
 
