@@ -84,7 +84,6 @@ export class RegisterComponent implements OnInit {
     return {'has-danger': !this.latitude.pristine && !this.latitude.valid }
   }
   setClassLongitude() {
-    console.log(this.isValid())
     return {'has-danger': !this.longitude.pristine && !this.longitude.valid }
   }
 
