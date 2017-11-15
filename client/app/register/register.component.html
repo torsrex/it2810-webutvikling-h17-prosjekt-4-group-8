@@ -37,7 +37,7 @@
         <input class="form-control" type="text" name="longitude" formControlName="longitude" placeholder="Longitude" autofocus>
       </div>
 
-      <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button>
+      <button class="btn btn-primary" type="submit" [disabled]="isValid()"><i class="fa fa-user-plus"></i> Register</button>
     </form>
   </div>
 </div>

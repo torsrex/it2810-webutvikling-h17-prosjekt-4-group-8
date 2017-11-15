@@ -34,15 +34,13 @@ export class RegisterComponent implements OnInit {
   ]);
   latitude = new FormControl('',[
     Validators.required,
-    Validators.minLength(2),
+    Validators.min(57.8),
     Validators.max(71.5),
-    Validators.min(57.8)
   ]);
   longitude = new FormControl('', [
     Validators.required,
-    Validators.minLength(2),
-    Validators.max(3.5),
-    Validators.min(31.5)
+    Validators.min(3.5),
+    Validators.max(31.5)
   ]);
 
   constructor(private formBuilder: FormBuilder,
@@ -62,6 +60,14 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  isValid(){
+    if(this.registerForm.valid && !isNaN(this.latitude.value) && !isNaN(this.longitude.value)){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
   setClassUsername() {
     return { 'has-danger': !this.username.pristine && !this.username.valid };
   }
@@ -78,6 +84,7 @@ export class RegisterComponent implements OnInit {
     return {'has-danger': !this.latitude.pristine && !this.latitude.valid }
   }
   setClassLongitude() {
+    console.log(this.isValid())
     return {'has-danger': !this.longitude.pristine && !this.longitude.valid }
   }
 
