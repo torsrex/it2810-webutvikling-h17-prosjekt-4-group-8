@@ -18,6 +18,12 @@
         <div class="form-group">
           <input class="form-control" type="number" name="price" formControlName="price" placeholder="Price" step="any" min="0">
         </div>
+        <div class="form-group">
+        <select class="form-control" formControlName="category">
+          <option value="default">--Select a category--</option>
+          <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
+        </select>
+      </div>
         <button class="btn btn-primary" type="submit" [disabled]="!addProductForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
       </form>
     </div>
@@ -26,15 +32,18 @@
   <!-- Search / filter -->
   <h4 class="card-header">List of products: </h4>
   <div class="card-block">
+    <!-- Search component -->
+    <div class="form-inline">
     <input
+    class="form-control"
     placeholder="Search for a product"
     [(ngModel)]="query"
     (keyup.enter)="searchFromBox()"
     type="text"
     >
-    <button (click)="searchFromBox()">Search</button>
     <label>Min price:</label>
     <input
+    class="form-control"
     type="number"
     min="0"
     step="100"
@@ -44,6 +53,7 @@
     >
     <label>Max price:</label>
     <input
+    class="form-control"
     type="number"
     min="0"
     step="100"
@@ -51,6 +61,13 @@
     [(ngModel)]="maxPrice"
     (keyup.enter)="searchFromBox()"
     >
+    <button (click)="searchFromBox()">Search</button>
+  </div>
+  <!-- The category filter works outside of search, should be separated -->
+    <select class="form-control" [(ngModel)]="selectedCategory" (ngModelChange)="filterByCategory($event)">
+      <option value="default">--Select a category--</option>
+      <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
+    </select>
   </div>
 
   <!-- Product list + details component (all dynamic content on the products-page) ______________________________-->
@@ -66,15 +83,16 @@
             <th>Price <button (click)="sortBy('price')">¤</button></th>
             <!-- <th>Created at <button (click)="sortBy('createdAt')">¤</button></th> -->
             <th>Added by </th>
+            <th>Category </th>
           </tr>
         </thead>
-        <tbody *ngIf="products.length === 0">
+        <tbody *ngIf="filteredProducts.length === 0">
           <tr>
             <td colspan="4">There are no products in the DB. Add a new product below.</td>
           </tr>
         </tbody>
         <tbody *ngIf="!isEditing">
-          <tr *ngFor="let product of products" (click)="updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
+          <tr *ngFor="let product of filteredProducts" (click)="updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
             <td>{{product.name}}</td>
             <!-- <td>{{product.description}}</td> -->
             <td>{{product.price}} NOK</td>
@@ -85,6 +103,7 @@
             </td> -->
             <!-- TODO: Remove ngif when database updated -->
             <td *ngIf="product.user">{{product.user.username}}</td>
+            <td *ngIf="product.category">{{product.category}}</td>
           </tr>
         </tbody>
         <!-- <tbody *ngIf="isEditing">
