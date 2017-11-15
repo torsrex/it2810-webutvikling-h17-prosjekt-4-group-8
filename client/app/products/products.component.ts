@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { ProductDetailsComponent } from '../product-details/product-details.component';
+import { CreateProductComponent } from '../create-product/create-product.component'
 import { ToastComponent } from '../shared/toast/toast.component';
 import { GoogleMapsComponent } from '../google-maps/google-maps.component'
 import { PaginationComponent } from '../pagination/pagination.component'
