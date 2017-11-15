@@ -120,7 +120,8 @@
   </div>
 </div>
 <!-- Pagination component -->
-<div>
+<div *ngIf="!searching">
+  <!--TODO: Make pagination component work with searches -->
   <app-pagination
     (goPage)="goToPage($event)"
     (goNext)="onNext()"
