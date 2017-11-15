@@ -27,6 +27,7 @@ export class ProductsComponent implements OnInit {
   query = ""; //Searchquery
   product = {}; //A single product, used when updating detailview and editing
   products = []; //List containing all products fetched from api
+  filteredProducts = [] //Used when filtering by category
   minPrice = 0 //Minprice in search filter
   maxPrice = Infinity; //Maxprice in search filter
   isLoading = true;
@@ -46,12 +47,15 @@ export class ProductsComponent implements OnInit {
   sortingParam: string //What to sort by
   sortingOrder = 1 //What order to sort by
   sortQuery = "?" //Holds the search query
+  selectedCategory = ""
 
   //Creates the default formgroup for adding a new product
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
   description = new FormControl('', Validators.required);
   price = new FormControl('', Validators.required);
+  category = new FormControl('', Validators.required)
+  categories = ["Electronics", "Household items", "Furniture", "Pets", "Sports", "Gardening"]
 
   constructor(private productService: ProductService,
               private messageService: MessageService,
@@ -72,7 +76,8 @@ export class ProductsComponent implements OnInit {
     this.addProductForm = this.formBuilder.group({
       name: this.name,
       description: this.description,
-      price: this.price
+      price: this.price,
+      category: this.category
     });
     //Gets user logged in status
     this.authenticated = this.auth.loggedIn
@@ -91,6 +96,7 @@ updateDetailView(product){
     this.productService.getProducts(pageNum+sortQuery).subscribe(
       data => {
         this.products = data.docs
+        this.filteredProducts = data.docs
         this.totalPageNum = data.pages
         this.totalListings = data.total
       },
@@ -211,6 +217,11 @@ updateDetailView(product){
     )
   }
 
+
+  filterByCategory(category){
+    this.filteredProducts = this.products.filter(product => product.category.includes(category))
+  }
+
   //code used to handle searches
   searchFromBox(){
   this.pageNum = 1
@@ -239,6 +250,7 @@ updateDetailView(product){
       this.minPrice, this.maxPrice+this.sortQuery).subscribe(
       data => {
         this.products = data.docs
+        this.filteredProducts = data.docs
         this.totalPageNum = data.pages
         this.totalListings = data.total
       },

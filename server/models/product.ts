@@ -10,7 +10,8 @@ const productSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  img: String
+  img: String,
+  category: String
 });
 
 //Adds pagination plugin to schema, to allow for paginated requests
