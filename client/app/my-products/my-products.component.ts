@@ -21,10 +21,15 @@ export class MyProductsComponent implements OnInit {
 
   ngOnInit() {
     this.getUserWithProducts();
-    this.searches = JSON.parse(localStorage.getItem('searches'))
+    this.getFromLocalStorage()
   }
 
+  getFromLocalStorage(){
+    if(JSON.parse(localStorage.getItem('searches'))){
+      this.searches = JSON.parse(localStorage.getItem('searches'))
+    }
 
+  }
   getUserWithProducts() {
     this.userService.getUserWithProducts(this.auth.currentUser).subscribe(
       data => this.user = data,

@@ -14,7 +14,7 @@ import { AuthService } from '../services/auth.service'
 
 import { HttpModule } from '@angular/http'
 import { RouterTestingModule } from '@angular/router/testing';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'
 
 import { By } from '@angular/platform-browser';
@@ -26,8 +26,8 @@ describe('ProductsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpModule, RouterTestingModule, FormsModule, ReactiveFormsModule ],
-      declarations: [ ProductsComponent ],
+      imports: [HttpModule, RouterTestingModule, FormsModule, ReactiveFormsModule],
+      declarations: [ProductsComponent],
       providers: [
         UserService,
         ProductService,
@@ -35,10 +35,33 @@ describe('ProductsComponent', () => {
         AuthService,
         ProductDetailsComponent,
         ToastComponent
-       ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
+    let store = {};
+    const mockLocalStorage = {
+      getItem: (key: string): string => {
+        return key in store ? store[key] : null;
+      },
+      setItem: (key: string, value: string) => {
+        store[key] = `${value}`;
+      },
+      removeItem: (key: string) => {
+        delete store[key];
+      },
+      clear: () => {
+        store = {};
+      }
+    };
+    spyOn(localStorage, 'getItem')
+      .and.callFake(mockLocalStorage.getItem);
+    spyOn(localStorage, 'setItem')
+      .and.callFake(mockLocalStorage.setItem);
+    spyOn(localStorage, 'removeItem')
+      .and.callFake(mockLocalStorage.removeItem);
+    spyOn(localStorage, 'clear')
+      .and.callFake(mockLocalStorage.clear);
   }));
 
   beforeEach(() => {
