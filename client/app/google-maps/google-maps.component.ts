@@ -9,8 +9,8 @@ import { UserService } from '../services/user.service';
 })
 export class GoogleMapsComponent implements OnInit {
 
-  lat = 63.428024;
-  lng = 10.393186;
+  init_lat = 63.428024;
+  init_lng = 10.393186;
   zoom = 10;
   users = [];
   locations = [];
@@ -18,20 +18,22 @@ export class GoogleMapsComponent implements OnInit {
 
   // TODO: remove this, used for testing as no data currently has location
   testUser = {
-  id: 1,
-    name: "Person 1",
+    _id: 1,
+    username: "Person 1",
     location: {
-      la: 63.42,
-      lo: 10.39
-    }
+      latitude: 63.42,
+      longitude: 10.37
+    },
+    products: ["jd7464djf484y7", "7f78f9shf"]
   };
   testBruker = {
-    id: 2,
-    name: "Person 2",
+    _id: 2,
+    username: "Person 2",
     location: {
-      la: 63.44,
-      lo: 10.46
-    }
+      latitude: 63.44,
+      longitude: 10.47
+    },
+    products: ["987fyd8fd7gf", "jiej9ijf9ie"]
   };
   testUsers = [];
 

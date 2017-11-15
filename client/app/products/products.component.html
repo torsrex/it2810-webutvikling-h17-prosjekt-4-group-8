@@ -4,30 +4,7 @@
 
 <div class="card" *ngIf="!isLoading">
 
-  <!-- Add new product  -->
-  <div class="card" *ngIf="!isEditing && authenticated">
-    <h4 class="card-header">Add new product</h4>
-    <div class="card-block">
-      <form class="form-inline" [formGroup]="addProductForm" (ngSubmit)="addProduct()" style="text-align:center">
-        <div class="form-group">
-          <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
-        </div>
-        <div class="form-group">
-          <input class="form-control" type="text" name="description" formControlName="description" placeholder="Description" min="0">
-        </div>
-        <div class="form-group">
-          <input class="form-control" type="number" name="price" formControlName="price" placeholder="Price" step="any" min="0">
-        </div>
-        <div class="form-group">
-        <select class="form-control" formControlName="category">
-          <option value="default">--Select a category--</option>
-          <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
-        </select>
-      </div>
-        <button class="btn btn-primary" type="submit" [disabled]="!addProductForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
-      </form>
-    </div>
-  </div>
+  <app-create-product></app-create-product>
 
   <!-- Search / filter -->
   <h4 class="card-header">List of products: </h4>
