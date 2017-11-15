@@ -219,6 +219,10 @@ updateDetailView(product){
 
 
   filterByCategory(category){
+    if(category === "default"){
+      this.filteredProducts = this.products
+      return
+    }
     this.filteredProducts = this.products.filter(product => product.category.includes(category))
   }
 
