@@ -11,8 +11,6 @@ import { AuthService } from '../services/auth.service';
 import {MessageService} from '../services/message.service'
 import { UserService } from '../services/user.service'
 
-
-
 import { Subscription } from 'rxjs/Subscription';
 
 
@@ -26,25 +24,30 @@ export class ProductsComponent implements OnInit {
   message: any;
   subscription: Subscription;
 
-  query = "";
-  product = {};
-  products = [];
-  minPrice = 0
-  maxPrice = Infinity;
+  query = ""; //Searchquery
+  product = {}; //A single product, used when updating detailview and editing
+  products = []; //List containing all products fetched from api
+  minPrice = 0 //Minprice in search filter
+  maxPrice = Infinity; //Maxprice in search filter
   isLoading = true;
   isEditing = false;
-  pageNum = 1; //this must be >0
-  totalPageNum = 0;
-  totalListings = 0;
-  listingsPerPage = 10;
-  authenticated = false
-  userId: string
-  user = {}
-  searching = false
-  sortingParam: string
-  sortingOrder = 1
-  sortQuery = "?"
+  authenticated = false //Is the user authenticated?
+  userId: string //What is the current userid?
+  user = {} //List containing the current user's parameters
 
+  //Used by pagination component
+  pageNum = 1; //this must be >0, which page we are on
+  totalPageNum = 0; //Total number of pages
+  totalListings = 0; //Total number of productlistings
+  listingsPerPage = 10; //How many to list pr. page
+
+  //Used to handle search and sorting
+  searching = false //Variable to indicate if we're in search mode
+  sortingParam: string //What to sort by
+  sortingOrder = 1 //What order to sort by
+  sortQuery = "?" //Holds the search query
+
+  //Creates the default formgroup for adding a new product
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
   description = new FormControl('', Validators.required);
@@ -63,14 +66,19 @@ export class ProductsComponent implements OnInit {
               }
 
   ngOnInit() {
+    //Initial fetch of products
     this.getProducts(this.pageNum, this.sortQuery);
+    //Creates the add productform
     this.addProductForm = this.formBuilder.group({
       name: this.name,
       description: this.description,
       price: this.price
     });
+    //Gets user logged in status
     this.authenticated = this.auth.loggedIn
+    //Sets the userid
     this.userId = this.auth.currentUser['_id']
+    //Gets other user paramters
     this.getUser()
   }
 
@@ -78,6 +86,7 @@ updateDetailView(product){
   this.productDetails.setProduct(product);
 }
 
+  //Fetches products and stores in products list
   getProducts(pageNum, sortQuery) {
     this.productService.getProducts(pageNum+sortQuery).subscribe(
       data => {
@@ -90,6 +99,7 @@ updateDetailView(product){
     );
   }
 
+ //Adds a new product
   addProduct() {
     //Code to add userid to product
     let productToAdd = this.addProductForm.value
@@ -210,7 +220,6 @@ updateDetailView(product){
   this.searchProducts()
 }
   searchProducts(){
-    //TODO: Add sorting in backend
     if(this.query === ""){
       this.pageNum = 1
       this.getProducts(this.pageNum, this.sortQuery)
