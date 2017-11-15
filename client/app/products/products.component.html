@@ -32,15 +32,18 @@
   <!-- Search / filter -->
   <h4 class="card-header">List of products: </h4>
   <div class="card-block">
+    <!-- Search component -->
+    <div class="form-inline">
     <input
+    class="form-control"
     placeholder="Search for a product"
     [(ngModel)]="query"
     (keyup.enter)="searchFromBox()"
     type="text"
     >
-    <button (click)="searchFromBox()">Search</button>
     <label>Min price:</label>
     <input
+    class="form-control"
     type="number"
     min="0"
     step="100"
@@ -50,6 +53,7 @@
     >
     <label>Max price:</label>
     <input
+    class="form-control"
     type="number"
     min="0"
     step="100"
@@ -57,6 +61,9 @@
     [(ngModel)]="maxPrice"
     (keyup.enter)="searchFromBox()"
     >
+    <button (click)="searchFromBox()">Search</button>
+  </div>
+  <!-- The category filter works outside of search, should be separated -->
     <select class="form-control" [(ngModel)]="selectedCategory" (ngModelChange)="filterByCategory($event)">
       <option value="default">--Select a category--</option>
       <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
