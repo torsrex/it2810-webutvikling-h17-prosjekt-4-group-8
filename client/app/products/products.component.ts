@@ -213,6 +213,7 @@ updateDetailView(product){
 
   //code used to handle searches
   searchFromBox(){
+  this.pageNum = 1
   this.searchProducts()
 }
   searchProducts(){
@@ -233,7 +234,6 @@ updateDetailView(product){
     history.splice(10)
     localStorage.setItem('searches', JSON.stringify(history));
 
-    this.pageNum = 1
     this.searching = true
     this.productService.searchProduct(this.query, this.pageNum,
       this.minPrice, this.maxPrice+this.sortQuery).subscribe(
