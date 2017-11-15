@@ -15,9 +15,8 @@
   </div>
 
   <div>
-    <span>Seller, </span>
-    <span>Tlf,</span>
-    <span>email</span> <br>
+    <td *ngIf="product.user">{{product.user.username}}</td>
+    <td *ngIf="product.category">{{product.category}}</td> <br>
   </div>
 
 </div>

@@ -12,6 +12,10 @@
         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
         <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email">
       </div>
+      <div class="input-group" [ngClass]="setPhone()">
+        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+        <input class="form-control" type="tel" name="phone" formControlName="phone" placeholder="Phone">
+      </div>
       <div class="input-group" [ngClass]="setClassPassword()">
         <span class="input-group-addon"><i class="fa fa-key"></i></span>
         <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password">
@@ -24,16 +28,16 @@
           <option value="admin">Admin</option>
         </select>
       </div>
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
-        <input class="form-control" type="text" name="img" formControlName="img" placeholder="image link">
+      <div class="input-group" [ngClass]="setClassLatitude()">
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input class="form-control" type="text" name="latitude" formControlName="latitude" placeholder="Latitude" autofocus>
       </div>
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-        <input class="form-control" type="number" name="age" formControlName="age" placeholder="age">
+      <div class="input-group" [ngClass]="setClassLongitude()">
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input class="form-control" type="text" name="longitude" formControlName="longitude" placeholder="Longitude" autofocus>
       </div>
 
-      <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button>
+      <button class="btn btn-primary" type="submit" [disabled]="isValid()"><i class="fa fa-user-plus"></i> Register</button>
     </form>
   </div>
 </div>

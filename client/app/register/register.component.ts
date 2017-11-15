@@ -9,31 +9,39 @@ import { ToastComponent } from '../shared/toast/toast.component';
   templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
-
   registerForm: FormGroup;
   username = new FormControl('', [
     Validators.required,
     Validators.minLength(2),
     Validators.maxLength(30),
-    Validators.pattern('[a-zA-Z0-9_-\\s]*')
+    Validators.pattern('[a-zA-Z0-9_-\\s]*'),
   ]);
   email = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
-    Validators.maxLength(100)
+    Validators.maxLength(100),
+  ]);
+  phone = new FormControl('',[
+    Validators.required,
+    Validators.minLength(8),
   ]);
   password = new FormControl('', [
     Validators.required,
-    Validators.minLength(6)
+    Validators.minLength(6),
   ]);
   role = new FormControl('', [
-    Validators.required
-  ]);
-  img = new FormControl('',[
     Validators.required,
   ]);
-  age = new FormControl('', [
-  ])
+  latitude = new FormControl('',[
+    Validators.required,
+    Validators.min(57.8),
+    Validators.max(71.5),
+  ]);
+  longitude = new FormControl('', [
+    Validators.required,
+    Validators.min(3.5),
+    Validators.max(31.5)
+  ]);
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -44,11 +52,20 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       username: this.username,
       email: this.email,
+      phone: this.phone,
       password: this.password,
       role: this.role,
-      img: this.img,
-      age: this.age
+      latitude: this.latitude,
+      longitude: this.longitude,
     });
+  }
+
+  isValid(){
+    if(this.registerForm.valid && !isNaN(this.latitude.value) && !isNaN(this.longitude.value)){
+      return false;
+    }else{
+      return true;
+    }
   }
 
   setClassUsername() {
@@ -57,8 +74,17 @@ export class RegisterComponent implements OnInit {
   setClassEmail() {
     return { 'has-danger': !this.email.pristine && !this.email.valid };
   }
+  setPhone() {
+    return { 'has-danger': !this.phone.pristine && !this.phone.valid };
+  }
   setClassPassword() {
     return { 'has-danger': !this.password.pristine && !this.password.valid };
+  }
+  setClassLatitude() {
+    return {'has-danger': !this.latitude.pristine && !this.latitude.valid }
+  }
+  setClassLongitude() {
+    return {'has-danger': !this.longitude.pristine && !this.longitude.valid }
   }
 
   register() {
@@ -67,7 +93,7 @@ export class RegisterComponent implements OnInit {
         this.toast.setMessage('you successfully registered!', 'success');
         this.router.navigate(['/login']);
       },
-      error => this.toast.setMessage('email already exists', 'danger')
+      error => this.toast.setMessage('Some bug', 'danger')
     );
   }
 }
