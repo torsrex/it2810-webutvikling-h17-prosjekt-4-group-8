@@ -4,7 +4,25 @@
   <h4 class="card-header">Map</h4>
   <div class="map">
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [streetViewControl]="false">
-      <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude"></agm-marker>
+      <!--
+      <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
+      </agm-marker>
+      -->
+      <agm-marker *ngFor="let user of testUsers" [latitude]="user.location.la" [longitude]="user.location.lo">
+        <!--
+        <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true">
+          <ng-template>
+            {{user.name}}
+          </ng-template>
+        </agm-snazzy-info-window>
+        -->
+        <agm-info-window>
+          <div class="info-window-content">
+            {{user.name}}<br/>
+            <button type="button" (click)="filterByUser(user.id)">Filter by user</button>
+          </div>
+        </agm-info-window>
+      </agm-marker>
     </agm-map>
   </div>
 </div>
