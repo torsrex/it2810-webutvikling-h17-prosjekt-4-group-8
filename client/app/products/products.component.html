@@ -82,8 +82,6 @@
             <!-- <th>Description</th> -->
             <th>Price <button (click)="sortBy('price')">¤</button></th>
             <!-- <th>Created at <button (click)="sortBy('createdAt')">¤</button></th> -->
-            <th>Added by </th>
-            <th>Category </th>
           </tr>
         </thead>
         <tbody *ngIf="filteredProducts.length === 0">
@@ -102,8 +100,6 @@
               <button class="btn btn-sm btn-danger" (click)="deleteProduct(product)"><i class="fa fa-trash"></i> Delete</button>
             </td> -->
             <!-- TODO: Remove ngif when database updated -->
-            <td *ngIf="product.user">{{product.user.username}}</td>
-            <td *ngIf="product.category">{{product.category}}</td>
           </tr>
         </tbody>
         <!-- <tbody *ngIf="isEditing">
