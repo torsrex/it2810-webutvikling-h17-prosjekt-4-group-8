@@ -6,19 +6,12 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true, trim: true },
   password: String,
   role: String,
-  location: {
-    longitude: Number,
-    latitude: Number
-  },
-  phone: Number,
-  img: String,
+  longitude: Number,
+  latitude: Number,
+  phone: String,
   //Sets to product array which references the products collection
   products: [{type: mongoose.Schema.Types.ObjectId, ref: 'Product'}],
-  name: {
-    surName: String,
-    firstName: String
-  },
-  age: Number,
+  name: String,
 });
 
 // Before saving the user, hash the password
