@@ -15,20 +15,26 @@ export default class ProductCtrl extends BaseCtrl {
 
   //pagination function
   getSomeProducts = (req, res) => {
-    this.model.paginate({}, {page: req.params.pageNum, limit:10, sort: {createdAt: -1}, populate: "user"}, (err, docs) => {
+    const sortingParam = req.query.sortby ? req.query.sortby : "createdAt"
+    const sortingOrder = req.query.increasing ? req.query.increasing: 1
+    this.model.paginate({}, {page: req.params.pageNum, limit:10,
+      sort: {[sortingParam]: +sortingOrder}, populate: "user"}, (err, docs) => {
       if (err) { return console.error(err); }
       res.json(docs);
     })
   }
 //search function
   search = (req, res) => {
+  const sortingParam = req.query.sortby ? req.query.sortby : "createdAt"
+  const sortingOrder = req.query.increasing ? req.query.increasing: 1
     const options = {
     page: req.params.pageNum,
     limit: 10,
     sort: {
+      [sortingParam]: +sortingOrder,
         score: {
             $meta: 'textScore'
-        }
+        },
     },
     select: {
         score: {

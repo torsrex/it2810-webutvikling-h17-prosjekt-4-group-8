@@ -24,3 +24,30 @@
       </tbody>
     </table>
   </div>
+<div>
+  <h4>Your 10 recent searches: </h4>
+  <div class="card-block">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-default">
+        <tr>
+          <th>Search query:</th>
+          <th>Min price:</th>
+          <th>Max price:</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="searches.length === 0">
+        <tr>
+          <td colspan="4">You don't have any searches.</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr *ngFor="let element of searches"> <!-- Generates a tr for each product in the db. -->
+          <td>{{element.query}}</td>
+          <td>{{element.minPrice}}</td>
+          <td *ngIf="!element.maxPrice">Infinity</td>
+          <td>{{element.maxPrice}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -35,6 +35,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('searches')
     this.loggedIn = false;
     this.isAdmin = false;
     this.currentUser = { _id: '', username: '', role: '', products: [] };

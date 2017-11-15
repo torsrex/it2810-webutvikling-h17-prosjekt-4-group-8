@@ -11,8 +11,6 @@ import { AuthService } from '../services/auth.service';
 import {MessageService} from '../services/message.service'
 import { UserService } from '../services/user.service'
 
-
-
 import { Subscription } from 'rxjs/Subscription';
 
 
@@ -26,23 +24,30 @@ export class ProductsComponent implements OnInit {
   message: any;
   subscription: Subscription;
 
-  query = "";
-  product = {};
-  products = [];
-  minPrice = 0
-  maxPrice = Infinity;
-  isIncreasing = true;
+  query = ""; //Searchquery
+  product = {}; //A single product, used when updating detailview and editing
+  products = []; //List containing all products fetched from api
+  minPrice = 0 //Minprice in search filter
+  maxPrice = Infinity; //Maxprice in search filter
   isLoading = true;
   isEditing = false;
-  pageNum = 1; //this must be >0
-  totalPageNum = 0;
-  totalListings = 0;
-  listingsPerPage = 10;
-  authenticated = false
-  userId: string
-  user = {}
-  searching = false
+  authenticated = false //Is the user authenticated?
+  userId: string //What is the current userid?
+  user = {} //List containing the current user's parameters
 
+  //Used by pagination component
+  pageNum = 1; //this must be >0, which page we are on
+  totalPageNum = 0; //Total number of pages
+  totalListings = 0; //Total number of productlistings
+  listingsPerPage = 10; //How many to list pr. page
+
+  //Used to handle search and sorting
+  searching = false //Variable to indicate if we're in search mode
+  sortingParam: string //What to sort by
+  sortingOrder = 1 //What order to sort by
+  sortQuery = "?" //Holds the search query
+
+  //Creates the default formgroup for adding a new product
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
   description = new FormControl('', Validators.required);
@@ -57,18 +62,23 @@ export class ProductsComponent implements OnInit {
               private userService: UserService
               ) {
                 //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
-                this.subscription = this.messageService.getMessage().subscribe(message => { this.getProducts(this.pageNum); this.message = message.text; });
+                this.subscription = this.messageService.getMessage().subscribe(message => { this.getProducts(this.pageNum, this.sortQuery); this.message = message.text; });
               }
 
   ngOnInit() {
-    this.getProducts(this.pageNum);
+    //Initial fetch of products
+    this.getProducts(this.pageNum, this.sortQuery);
+    //Creates the add productform
     this.addProductForm = this.formBuilder.group({
       name: this.name,
       description: this.description,
       price: this.price
     });
+    //Gets user logged in status
     this.authenticated = this.auth.loggedIn
+    //Sets the userid
     this.userId = this.auth.currentUser['_id']
+    //Gets other user paramters
     this.getUser()
   }
 
@@ -76,8 +86,9 @@ updateDetailView(product){
   this.productDetails.setProduct(product);
 }
 
-  getProducts(pageNum) {
-    this.productService.getProducts(this.pageNum).subscribe(
+  //Fetches products and stores in products list
+  getProducts(pageNum, sortQuery) {
+    this.productService.getProducts(pageNum+sortQuery).subscribe(
       data => {
         this.products = data.docs
         this.totalPageNum = data.pages
@@ -88,6 +99,7 @@ updateDetailView(product){
     );
   }
 
+ //Adds a new product
   addProduct() {
     //Code to add userid to product
     let productToAdd = this.addProductForm.value
@@ -125,7 +137,7 @@ updateDetailView(product){
     this.product = {};
     this.toast.setMessage('item editing cancelled.', 'warning');
     // reload the products to reset the editing
-    this.getProducts(this.pageNum);
+    this.getProducts(this.pageNum, this.sortQuery);
   }
 
   editProduct(product) {
@@ -152,59 +164,42 @@ updateDetailView(product){
     }
   }
 
-/*
-  filterProducts() {
-    this.filteredProducts = this.products
-    .filter(product => product.name.includes(this.query))
-    .filter(product => product.price > this.minPrice && product.price < this.maxPrice)
+  sortBy(value){
+    this.sortingParam = value
+    this.sortingOrder === -1 ? this.sortingOrder = 1 : this.sortingOrder = -1
+    this.sortQuery = "?sortby="+this.sortingParam+"&increasing="+this.sortingOrder
+    if(this.searching){
+      this.searchProducts()
+    }else{
+      this.getProducts(this.pageNum, this.sortQuery)
+    }
   }
-
-  sortBy(type) {
-    this.filteredProducts = this.products.sort((a,b) => {
-      if(this.isIncreasing) {
-        if(typeof a[type] === "number") {
-          return a[type] - b[type]
-        } else {
-          return a[type].localeCompare(b[type])
-        }
-      } else {
-        if(typeof a[type] === "number") {
-          return b[type] - a[type]
-        } else {
-          return b[type].localeCompare(a[type])
-        }
-      }
-    })
-    this.isIncreasing = !this.isIncreasing
-    this.filterProducts()
-  }
-  */
 
   //Functions called by pagination component
   goToPage(n: number): void {
       this.pageNum = n;
       if (this.searching){
-        this.searchProducts(this.pageNum)
+        this.searchProducts()
       }else{
-        this.getProducts(this.pageNum);
+        this.getProducts(this.pageNum, this.sortQuery);
       }
     }
 
     onNext(): void {
       this.pageNum++;
       if (this.searching){
-        this.searchProducts(this.pageNum)
+        this.searchProducts()
       }else{
-        this.getProducts(this.pageNum);
+        this.getProducts(this.pageNum, this.sortQuery);
       }
     }
 
     onPrev(): void {
       this.pageNum--;
       if (this.searching){
-        this.searchProducts(this.pageNum)
+        this.searchProducts()
       }else{
-        this.getProducts(this.pageNum);
+        this.getProducts(this.pageNum, this.sortQuery);
       }
     }
 
@@ -218,20 +213,30 @@ updateDetailView(product){
 
   //code used to handle searches
   searchFromBox(){
-  this.searchProducts(1)
+  this.searchProducts()
 }
-  searchProducts(pageNum){
-    //TODO: Add sorting in backend
+  searchProducts(){
     if(this.query === ""){
       this.pageNum = 1
-      this.getProducts(this.pageNum)
+      this.getProducts(this.pageNum, this.sortQuery)
       this.searching = false
       return
     }
+    let history = []
+    let object = {query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice};
+    if(JSON.parse(localStorage.getItem('searches'))){
+      history = JSON.parse(localStorage.getItem('searches'))
+      history.unshift(object)
+    }else{
+      history.unshift(object)
+    }
+    history.splice(10)
+    localStorage.setItem('searches', JSON.stringify(history));
+
     this.pageNum = 1
     this.searching = true
     this.productService.searchProduct(this.query, this.pageNum,
-      this.minPrice, this.maxPrice).subscribe(
+      this.minPrice, this.maxPrice+this.sortQuery).subscribe(
       data => {
         this.products = data.docs
         this.totalPageNum = data.pages
