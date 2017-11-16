@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { AccountComponent } from './account.component';
+import { MyPageComponent } from './my-page.component';
 import { ToastComponent } from '../shared/toast/toast.component';
 
 import { RouterTestingModule } from '@angular/router/testing';
@@ -14,8 +14,8 @@ import { UserService } from '../services/user.service'
 
 
 describe('AccountComponent', () => {
-  let component: AccountComponent;
-  let fixture: ComponentFixture<AccountComponent>;
+  let component: MyPageComponent;
+  let fixture: ComponentFixture<MyPageComponent>;
   let authService: AuthService
   let authServiceStub: {
     loggedIn: boolean,
@@ -31,12 +31,12 @@ describe('AccountComponent', () => {
     };
     TestBed.configureTestingModule({
       imports: [ FormsModule, HttpModule, RouterTestingModule ],
-      declarations: [ AccountComponent ],
+      declarations: [ MyPageComponent ],
       providers: [{provide: AuthService, useValue: authServiceStub}, UserService, ToastComponent],
       schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents().then(() => {
-      fixture = TestBed.createComponent(AccountComponent);
+      fixture = TestBed.createComponent(MyPageComponent);
       component = fixture.componentInstance;
       authService = fixture.debugElement.injector.get(AuthService);
       fixture.detectChanges();
