@@ -2,10 +2,9 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="card" *ngIf="!isLoading">
 
 <!-- Add new product  -->
-<div class="card" *ngIf="isEditing && authenticated">
+<div class="card" *ngIf="authenticated && isEditing && !isLoading">
   <div class="card-header"><h4>Add new product</h4><button (click)="isEditing = !isEditing" >close</button></div>
   <div class="card-block">
     <form class="form-inline" [formGroup]="addProductForm" (ngSubmit)="addProduct()" style="text-align:center">
