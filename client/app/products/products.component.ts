@@ -50,6 +50,10 @@ export class ProductsComponent implements OnInit {
   sortingOrder = 1 //What order to sort by
   sortQuery = "?" //Holds the search query
   selectedCategory = "default"
+  ascName = false;
+  ascPrice = false;
+  nameSelected = false;
+  priceSelected = false;
 
   //Creates the default formgroup for adding a new product
   addProductForm: FormGroup;
@@ -171,6 +175,22 @@ updateDetailView(product){
         error => console.log(error)
       );
     }
+  }
+
+  toggleNameSort(){
+    this.ascName = !this.ascName;
+    this.ascPrice = true;
+    
+    this.nameSelected = true;
+    this.priceSelected = false;
+  }
+  togglePriceSort(){
+    this.ascPrice = !this.ascPrice;
+    this.ascName = true;
+
+    this.nameSelected = false;
+    this.priceSelected = true;
+
   }
 
   sortBy(value){
