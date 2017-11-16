@@ -16,7 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-import { AccountComponent } from './account/account.component';
+import { MyPageComponent } from './my-page/my-page.component';
 import { AdminComponent } from './admin/admin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GoogleMapsComponent } from './google-maps/google-maps.component';
@@ -35,7 +35,7 @@ import { MyProductsComponent } from './my-products/my-products.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    AccountComponent,
+    MyPageComponent,
     AdminComponent,
     NotFoundComponent,
     ProductDetailsComponent,

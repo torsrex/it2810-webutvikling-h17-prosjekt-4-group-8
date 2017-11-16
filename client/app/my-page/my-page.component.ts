@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import { MyProductsComponent } from '../my-products/my-products.component';
 
 @Component({
   selector: 'app-account',
-  templateUrl: './account.component.html'
+  templateUrl: './my-page.component.html'
 })
-export class AccountComponent implements OnInit {
+export class MyPageComponent implements OnInit {
   //TODO: Add validation just like in register page
   user = {};
   isLoading = true;
