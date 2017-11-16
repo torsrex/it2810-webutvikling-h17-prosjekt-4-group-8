@@ -4,7 +4,7 @@
 
 <div class="card" *ngIf="!isLoading">
 
-  <app-create-product></app-create-product>
+  <app-create-product [isEditing]="isCreateFormOpen"></app-create-product>
 
   <!-- Search / filter -->
   <h4 class="card-header">List of products: </h4>
@@ -46,6 +46,8 @@
       <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
     </select>
   </div>
+
+<button (click)="isCreateFormOpen = !isCreateFormOpen">Create product</button>
 
   <!-- Product list + details component (all dynamic content on the products-page) ______________________________-->
   <div class="productsAllComponents">

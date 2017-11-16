@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { ToastComponent } from '../shared/toast/toast.component';
@@ -25,6 +25,7 @@ export class CreateProductComponent implements OnInit{
   authenticated = false //Is the user authenticated?
   userId: string //What is the current userid?
   user = {} //List containing the current user's parameters
+  @Input() isEditing: boolean //TODO: Add product form needs a button
 
   //Creates the default formgroup for adding a new product
   addProductForm: FormGroup;
