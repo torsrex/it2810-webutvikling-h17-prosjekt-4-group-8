@@ -69,6 +69,7 @@ export class ProductsComponent implements OnInit {
               ) {
                 //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
                 this.subscription = this.messageService.getMessage().subscribe(message => { this.getProducts(this.pageNum, this.sortQuery); this.message = message.text; });
+                this.subscription = this.messageService.getID().subscribe(id => { this.filterByUser(id.text); })
               }
 
   ngOnInit() {
@@ -227,6 +228,11 @@ updateDetailView(product){
       return
     }
     this.filteredProducts = this.products.filter(product => product.category.includes(category))
+    this.totalListings = this.filteredProducts.length
+  }
+
+  filterByUser(id) {
+    this.filteredProducts = this.products.filter(product => product.user._id.includes(id))
     this.totalListings = this.filteredProducts.length
   }
 

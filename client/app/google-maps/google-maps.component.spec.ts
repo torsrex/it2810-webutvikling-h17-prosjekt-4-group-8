@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http'
 
 
 import { GoogleMapsComponent } from './google-maps.component';
+import { MessageService } from '../services/message.service';
 
 import { UserService } from '../services/user.service';
 
@@ -17,7 +18,7 @@ describe('GoogleMapsComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
       declarations: [ GoogleMapsComponent ],
-      providers: [UserService],
+      providers: [UserService, MessageService],
       schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();

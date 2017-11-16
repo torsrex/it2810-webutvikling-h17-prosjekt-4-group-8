@@ -17,7 +17,6 @@ export class GoogleMapsComponent implements OnInit {
   zoom = 4;
   users = [];
   isLoading = true
-  msg: any;
 
   constructor(private userService: UserService,
               private messageService: MessageService) {
@@ -33,8 +32,7 @@ export class GoogleMapsComponent implements OnInit {
   }
 
   filterByUser(id) {
-    // TODO: Actually filter by user id
-    console.log(id);
+    this.messageService.sendID(id);
   }
 
   getUsers() {
