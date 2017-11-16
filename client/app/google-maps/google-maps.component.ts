@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../services/user.service';
+import { MessageService } from '../services/message.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-google-maps',
@@ -9,21 +11,28 @@ import { UserService } from '../services/user.service';
 })
 export class GoogleMapsComponent implements OnInit {
 
+  subscription: Subscription;
   init_lat = 63.428024;
   init_lng = 10.393186;
   zoom = 4;
   users = [];
   isLoading = true
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private messageService: MessageService) {
+                this.subscription = this.messageService.getMessage().subscribe(msg => { this.init_lat = msg.text[0]; this.init_lng = msg.text[1]; this.zoom = 10; });
+  }
 
   ngOnInit() {
     this.getUsers();
   }
 
+  updateMap($event) {
+    this.zoom = $event;
+  }
+
   filterByUser(id) {
-    // TODO: Actually filter by user id
-    console.log(id);
+    this.messageService.sendID(id);
   }
 
   getUsers() {

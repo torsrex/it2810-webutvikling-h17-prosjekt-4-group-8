@@ -97,4 +97,9 @@ export class ProductDetailsComponent {
        );
      }
    }
+
+   // Send to coords to map
+   sendCoords(lat, lng): void {
+     this.message.sendCoords(lat, lng);
+   }
 }
