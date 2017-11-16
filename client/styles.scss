@@ -3,21 +3,22 @@
 body {
   margin-bottom: 10px;
 }
-
 th{
-  background-color: #aaa !important;
-  color: #fff;
+  background-color: #bbb !important;
+  color: #fff !important;
+  font-weight: normal;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
 }tr{
   background-color: #fff !important;
   border: none;
   td{
     border: none !important;
     border-bottom: 1px solid #eee !important;
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
   }
 }
-
 button{
   background-color: #eee;
   border: none;
@@ -27,23 +28,27 @@ button{
 input{
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
 }
+
+
 .input-group {
   margin-bottom: 15px;
 }
-.leftColumn{
+.productsColumn{
   display: flex;
-  flex: 1;
+  flex-direction: column;
+  flex: 4;
+  padding-right: 2%;
   table{
-    width: 100%; //nice
+    width: 100% !important;
   }
 }
 .rightColumn{
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 6;
   width: 100%;
 }
-//Navigation styling
+//Navigation styling-------------------
 .navbar{
   background-color: #3F51B5 !important;
   .nav{
@@ -59,11 +64,15 @@ input{
     }
   }
 }
-// ---
+// End nav ------------
+
 
 .centerText{
   text-align: center;
 }
 .addSomethingPopup{
   padding: 20px;
+}
+.clickable{
+  cursor: pointer;
 }

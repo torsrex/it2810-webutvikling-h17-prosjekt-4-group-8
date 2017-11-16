@@ -1,4 +1,4 @@
-//Observer service, used to let the product-details component notify the products component when the list should be re-rendered. 
+//Observer service, used to let the product-details component notify the products component when the list should be re-rendered.
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

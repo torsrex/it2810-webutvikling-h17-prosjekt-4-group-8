@@ -1,17 +1,16 @@
 <app-loading [condition]="isLoading"></app-loading>
-
 <app-toast [message]="toast.message"></app-toast>
+
 
 <div class="productsPage" *ngIf="!isLoading">
   <br>
   <h2 class="centerText">All products</h2>
-  <!-- Create new product button -->
+  <!-- new product button-->
   <app-create-product [isEditing]="isCreateFormOpen"></app-create-product>
   <button class="createProductButton" (click)="isCreateFormOpen = !isCreateFormOpen">Create product</button>
 
 
-
-  <!-- Product list component _________________________________________________________ -->
+  <!-- PRODUCT COMPONENT _________________________________________________________ -->
   <!-- Search component -->
   <div class="form-inline">
     <!-- name search -->
@@ -49,18 +48,21 @@
   <div class="productsAllComponents">
     <div class="card-block" class="productsColumn">
 
-      <!-- The category filter works outside of search, should be separated -->
+      <!-- Category filter. works outside of search, should be separated -->
       <select class="form-control"  [(ngModel)]="selectedCategory" (ngModelChange)="filterByCategory($event)">
         <option selected value="default" >--Select a category--</option>
         <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
       </select>
 
-      <!-- Products list -->
+
+      <!-- Products LIST -->
       <table class="table table-bordered table-striped">
         <thead class="thead-default">
           <tr>
-            <th>Name <button (click)="sortBy('name')">¤</button></th>
-            <th>Price <button (click)="sortBy('price')">¤</button></th>
+            <th class="clickable" (click)="sortBy('name')">NAME <i class="fa fa-chevron-up" aria-hidden="true"></i></th>
+            <!-- <th class="clickable" (click)="sortBy('name')">NAME <i class="fa fa-chevron-down" aria-hidden="true"></i></th> -->
+            <th class="clickable" (click)="sortBy('price')">PRICE <i class="fa fa-chevron-up" aria-hidden="true"></i></th>
+            <!-- <th class="clickable" (click)="sortBy('price')">PRICE <i class="fa fa-chevron-up" aria-hidden="true"></i></th> -->
           </tr>
         </thead>
         <tbody *ngIf="filteredProducts.length === 0">
@@ -75,7 +77,9 @@
           </tr>
         </tbody>
       </table>
+
     </div>
+
 
     <!-- GOOGLE MAPS + card details (right column)________________________ -->
     <div class="rightColumn">
@@ -85,9 +89,12 @@
       <app-google-maps></app-google-maps>
     </div>
 
+
   </div>
-  <div>
+
+
   <!-- Pagination component -->
+  <div>
   <app-pagination
     (goPage)="goToPage($event)"
     (goNext)="onNext()"
