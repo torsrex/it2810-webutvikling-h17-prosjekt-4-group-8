@@ -13,7 +13,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 
 export class ProductDetailsComponent {
   //Needed to bind the product from the parent class to this class.
-  @Input() product = {_id: '', name: '', description: '', price: '', date: '', image: '', userId: ''};
+  @Input() product = {_id: '', name: '', description: '', price: '', createdAt: '', userId: '', category: '', user: {username: '', email: ''}};
   @Input() authenticated: boolean
   //Local variables
   isEditing = false;
@@ -39,6 +39,7 @@ export class ProductDetailsComponent {
   //sets the current component values to the clicked product.
   setProduct(product){
     this.product = product;
+    console.log(this.product)
   }
   // send message to subscribers from observable subject(this component) to (typically parent class)
   sendMessage(message): void {
