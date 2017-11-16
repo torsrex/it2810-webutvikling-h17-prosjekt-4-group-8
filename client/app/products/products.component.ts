@@ -9,7 +9,7 @@ import { PaginationComponent } from '../pagination/pagination.component'
 
 import { ProductService } from '../services/product.service';
 import { AuthService } from '../services/auth.service';
-import {MessageService} from '../services/message.service'
+import { MessageService } from '../services/message.service'
 import { UserService } from '../services/user.service'
 
 import { Subscription } from 'rxjs/Subscription';
@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit {
   product = {}; //A single product, used when updating detailview and editing
   products = []; //List containing all products fetched from api
   filteredProducts = [] //Used when filtering by category
-  minPrice = 0 //Minprice in search filter
+  minPrice = -Infinity; //Minprice in search filter
   maxPrice = Infinity; //Maxprice in search filter
   isLoading = true;
   isEditing = false;
@@ -49,7 +49,7 @@ export class ProductsComponent implements OnInit {
   sortingParam: string //What to sort by
   sortingOrder = 1 //What order to sort by
   sortQuery = "?" //Holds the search query
-  selectedCategory = ""
+  selectedCategory = "default"
 
   //Creates the default formgroup for adding a new product
   addProductForm: FormGroup;

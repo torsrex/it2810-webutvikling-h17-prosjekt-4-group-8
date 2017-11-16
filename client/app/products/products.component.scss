@@ -1,3 +1,6 @@
+.productsPage{
+//  padding-top: 50px !important;
+}
 .table td,
 .table th {
   text-align: center;
@@ -6,23 +9,44 @@
 .table {
   width: 50%;
 }
-
-
 .productsAllComponents{
   display: flex;
 }
 
-.productList{
-  display: flex;
-  flex: 1;
-  table{
-    width: 100%; //nice
-  }
-}
-.detailsComponents{
+.productsColumn{
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 4;
+  table{
+    width: 100% !important;
+  }
+}
+.rightColumn{
+  display: flex;
+  flex-direction: column;
+  flex: 6;
   width: 100%;
+}
 
+.createProductButton{
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #FF9800;
+  border: none;
+  cursor: pointer;
+}
+.searchFields{
+  margin: 20px 0px 20px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  input:first-child{
+    flex: 2;
+  }input{
+    flex: 1;
+  }button{
+    padding: 0px 12px 0px 12px;
+  }
 }

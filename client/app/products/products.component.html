@@ -2,65 +2,65 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="card" *ngIf="!isLoading">
-
+<div class="productsPage" *ngIf="!isLoading">
+  <br>
+  <h2 class="centerText">All products</h2>
+  <!-- Create new product button -->
   <app-create-product [isEditing]="isCreateFormOpen"></app-create-product>
+  <button class="createProductButton" (click)="isCreateFormOpen = !isCreateFormOpen">Create product</button>
 
-  <!-- Search / filter -->
-  <h4 class="card-header">List of products: </h4>
-  <div class="card-block">
-    <!-- Search component -->
-    <div class="form-inline">
-    <input
-    class="form-control"
-    placeholder="Search for a product"
-    [(ngModel)]="query"
-    (keyup.enter)="searchFromBox()"
-    type="text"
-    >
-    <label>Min price:</label>
-    <input
-    class="form-control"
-    type="number"
-    min="0"
-    step="100"
-    placeholder="0"
-    [(ngModel)]="minPrice"
-    (keyup.enter)="searchFromBox()"
-    >
-    <label>Max price:</label>
-    <input
-    class="form-control"
-    type="number"
-    min="0"
-    step="100"
-    placeholder="Infinity"
-    [(ngModel)]="maxPrice"
-    (keyup.enter)="searchFromBox()"
-    >
-    <button (click)="searchFromBox()">Search</button>
+
+
+  <!-- Product list component _________________________________________________________ -->
+  <!-- Search component -->
+  <div class="form-inline">
+    <!-- name search -->
+    <div class="searchFields">
+      <input
+      class="form-control"
+      placeholder="Search for a product"
+      [(ngModel)]="query"
+      (keyup.enter)="searchFromBox()"
+      type="text"
+      >
+      <!-- min search -->
+      <input
+      class="form-control"
+      type="number"
+      min="0"
+      step="100"
+      placeholder="min price"
+      [(ngModel)]="minPrice"
+      (keyup.enter)="searchFromBox()"
+      >
+      <!-- max search -->
+      <input
+      class="form-control"
+      type="number"
+      min="0"
+      step="100"
+      placeholder="max price"
+      [(ngModel)]="maxPrice"
+      (keyup.enter)="searchFromBox()"
+      >
+      <button (click)="searchFromBox()"><i class="fa fa-search"></i></button>
+    </div>
   </div>
-  <!-- The category filter works outside of search, should be separated -->
-    <select class="form-control" [(ngModel)]="selectedCategory" (ngModelChange)="filterByCategory($event)">
-      <option value="default">--Select a category--</option>
-      <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
-    </select>
-  </div>
-
-<button (click)="isCreateFormOpen = !isCreateFormOpen">Create product</button>
-
-  <!-- Product list + details component (all dynamic content on the products-page) ______________________________-->
   <div class="productsAllComponents">
+    <div class="card-block" class="productsColumn">
 
-    <!-- Product list component _________________________________________________________ -->
-    <div class="card-block" class="productList">
+      <!-- The category filter works outside of search, should be separated -->
+      <select class="form-control"  [(ngModel)]="selectedCategory" (ngModelChange)="filterByCategory($event)">
+        <option selected value="default" >--Select a category--</option>
+        <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
+      </select>
+
+      <!-- Products list -->
       <table class="table table-bordered table-striped">
         <thead class="thead-default">
           <tr>
             <th>Name <button (click)="sortBy('name')">¤</button></th>
-            <!-- <th>Description</th> -->
             <th>Price <button (click)="sortBy('price')">¤</button></th>
-            <!-- <th>Created at <button (click)="sortBy('createdAt')">¤</button></th> -->
           </tr>
         </thead>
         <tbody *ngIf="filteredProducts.length === 0">
@@ -71,40 +71,14 @@
         <tbody *ngIf="!isEditing">
           <tr *ngFor="let product of filteredProducts" (click)="updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
             <td>{{product.name}}</td>
-            <!-- <td>{{product.description}}</td> -->
             <td>{{product.price}} NOK</td>
-            <!-- <td>{{product.createdAt}}</td> -->
-            <!--  <td>
-              <button class="btn btn-sm btn-warning" (click)="enableEditing(product)"><i class="fa fa-pencil"></i> Edit</button>
-              <button class="btn btn-sm btn-danger" (click)="deleteProduct(product)"><i class="fa fa-trash"></i> Delete</button>
-            </td> -->
-            <!-- TODO: Remove ngif when database updated -->
           </tr>
         </tbody>
-        <!-- <tbody *ngIf="isEditing">
-          <tr>
-            <td colspan="4">
-              <form class="form-inline" #form="ngForm" (ngSubmit)="editProduct(product)" style="display:inline">
-                <div class="form-group">
-                  <input class="form-control" type="text" name="name" [(ngModel)]="product.name" placeholder="Name" required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="description" [(ngModel)]="product.description" placeholder="Description" min="0" required>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="number" name="price" [(ngModel)]="product.price" placeholder="Price" step="any" min="0" required>
-                </div>
-                <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
-              </form>
-              <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
-            </td>
-          </tr>
-        </tbody> -->
       </table>
     </div>
 
-    <!-- Product Details (all product details components) component________________________ -->
-    <div class="detailsComponents">
+    <!-- GOOGLE MAPS + card details (right column)________________________ -->
+    <div class="rightColumn">
       <!-- Product details card -->
       <app-product-details [authenticated]="authenticated" [product]="productDetails.product" class="detailsCard"></app-product-details>
       <!-- Google maps Map -->
@@ -112,9 +86,8 @@
     </div>
 
   </div>
-</div>
-<!-- Pagination component -->
-<div>
+  <div>
+  <!-- Pagination component -->
   <app-pagination
     (goPage)="goToPage($event)"
     (goNext)="onNext()"
@@ -124,3 +97,4 @@
     [perPage]="listingsPerPage"
     [count]="totalListings"></app-pagination>
   </div>
+</div>

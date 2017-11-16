@@ -4,26 +4,30 @@
 
 
 <!-- Add new product  -->
-<div class="card" *ngIf="authenticated && isEditing && !isLoading">
-  <div class="card-header"><h4>Add new product</h4><button (click)="isEditing = !isEditing" >close</button></div>
-  <div class="card-block">
-    <form class="form-inline" [formGroup]="addProductForm" (ngSubmit)="addProduct()" style="text-align:center">
-      <div class="form-group">
-        <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
-      </div>
-      <div class="form-group">
-        <input class="form-control" type="text" name="description" formControlName="description" placeholder="Description" min="0">
-      </div>
-      <div class="form-group">
-        <input class="form-control" type="number" name="price" formControlName="price" placeholder="Price" step="any" min="0">
-      </div>
-      <div class="form-group">
-      <select class="form-control" formControlName="category">
-        <option value="default">--Select a category--</option>
-        <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
-      </select>
+<div class="background" *ngIf="authenticated && isEditing && !isLoading">
+  <div class="card addSomethingPopup">
+    <h2 class="centerText"> New product </h2>
+    <div class="card-block">
+      <form class="form-inline" [formGroup]="addProductForm" (ngSubmit)="addProduct()" style="text-align:center">
+        <div class="form-group">
+          <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="text" name="description" formControlName="description" placeholder="Description" min="0">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="number" name="price" formControlName="price" placeholder="Price" step="any" min="0">
+        </div>
+        <div class="form-group">
+        <select class="form-control" formControlName="category">
+          <option value="default">--Select a category--</option>
+          <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
+        </select>
+        </div>
+        <br><br>
+        <button class="btn btn-primary" type="submit" [disabled]="!addProductForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
+        <button class="btn btn-danger" (click)="isEditing = !isEditing" ><i class="fa fa-times"></i> close</button>
+      </form>
     </div>
-      <button class="btn btn-primary" type="submit" [disabled]="!addProductForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
-    </form>
   </div>
 </div>

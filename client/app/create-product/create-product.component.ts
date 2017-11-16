@@ -41,9 +41,7 @@ export class CreateProductComponent implements OnInit{
               public toast: ToastComponent,
               private auth: AuthService,
               private userService: UserService
-              ) {
-                console.log("XOOO")
-              }
+            ) { }
 
   ngOnInit() {
     //Creates the add productform
