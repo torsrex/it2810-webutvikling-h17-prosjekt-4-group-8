@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 
-import { ProductsComponent } from './products.component'
+import { CreateProductComponent } from './create-product.component'
 import { ProductDetailsComponent } from '../product-details/product-details.component'
 import { ToastComponent } from '../shared/toast/toast.component';
 
@@ -20,14 +20,14 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { By } from '@angular/platform-browser';
 
 
-describe('ProductsComponent', () => {
-  let component: ProductsComponent;
-  let fixture: ComponentFixture<ProductsComponent>;
+describe('CreateProductComponent', () => {
+  let component: CreateProductComponent;
+  let fixture: ComponentFixture<CreateProductComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule, RouterTestingModule, FormsModule, ReactiveFormsModule],
-      declarations: [ProductsComponent],
+      declarations: [CreateProductComponent],
       providers: [
         UserService,
         ProductService,
@@ -65,7 +65,7 @@ describe('ProductsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductsComponent);
+    fixture = TestBed.createComponent(CreateProductComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
