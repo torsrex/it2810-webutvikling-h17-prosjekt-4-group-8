@@ -2,19 +2,20 @@
 <app-toast [message]="toast.message"></app-toast>
 
 
+<!-- PRODUCT COMPONENT _________________________________________________________ -->
 <div class="productsPage" *ngIf="!isLoading">
   <br>
-  <h2 class="centerText">All products</h2>
+  <h2 class="centerText">Products</h2>
   <!-- new product button-->
   <app-create-product [isEditing]="isCreateFormOpen"></app-create-product>
-  <button class="createProductButton" (click)="isCreateFormOpen = !isCreateFormOpen">Create product</button>
+  <button class="createProductButton largeBottomMargin" (click)="isCreateFormOpen = !isCreateFormOpen">Create product</button>
 
 
-  <!-- PRODUCT COMPONENT _________________________________________________________ -->
+
   <!-- Search component -->
   <div class="form-inline">
     <!-- name search -->
-    <div class="searchFields">
+    <div class="searchFields smallBottomMargin">
       <input
       class="form-control"
       placeholder="Search for a product"
@@ -45,24 +46,41 @@
       <button (click)="searchFromBox()"><i class="fa fa-search"></i></button>
     </div>
   </div>
+
+  <!-- Category filter. works outside of search, should be separated -->
+  <select class="form-control smallBottomMargin"  [(ngModel)]="selectedCategory" (ngModelChange)="filterByCategory($event)">
+    <option selected value="default" >--Select a category--</option>
+    <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
+  </select>
+
   <div class="productsAllComponents">
     <div class="card-block" class="productsColumn">
-
-      <!-- Category filter. works outside of search, should be separated -->
-      <select class="form-control"  [(ngModel)]="selectedCategory" (ngModelChange)="filterByCategory($event)">
-        <option selected value="default" >--Select a category--</option>
-        <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
-      </select>
 
 
       <!-- Products LIST -->
       <table class="table table-bordered table-striped">
         <thead class="thead-default">
           <tr>
-            <th class="clickable" (click)="sortBy('name')">NAME <i class="fa fa-chevron-up" aria-hidden="true"></i></th>
-            <!-- <th class="clickable" (click)="sortBy('name')">NAME <i class="fa fa-chevron-down" aria-hidden="true"></i></th> -->
-            <th class="clickable" (click)="sortBy('price')">PRICE <i class="fa fa-chevron-up" aria-hidden="true"></i></th>
-            <!-- <th class="clickable" (click)="sortBy('price')">PRICE <i class="fa fa-chevron-up" aria-hidden="true"></i></th> -->
+            <!-- name, not selected -->
+            <th *ngIf="!nameSelected" class="clickable" (click)="sortBy('name'); toggleNameSort()">NAME
+              <i *ngIf="!ascName" class="fa fa-chevron-up" aria-hidden="true"></i>
+              <i *ngIf="ascName" class="fa fa-chevron-down" aria-hidden="true"></i>
+            </th>
+            <!-- name, selected -->
+            <th *ngIf="nameSelected" class="clickable bgOrange" (click)="sortBy('name'); toggleNameSort()">NAME
+              <i *ngIf="!ascName" class="fa fa-chevron-up" aria-hidden="true"></i>
+              <i *ngIf="ascName" class="fa fa-chevron-down" aria-hidden="true"></i>
+            </th>
+            <!-- price, not selected -->
+            <th *ngIf="!priceSelected" class="clickable" (click)="sortBy('price'); togglePriceSort()">PRICE
+              <i *ngIf="!ascPrice" class="fa fa-chevron-up" aria-hidden="true"></i>
+              <i *ngIf="ascPrice" class="fa fa-chevron-down" aria-hidden="true"></i>
+            </th>
+            <!-- price, selected -->
+            <th *ngIf="priceSelected" class="clickable bgOrange" (click)="sortBy('price'); togglePriceSort()">PRICE
+              <i *ngIf="!ascPrice" class="fa fa-chevron-up" aria-hidden="true"></i>
+              <i *ngIf="ascPrice" class="fa fa-chevron-down" aria-hidden="true"></i>
+            </th>
           </tr>
         </thead>
         <tbody *ngIf="filteredProducts.length === 0">

@@ -3,8 +3,11 @@
 body {
   margin-bottom: 10px;
 }
+p{
+  margin-bottom: 8px !important
+}
 th{
-  background-color: #bbb !important;
+  background-color: #aaa !important;
   color: #fff !important;
   font-weight: normal;
   padding-top: 5px !important;
@@ -25,7 +28,7 @@ button{
   cursor: pointer;
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
 }
-input{
+input, select{
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
 }
 
@@ -65,8 +68,15 @@ input{
   }
 }
 // End nav ------------
-
-
+.smallBottomMargin{
+  margin-bottom: 10px;
+}
+.normalBottomMargin{
+  margin-bottom: 25px;
+}
+.largeBottomMargin{
+  margin-bottom: 50px;
+}
 .centerText{
   text-align: center;
 }
@@ -75,4 +85,7 @@ input{
 }
 .clickable{
   cursor: pointer;
+}
+.bgOrange{
+  background-color: #FF9800 !important;
 }
