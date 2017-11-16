@@ -34,6 +34,7 @@ export class CreateProductComponent implements OnInit{
   price = new FormControl('', Validators.required);
   category = new FormControl('', Validators.required)
   categories = ["Electronics", "Household items", "Furniture", "Pets", "Sports", "Gardening"]
+  selectedCategory = "default"
 
   constructor(private productService: ProductService,
               private messageService: MessageService,

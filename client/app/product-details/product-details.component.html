@@ -1,8 +1,9 @@
 <div *ngIf="!isEditing"  class="card">
   <div class="cardHeader">
-    <button *ngIf="authenticated" (click)="enableEditing()">Edit</button>
+
+    <i *ngIf="authenticated" (click)="enableEditing()" class="fa fa-pencil fa-2x iconColor clickable" aria-hidden="true"></i>
     <h3>{{product.name}}</h3>
-    <button *ngIf="authenticated" (click)="deleteProduct()">Delete</button>
+    <i *ngIf="authenticated" (click)="deleteProduct()" class="fa fa-times fa-2x iconColor clickable" aria-hidden="true"></i>
   </div>
 
   <div>
