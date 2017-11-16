@@ -17,6 +17,7 @@
   <div>
     <td *ngIf="product.user">{{product.user.username}}</td>
     <td *ngIf="product.category">{{product.category}}</td> <br>
+    <button (click)="sendCoords(product.user.latitude, product.user.longitude)">Show user</button>
   </div>
 
 </div>
