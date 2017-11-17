@@ -17,7 +17,8 @@
     <div> <!-- User fields -->
       <p *ngIf="product.user">NAME: {{product.user.username}}</p>
       <p *ngIf="product.user">EMAIL: {{product.user.email}}</p>
-      <button (click)="sendCoords(product.user.latitude, product.user.longitude)">Show user</button>
+      <button (click)="sendCoords(product.user.latitude, product.user.longitude)">Show user</button><br />
+      <button (click)="filterByUser(product.user._id)">Filter by user</button>
     </div>
   </div>
 
