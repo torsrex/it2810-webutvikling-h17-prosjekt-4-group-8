@@ -55,6 +55,8 @@ export class ProductsComponent implements OnInit {
   nameSelected = false;
   priceSelected = false;
 
+  lastSelected = null;
+
   //Creates the default formgroup for adding a new product
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -96,6 +98,14 @@ export class ProductsComponent implements OnInit {
 
 updateDetailView(product){
   this.productDetails.setProduct(product);
+}
+updateStyle($event){
+  if (this.lastSelected != null){
+    console.log("last selected: " + this.lastSelected)
+    this.lastSelected.classList.remove('styleThis');
+  }
+  this.lastSelected = $event.target.parentNode
+  $event.target.parentNode.classList.add('styleThis');
 }
 
   //Fetches products and stores in products list
@@ -272,6 +282,9 @@ updateDetailView(product){
       this.query = ".*"
       this.pageNum = 1
     }
+    if(this.selectedCategory === "default"){
+      this.selectedCategory = ".*"
+    }
     let history = []
     let object = {query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice};
     if(JSON.parse(localStorage.getItem('searches'))){
@@ -294,5 +307,6 @@ updateDetailView(product){
       },
       error => console.log(error),
   )
+  this.selectedCategory = "default"
 }
 }
