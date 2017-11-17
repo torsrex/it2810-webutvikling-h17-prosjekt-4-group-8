@@ -180,7 +180,7 @@ updateDetailView(product){
   toggleNameSort(){
     this.ascName = !this.ascName;
     this.ascPrice = true;
-    
+
     this.nameSelected = true;
     this.priceSelected = false;
   }
