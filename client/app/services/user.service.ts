@@ -36,8 +36,8 @@ export class UserService {
     return this.http.get(`/api/user/${user._id}`).map(res => res.json());
   }
 
-  getUserWithProducts(user): Observable<any> {
-    return this.http.get(`/api/user/getuserwithproducts/${user._id}`).map(res => res.json());
+  getUserWithProducts(id): Observable<any> {
+    return this.http.get(`/api/user/getuserwithproducts/${id}`).map(res => res.json());
   }
 
   editUser(user): Observable<any> {

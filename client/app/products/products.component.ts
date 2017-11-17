@@ -43,6 +43,7 @@ export class ProductsComponent implements OnInit {
   totalPageNum = 0; //Total number of pages
   totalListings = 0; //Total number of productlistings
   listingsPerPage = 10; //How many to list pr. page
+  hidePagination= false
 
   //Used to handle search and sorting
   searching = false //Variable to indicate if we're in search mode
@@ -54,6 +55,8 @@ export class ProductsComponent implements OnInit {
   ascPrice = false;
   nameSelected = false;
   priceSelected = false;
+
+  lastSelected = null;
 
   //Creates the default formgroup for adding a new product
   addProductForm: FormGroup;
@@ -96,6 +99,14 @@ export class ProductsComponent implements OnInit {
 
 updateDetailView(product){
   this.productDetails.setProduct(product);
+}
+updateStyle($event){
+  if (this.lastSelected != null){
+    console.log("last selected: " + this.lastSelected)
+    this.lastSelected.classList.remove('styleThis');
+  }
+  this.lastSelected = $event.target.parentNode
+  $event.target.parentNode.classList.add('styleThis');
 }
 
   //Fetches products and stores in products list
@@ -237,7 +248,7 @@ updateDetailView(product){
     )
   }
 
-
+/*
   filterByCategory(category){
     if(category === "default"){
       this.filteredProducts = this.products
@@ -247,23 +258,32 @@ updateDetailView(product){
     this.filteredProducts = this.products.filter(product => product.category.includes(category))
     this.totalListings = this.filteredProducts.length
   }
+  */
 
   filterByUser(id) {
-    this.filteredProducts = this.products.filter(product => product.user._id.includes(id))
-    this.totalListings = this.filteredProducts.length
+    //TODO: Need to handle pagination
+    this.hidePagination = true
+    this.userService.getUserWithProducts(id).subscribe(
+        data => {
+          this.products = data.products,
+          this.filteredProducts = data.products
+        },
+        error => console.log(error)
+    )
   }
-
   //code used to handle searches
   searchFromBox(){
+  this.hidePagination = false
   this.pageNum = 1
   this.searchProducts()
 }
   searchProducts(){
     if(this.query === ""){
+      this.query = ".*"
       this.pageNum = 1
-      this.getProducts(this.pageNum, this.sortQuery)
-      this.searching = false
-      return
+    }
+    if(this.selectedCategory === "default"){
+      this.selectedCategory = ".*"
     }
     let history = []
     let object = {query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice};
@@ -278,7 +298,7 @@ updateDetailView(product){
 
     this.searching = true
     this.productService.searchProduct(this.query, this.pageNum,
-      this.minPrice, this.maxPrice+this.sortQuery).subscribe(
+      this.minPrice, this.maxPrice+this.sortQuery+"&category="+this.selectedCategory).subscribe(
       data => {
         this.products = data.docs
         this.filteredProducts = data.docs
@@ -287,5 +307,6 @@ updateDetailView(product){
       },
       error => console.log(error),
   )
+  this.selectedCategory = "default"
 }
 }

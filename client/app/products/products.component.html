@@ -7,8 +7,9 @@
   <br>
   <h2 class="centerText">Products</h2>
   <!-- new product button-->
+
   <app-create-product [isEditing]="isCreateFormOpen"></app-create-product>
-  <button class="createProductButton largeBottomMargin" (click)="isCreateFormOpen = !isCreateFormOpen">Create product</button>
+  <button *ngIf="authenticated" class="createProductButton largeBottomMargin" (click)="isCreateFormOpen = !isCreateFormOpen">Create product</button>
 
 
 
@@ -48,7 +49,7 @@
   </div>
 
   <!-- Category filter. works outside of search, should be separated -->
-  <select class="form-control smallBottomMargin"  [(ngModel)]="selectedCategory" (ngModelChange)="filterByCategory($event)">
+  <select class="form-control smallBottomMargin"  [(ngModel)]="selectedCategory">
     <option selected value="default" >--Select a category--</option>
     <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
   </select>
@@ -57,7 +58,7 @@
     <div class="card-block" class="productsColumn">
 
 
-      <!-- Products LIST -->
+      <!-- PRODUCT LIST -->
       <table class="table table-bordered table-striped">
         <thead class="thead-default">
           <tr>
@@ -89,7 +90,7 @@
           </tr>
         </tbody>
         <tbody *ngIf="!isEditing">
-          <tr *ngFor="let product of filteredProducts" (click)="updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
+          <tr *ngFor="let product of filteredProducts" (click)="updateStyle($event); updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
             <td>{{product.name}}</td>
             <td>{{product.price}} NOK</td>
           </tr>
@@ -112,7 +113,7 @@
 
 
   <!-- Pagination component -->
-  <div>
+  <div *ngIf="!hidePagination">
   <app-pagination
     (goPage)="goToPage($event)"
     (goNext)="onNext()"
