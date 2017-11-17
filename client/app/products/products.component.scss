@@ -16,6 +16,11 @@ tr:hover {
   display: flex;
 }
 
+app-google-maps {
+  flex-grow: 1;
+  height: 0
+}
+
 .createProductButton{
   width: 100%;
   height: 50px;
