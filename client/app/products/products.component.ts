@@ -240,7 +240,7 @@ updateDetailView(product){
     )
   }
 
-
+/*
   filterByCategory(category){
     if(category === "default"){
       this.filteredProducts = this.products
@@ -250,12 +250,18 @@ updateDetailView(product){
     this.filteredProducts = this.products.filter(product => product.category.includes(category))
     this.totalListings = this.filteredProducts.length
   }
+  */
 
   filterByUser(id) {
-    this.filteredProducts = this.products.filter(product => product.user._id.includes(id))
-    this.totalListings = this.filteredProducts.length
+    //TODO: Need to handle pagination
+    this.userService.getUserWithProducts(id).subscribe(
+        data => {
+          this.products = data.products,
+          this.filteredProducts = data.products
+        },
+        error => console.log(error)
+    )
   }
-
   //code used to handle searches
   searchFromBox(){
   this.pageNum = 1
@@ -263,10 +269,8 @@ updateDetailView(product){
 }
   searchProducts(){
     if(this.query === ""){
+      this.query = ".*"
       this.pageNum = 1
-      this.getProducts(this.pageNum, this.sortQuery)
-      this.searching = false
-      return
     }
     let history = []
     let object = {query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice};
@@ -281,7 +285,7 @@ updateDetailView(product){
 
     this.searching = true
     this.productService.searchProduct(this.query, this.pageNum,
-      this.minPrice, this.maxPrice+this.sortQuery).subscribe(
+      this.minPrice, this.maxPrice+this.sortQuery+"&category="+this.selectedCategory).subscribe(
       data => {
         this.products = data.docs
         this.filteredProducts = data.docs
