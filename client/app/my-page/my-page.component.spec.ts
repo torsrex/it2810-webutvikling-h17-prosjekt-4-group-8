@@ -11,9 +11,9 @@ import { HttpModule } from '@angular/http'
 
 import { AuthService } from '../services/auth.service'
 import { UserService } from '../services/user.service'
+import { MessageService } from '../services/message.service'
 
-
-describe('AccountComponent', () => {
+describe('MyPageComponent', () => {
   let component: MyPageComponent;
   let fixture: ComponentFixture<MyPageComponent>;
   let authService: AuthService
@@ -32,7 +32,7 @@ describe('AccountComponent', () => {
     TestBed.configureTestingModule({
       imports: [ FormsModule, HttpModule, RouterTestingModule ],
       declarations: [ MyPageComponent ],
-      providers: [{provide: AuthService, useValue: authServiceStub}, UserService, ToastComponent],
+      providers: [{provide: AuthService, useValue: authServiceStub}, UserService, MessageService, ToastComponent],
       schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents().then(() => {
