@@ -47,7 +47,7 @@ export class ProductsComponent implements OnInit {
   //Used to handle search and sorting
   searching = false //Variable to indicate if we're in search mode
   sortingParam: string //What to sort by
-  sortingOrder = 1 //What order to sort by
+  sortingOrder = true //What order to sort by
   sortQuery = "?" //Holds the search query
   selectedCategory = "default"
   ascName = false;
@@ -180,23 +180,20 @@ updateDetailView(product){
   toggleNameSort(){
     this.ascName = !this.ascName;
     this.ascPrice = true;
-    
     this.nameSelected = true;
     this.priceSelected = false;
   }
   togglePriceSort(){
     this.ascPrice = !this.ascPrice;
     this.ascName = true;
-
     this.nameSelected = false;
     this.priceSelected = true;
-
   }
 
   sortBy(value){
     this.sortingParam = value
-    this.sortingOrder === -1 ? this.sortingOrder = 1 : this.sortingOrder = -1
-    this.sortQuery = "?sortby="+this.sortingParam+"&increasing="+this.sortingOrder
+    this.sortingOrder = !this.sortingOrder
+    this.sortQuery = `?sortby=${this.sortingParam}&increasing=${this.sortingOrder?1:-1}`
     if(this.searching){
       this.searchProducts()
     }else{
