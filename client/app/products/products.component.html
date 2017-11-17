@@ -50,7 +50,7 @@
 
   <!-- Category filter. works outside of search, should be separated -->
   <select class="form-control smallBottomMargin"  [(ngModel)]="selectedCategory">
-    <option selected value=".*" >--Select a category--</option>
+    <option selected value="default" >--Select a category--</option>
     <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
   </select>
 
