@@ -46,5 +46,11 @@ describe('MyPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
+  it('Should display headings in h4', () => {
+    component.isLoading = false
+    fixture.detectChanges()
+    const el = fixture.debugElement.queryAll(By.css('h4'))
+    expect(el[0].nativeElement.textContent).toContain("Account settings")
+    expect(el[1].nativeElement.textContent).toContain("My Products")
+  })
 });
