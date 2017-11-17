@@ -38,4 +38,8 @@ describe('RegisterComponent', () => {
     const el = fixture.debugElement.query(By.css('h4')).nativeElement;
     expect(el.textContent).toContain('Register');
   });
+  it('Should display register button', () => {
+    const el = fixture.debugElement.query(By.css('Button')).nativeElement
+    expect(el.textContent).toContain('Register')
+  })
 });
