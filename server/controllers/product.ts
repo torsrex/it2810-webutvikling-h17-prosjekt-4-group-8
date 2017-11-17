@@ -23,6 +23,7 @@ export default class ProductCtrl extends BaseCtrl {
       res.json(docs);
     })
   }
+  
   filteredGetSomeProducts = (req, res) => {
     const sortingParam = req.query.sortby ? req.query.sortby : "createdAt"
     const sortingOrder = req.query.increasing ? req.query.increasing: 1
