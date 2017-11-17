@@ -20,9 +20,10 @@
         <p *ngIf="product.user">NAME: {{product.user.username}}</p>
         <p *ngIf="product.user">EMAIL: {{product.user.email}}</p>
         <button (click)="sendCoords(product.user.latitude, product.user.longitude)">Show owner</button>
+        <button (click)="filterByUser(product.user._id)">Filter by user</button>
       </div>
     </div>
-    <hr>
+    <hr />
     <p>DESCRIPTION: {{product.description}}</p>
     </div>
   </div>

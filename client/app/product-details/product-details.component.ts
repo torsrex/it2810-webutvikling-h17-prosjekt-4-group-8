@@ -41,10 +41,27 @@ export class ProductDetailsComponent {
     this.product = product;
     console.log(this.product)
   }
+
+  // gets the is of the selected user to send to product component
+  filterByUser(id) {
+    this.message.sendID(id);
+  }
+
   // send message to subscribers from observable subject(this component) to (typically parent class)
   sendMessage(message): void {
     this.message.sendMessage(message);
    }
+
+   // Send to coords to map
+   sendCoords(lat, lng): void {
+     this.message.sendCoords(lat, lng);
+   }
+
+   // sends the user ID to product component for filtering
+   sendID(id): void {
+     this.message.sendID(id);
+   }
+
 
    //Start editing
    enableEditing() {
@@ -97,10 +114,5 @@ export class ProductDetailsComponent {
          error => console.log(error)
        );
      }
-   }
-
-   // Send to coords to map
-   sendCoords(lat, lng): void {
-     this.message.sendCoords(lat, lng);
    }
 }
