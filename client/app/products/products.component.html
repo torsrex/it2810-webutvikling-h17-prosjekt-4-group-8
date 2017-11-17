@@ -6,9 +6,10 @@
 <div class="productsPage" *ngIf="!isLoading">
   <br>
   <h2 class="centerText">Products</h2>
-  <!-- NEW PRODUCT BUTTON-->
+  <!-- new product button-->
+
   <app-create-product [isEditing]="isCreateFormOpen"></app-create-product>
-  <button class="createProductButton mediumBottomMargin" (click)="isCreateFormOpen = !isCreateFormOpen">CREATE PRODUCT</button>
+  <button *ngIf="authenticated" class="createProductButton largeBottomMargin" (click)="isCreateFormOpen = !isCreateFormOpen">Create product</button>
 
 
 
@@ -48,8 +49,8 @@
   </div>
 
   <!-- Category filter. works outside of search, should be separated -->
-  <select class="form-control smallBottomMargin"  [(ngModel)]="selectedCategory" (ngModelChange)="filterByCategory($event)">
-    <option selected value="default" >--Select a category--</option>
+  <select class="form-control smallBottomMargin"  [(ngModel)]="selectedCategory">
+    <option selected value=".*" >--Select a category--</option>
     <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
   </select>
 
