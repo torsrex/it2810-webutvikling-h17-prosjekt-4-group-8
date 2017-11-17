@@ -58,7 +58,7 @@
     <div class="card-block" class="productsColumn">
 
 
-      <!-- Products LIST -->
+      <!-- PRODUCT LIST -->
       <table class="table table-bordered table-striped">
         <thead class="thead-default">
           <tr>
@@ -90,7 +90,7 @@
           </tr>
         </tbody>
         <tbody *ngIf="!isEditing">
-          <tr *ngFor="let product of filteredProducts" (click)="updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
+          <tr *ngFor="let product of filteredProducts" (click)="updateStyle($event); updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
             <td>{{product.name}}</td>
             <td>{{product.price}} NOK</td>
           </tr>
