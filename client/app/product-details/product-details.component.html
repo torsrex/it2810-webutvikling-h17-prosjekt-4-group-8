@@ -1,32 +1,39 @@
-<div *ngIf="!isEditing"  class="detailsCard smallBottomMargin">
-  <!-- Title & edit/delete btns -->
-  <div class="cardHeader">
-    <i *ngIf="authenticated" (click)="enableEditing()" class="fa fa-pencil iconColor clickable" aria-hidden="true"></i>
-    <h5>{{product.name | uppercase}}</h5>
-    <i *ngIf="authenticated" (click)="deleteProduct()" class="fa fa-times iconColor clickable " aria-hidden="true"></i>
-  </div>
+<div>
+  <div *ngIf="!isEditing"  class="detailsCard smallBottomMargin">
+    <!-- Title & edit/delete btns -->
+    <div class="cardHeader">
+      <i *ngIf="authenticated" (click)="enableEditing()" class="fa fa-pencil iconLeft clickable" aria-hidden="true"></i>
+      <i *ngIf="authenticated" (click)="deleteProduct()" class="fa fa-trash-o iconLeft clickable " aria-hidden="true"></i>
 
-  <div class="cardContent">
-    <div class="productCardInfo mediumBottomMargin">
-      <div> <!-- Info fields -->
-        <strong>DETAILS</strong>
-        <p *ngIf="product.user">PRICE: {{product.price}} kr.-</p>
-        <p *ngIf="product.user">TYPE: {{product.category}}</p>
-        <p *ngIf="product.user">ADDED: {{product.createdAt}}</p>
-      </div>
+      <h5>{{product.name | uppercase}}</h5>
 
-      <div> <!-- User fields -->
-        <strong>SELLER</strong>
-        <p *ngIf="product.user">NAME: {{product.user.username}}</p>
-        <p *ngIf="product.user">EMAIL: {{product.user.email}}</p>
-        <button (click)="sendCoords(product.user.latitude, product.user.longitude)">Show owner</button>
-        <button (click)="filterByUser(product.user._id)">Filter by user</button>
-      </div>
+      <i *ngIf="authenticated" (click)="removeDetailsCard()" class="fa fa-times iconRight clickable " aria-hidden="true"></i> <!-- deleteProduct() -->
     </div>
-    <hr />
-    <p>DESCRIPTION: {{product.description}}</p>
+
+    <div class="cardContent">
+      <div class="productCardInfo mediumBottomMargin">
+
+        <div> <!-- Info fields -->
+          <strong>DETAILS</strong>
+          <p *ngIf="product.user">PRICE: {{product.price}} kr</p>
+          <p *ngIf="product.user">TYPE: {{product.category}}</p>
+          <p *ngIf="product.user">ADDED: {{product.createdAt}}</p>
+        </div>
+
+        <div> <!-- User fields -->
+          <strong>SELLER</strong>
+          <p *ngIf="product.user">NAME: {{product.user.username}}</p>
+          <p *ngIf="product.user">EMAIL: {{product.user.email}}</p>
+          <button (click)="sendCoords(product.user.latitude, product.user.longitude)">Show owner</button>
+          <button (click)="filterByUser(product.user._id)">Filter by user</button>
+        </div>
+      </div>
+      <hr />
+      <p>DESCRIPTION: {{product.description}}</p>
+
     </div>
   </div>
+</div>
 
 
 <!-- _______________________________EDITING STATE______________________________ -->

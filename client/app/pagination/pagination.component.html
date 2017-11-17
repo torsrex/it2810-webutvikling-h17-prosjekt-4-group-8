@@ -1,22 +1,24 @@
 <!-- pagination.component.html -->
 <div class="pagination" *ngIf="count > 0">
-	<div class="description">
-		<!-- Page x of y -->
-		<span class="page-counts">{{ getMin() }} - {{ getMax() }} of {{ count }} | </span>
-		<!-- Total number of pages -->
-		<span class="page-totals">{{ totalPages() }} pages | </span>
-		<!-- Current page -->
-    <span>Current page: {{page}}</span>
-	</div>
-	<!-- Page navigation buttons -->
-	<div class="numbers">
-		<button class="link" (click)="onPrev()" [disabled]="page === 1 || loading" [ngClass]="{ 'disabled': page === 1 || loading }">&lt; Previous</button>
+	<div>
+		<div class="description">
+			<!-- Page x of y -->
+			<span class="page-counts">{{ getMin() }} - {{ getMax() }} of {{ count }} | </span>
+			<!-- Total number of pages -->
+			<span class="page-totals">{{ totalPages() }} pages | </span>
+			<!-- Current page -->
+	    <span>Current page: {{page}}</span>
+		</div>
+		<!-- Page navigation buttons -->
+		<div class="numbers">
+			<button class="link" (click)="onPrev()" [disabled]="page === 1 || loading" [ngClass]="{ 'disabled': page === 1 || loading }">&lt; Previous</button>
 
-		<button
-			*ngFor="let pageNum of getPages()"
-			(click)="onPage(pageNum)"
-			[ngClass]="{'active': pageNum === page, 'disabled': loading}">{{ pageNum }}</button>
+			<button
+				*ngFor="let pageNum of getPages()"
+				(click)="onPage(pageNum)"
+				[ngClass]="{'active': pageNum === page, 'disabled': loading}">{{ pageNum }}</button>
 
-		<button class="link" (click)="onNext(true)" [disabled]="lastPage() || loading" [ngClass]="{ 'disabled': lastPage() || loading }">Next &gt;</button>
+			<button class="link" (click)="onNext(true)" [disabled]="lastPage() || loading" [ngClass]="{ 'disabled': lastPage() || loading }">Next &gt;</button>
+		</div>
 	</div>
 </div>

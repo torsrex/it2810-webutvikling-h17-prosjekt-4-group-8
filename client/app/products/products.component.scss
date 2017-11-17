@@ -37,7 +37,8 @@
   }button{
     padding: 0px 12px 0px 12px;
   }select{
-    margin-left: 4%;
+    margin-bottom: 0px; //had bottom margin for some reason
     flex: 1;
+    height: 100%;
   }
 }

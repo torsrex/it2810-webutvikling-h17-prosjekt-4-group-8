@@ -24,6 +24,8 @@ export class ProductDetailsComponent {
   price = new FormControl('', Validators.required);
 
 
+
+
   constructor(private productService: ProductService,
               private message: MessageService,
               public toast: ToastComponent,
@@ -36,10 +38,13 @@ export class ProductDetailsComponent {
     });
   }
 
+  removeDetailsCard(){
+    this.sendMessage("hide product details");
+  }
+
   //sets the current component values to the clicked product.
   setProduct(product){
     this.product = product;
-    console.log(this.product)
   }
 
   // gets the is of the selected user to send to product component

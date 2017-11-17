@@ -22,7 +22,6 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ProductsComponent implements OnInit {
   //Observer vars
-  message: any;
   subscription: Subscription;
 
   query = ""; //Searchquery
@@ -57,6 +56,7 @@ export class ProductsComponent implements OnInit {
   priceSelected = false;
 
   lastSelected = null;
+  displayProductDetails = false;
 
   //Creates the default formgroup for adding a new product
   addProductForm: FormGroup;
@@ -75,7 +75,12 @@ export class ProductsComponent implements OnInit {
               private userService: UserService
               ) {
                 //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
-                this.subscription = this.messageService.getMessage().subscribe(message => { this.getProducts(this.pageNum, this.sortQuery); this.message = message.text; });
+                this.subscription = this.messageService.getMessage().subscribe(message => {
+                  this.getProducts(this.pageNum, this.sortQuery);
+                  if(message = "hide product details"){
+                    this.displayProductDetails = false;
+                  }
+                });
                 this.subscription = this.messageService.getID().subscribe(id => { this.filterByUser(id.text); })
               }
 
@@ -99,14 +104,18 @@ export class ProductsComponent implements OnInit {
 
 updateDetailView(product){
   this.productDetails.setProduct(product);
+  this.displayProductDetails = true;
 }
 updateStyle($event){
-  if (this.lastSelected != null){
-    console.log("last selected: " + this.lastSelected)
+  if (this.lastSelected){
     this.lastSelected.classList.remove('styleThis');
   }
   this.lastSelected = $event.target.parentNode
   $event.target.parentNode.classList.add('styleThis');
+}
+
+toggleDetailsCard(){
+  this.displayProductDetails = !this.displayProductDetails;
 }
 
   //Fetches products and stores in products list
