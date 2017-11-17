@@ -73,4 +73,21 @@ describe('CreateProductComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('Should display a form if authenticated, not loading and in editing mode', () => {
+    component.isEditing = true
+    component.isLoading = false
+    component.authenticated = true
+    fixture.detectChanges()
+    const el = fixture.debugElement.query(By.css(".centerText"))
+    expect(el.nativeElement.textContent).toContain("New product")
+  })
+  it('Should close when close button is pressed', () => {
+    component.isEditing = true
+    component.isLoading = false
+    component.authenticated = true
+    fixture.detectChanges()
+    const el = fixture.debugElement.queryAll(By.css(".largeButton"))
+    el[1].triggerEventHandler('click', null)
+    expect(component.isEditing).toBe(false)
+  })
 });
