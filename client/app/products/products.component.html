@@ -55,6 +55,12 @@
     </div>
   </div>
 
+  <!-- Category filter. works outside of search, should be separated -->
+  <select class="form-control smallBottomMargin"  [(ngModel)]="selectedCategory">
+    <option selected value="default" >--Select a category--</option>
+    <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
+  </select>
+
   <div class="productsAllComponents">
     <div class="card-block" class="productsColumn">
 

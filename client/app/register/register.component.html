@@ -4,18 +4,12 @@
   <h4 class="card-header">Register</h4>
   <div class="card-block">
     <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <label>Basic</label>
       <div class="input-group" [ngClass]="setClassUsername()">
         <span class="input-group-addon"><i class="fa fa-user"></i></span>
         <input class="form-control" type="text" name="username" formControlName="username" placeholder="Username" autofocus>
       </div>
-      <div class="input-group" [ngClass]="setClassEmail()">
-        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-        <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email">
-      </div>
-      <div class="input-group" [ngClass]="setPhone()">
-        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-        <input class="form-control" type="tel" name="phone" formControlName="phone" placeholder="Phone">
-      </div>
+
       <div class="input-group" [ngClass]="setClassPassword()">
         <span class="input-group-addon"><i class="fa fa-key"></i></span>
         <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password">
@@ -28,15 +22,28 @@
           <option value="admin">Admin</option>
         </select>
       </div>
-      <div class="input-group" [ngClass]="setClassLatitude()">
-        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-        <input class="form-control" type="text" name="latitude" formControlName="latitude" placeholder="Latitude" autofocus>
+      <label>Contact information</label>
+      <div class="input-group" [ngClass]="setClassEmail()">
+        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+        <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email">
       </div>
-      <div class="input-group" [ngClass]="setClassLongitude()">
-        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-        <input class="form-control" type="text" name="longitude" formControlName="longitude" placeholder="Longitude" autofocus>
+      <div class="input-group" [ngClass]="setPhone()">
+        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+        <span class="input-group-addon">+47</span>
+        <input class="form-control" type="tel" name="phone" formControlName="phone" placeholder="Phone">
       </div>
-
+      <label>Address</label>
+      <div class="input-group">
+        <agm-map
+          (zoomChange)="updateMap($event)"
+          (mapClick)="mapClick($event)"
+          [latitude]="init_lat"
+          [longitude]="init_lng"
+          [zoom]="zoom"
+          [streetViewControl]="false">
+          <agm-marker [latitude]="latitude.value" [longitude]="longitude.value"></agm-marker>
+        </agm-map>
+      </div>
       <button class="btn btn-primary" type="submit" [disabled]="isValid()"><i class="fa fa-user-plus"></i> Register</button>
     </form>
   </div>

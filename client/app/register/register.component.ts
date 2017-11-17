@@ -2,13 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { MessageService } from '../services/message.service';
+import { Subscription } from 'rxjs/Subscription';
 import { ToastComponent } from '../shared/toast/toast.component';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html'
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
+
 })
 export class RegisterComponent implements OnInit {
+
+  subscription: Subscription;
+  init_lat = 63.428024;
+  init_lng = 10.393186;
+  zoom = 4;
+
   registerForm: FormGroup;
   username = new FormControl('', [
     Validators.required,
@@ -32,7 +42,7 @@ export class RegisterComponent implements OnInit {
   role = new FormControl('', [
     Validators.required,
   ]);
-  latitude = new FormControl('',[
+  latitude = new FormControl('', [
     Validators.required,
     Validators.min(57.8),
     Validators.max(71.5),
@@ -46,7 +56,10 @@ export class RegisterComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               public toast: ToastComponent,
-              private userService: UserService) { }
+              private userService: UserService,
+              private messageService: MessageService) {
+                this.subscription = this.messageService.getMessage().subscribe(msg => { this.init_lat = msg.text[0]; this.init_lng = msg.text[1]; this.zoom = 10; });
+  }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -60,13 +73,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  isValid(){
-    if(this.registerForm.valid && !isNaN(this.latitude.value) && !isNaN(this.longitude.value)){
-      return false;
-    }else{
-      return true;
-    }
-  }
+  isValid = () => !this.registerForm.valid
 
   setClassUsername() {
     return { 'has-danger': !this.username.pristine && !this.username.valid };
@@ -95,5 +102,14 @@ export class RegisterComponent implements OnInit {
       },
       error => this.toast.setMessage('Some bug', 'danger')
     );
+  }
+
+  mapClick = ({coords: {lat, lng}}) => {
+    this.latitude.setValue(lat)
+    this.longitude.setValue(lng)
+  }
+
+  updateMap($event) {
+    this.zoom = $event;
   }
 }

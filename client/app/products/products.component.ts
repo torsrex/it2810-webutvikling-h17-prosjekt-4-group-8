@@ -42,11 +42,12 @@ export class ProductsComponent implements OnInit {
   totalPageNum = 0; //Total number of pages
   totalListings = 0; //Total number of productlistings
   listingsPerPage = 10; //How many to list pr. page
+  hidePagination= false
 
   //Used to handle search and sorting
   searching = false //Variable to indicate if we're in search mode
   sortingParam: string //What to sort by
-  sortingOrder = 1 //What order to sort by
+  sortingOrder = true //What order to sort by
   sortQuery = "?" //Holds the search query
   selectedCategory = "default"
   ascName = false;
@@ -200,23 +201,20 @@ toggleDetailsCard(){
   toggleNameSort(){
     this.ascName = !this.ascName;
     this.ascPrice = true;
-
     this.nameSelected = true;
     this.priceSelected = false;
   }
   togglePriceSort(){
     this.ascPrice = !this.ascPrice;
     this.ascName = true;
-
     this.nameSelected = false;
     this.priceSelected = true;
-
   }
 
   sortBy(value){
     this.sortingParam = value
-    this.sortingOrder === -1 ? this.sortingOrder = 1 : this.sortingOrder = -1
-    this.sortQuery = "?sortby="+this.sortingParam+"&increasing="+this.sortingOrder
+    this.sortingOrder = !this.sortingOrder
+    this.sortQuery = `?sortby=${this.sortingParam}&increasing=${this.sortingOrder?1:-1}`
     if(this.searching){
       this.searchProducts()
     }else{
@@ -274,6 +272,7 @@ toggleDetailsCard(){
 
   filterByUser(id) {
     //TODO: Need to handle pagination
+    this.hidePagination = true
     this.userService.getUserWithProducts(id).subscribe(
         data => {
           this.products = data.products,
@@ -284,6 +283,7 @@ toggleDetailsCard(){
   }
   //code used to handle searches
   searchFromBox(){
+  this.hidePagination = false
   this.pageNum = 1
   this.searchProducts()
 }
@@ -291,6 +291,9 @@ toggleDetailsCard(){
     if(this.query === ""){
       this.query = ".*"
       this.pageNum = 1
+    }
+    if(this.selectedCategory === "default"){
+      this.selectedCategory = ".*"
     }
     let history = []
     let object = {query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice};
@@ -314,5 +317,6 @@ toggleDetailsCard(){
       },
       error => console.log(error),
   )
+  this.selectedCategory = "default"
 }
 }

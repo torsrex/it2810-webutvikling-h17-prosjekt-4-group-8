@@ -6,6 +6,7 @@
   <h4 class="card-header">Account settings</h4>
   <div class="card-block">
     <form #accountForm="ngForm" (ngSubmit)="save(user)">
+      <label>Basic</label>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-user"></i></span>
         <input class="form-control" type="text" name="username" [(ngModel)]="user.username" placeholder="Username" required>
@@ -22,15 +23,18 @@
           <option value="admin">Admin</option>
         </select>
       </div>
+      <label>Address</label>
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-        <input class="form-control" type="text" name="age" [(ngModel)]="user.age" placeholder="age">
+        <agm-map
+          (zoomChange)="updateMap($event)"
+          (mapClick)="mapClick($event)"
+          [latitude]="init_lat"
+          [longitude]="init_lng"
+          [zoom]="zoom"
+          [streetViewControl]="false">
+          <agm-marker [latitude]="user.latitude" [longitude]="user.longitude"></agm-marker>
+        </agm-map>
       </div>
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
-        <input class="form-control" type="text" name="img" [(ngModel)]="user.img" placeholder="image link">
-      </div>
-      <img src="{{user.img}}" alt="Profile picture" height="25%" width="25%">
       <br>
       <button class="btn btn-primary" type="submit" [disabled]="!accountForm.form.valid">
         <i class="fa fa-save"></i> Save
