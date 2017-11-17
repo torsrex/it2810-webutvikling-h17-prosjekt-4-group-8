@@ -55,7 +55,6 @@ export class ProductsComponent implements OnInit {
   priceSelected = false;
 
   lastSelected = null;
-
   displayProductDetails = false;
 
   //Creates the default formgroup for adding a new product
