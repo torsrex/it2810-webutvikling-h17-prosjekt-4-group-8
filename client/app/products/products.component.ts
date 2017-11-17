@@ -107,8 +107,7 @@ updateDetailView(product){
   this.displayProductDetails = true;
 }
 updateStyle($event){
-  if (this.lastSelected != null){
-    console.log("last selected: " + this.lastSelected)
+  if (this.lastSelected){
     this.lastSelected.classList.remove('styleThis');
   }
   this.lastSelected = $event.target.parentNode

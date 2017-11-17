@@ -45,7 +45,6 @@ export class ProductDetailsComponent {
   //sets the current component values to the clicked product.
   setProduct(product){
     this.product = product;
-    console.log(this.product)
   }
 
   // gets the is of the selected user to send to product component
