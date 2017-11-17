@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+$color-1 : #fff;
+$color-2: #FF9800;
 
 body {
   margin-bottom: 10px;
@@ -13,24 +15,22 @@ p{
 }
 th{
   background-color: #555 !important;
-  color: #fff !important;
+  color: $color-1 !important;
   font-weight: normal;
-  padding-top: 5px !important;
-  padding-bottom: 5px !important;
+  padding: 5px 0 !important;
   &:hover{
-    background-color: #FF9800 !important;
+    background-color: $color-2 !important;
   }
 }
 tr{
-  background-color: #fff !important;
+  background-color: $color-1 !important;
   border: none;
   &:hover{
-    background-color: #FF9800 !important;
+    background-color: $color-2 !important;
   }td{
     border: none !important;
     border-bottom: 1px solid #eee !important;
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+    padding: 10px 0 !important;
   }
 }
 button{
@@ -69,8 +69,7 @@ input, select{
     display: flex;
     justify-content: center;
     a{
-      padding-left: 20px;
-      padding-right: 20px;
+      padding: 0 20px;
     }
   }
 }
@@ -89,8 +88,7 @@ input, select{
   margin-bottom: 50px;
 }
 .sideMargin{
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0 10px;
 }
 .centerText{
   text-align: center;
@@ -102,12 +100,12 @@ input, select{
   cursor: pointer;
 }
 .bgOrange{
-  background-color: #FF9800 !important;
+  background-color: $color-2 !important;
 }
 .largeButton{
-  padding: 5px 25px 5px 25px;
+  padding: 5px 25px;
 }
 .styleThis{
-  color: #fff !important;
-  background-color: #FF9800 !important;
+  color: $color-1 !important;
+  background-color: $color-2 !important;
 }
