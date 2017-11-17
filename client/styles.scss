@@ -3,7 +3,8 @@
 body {
   margin-bottom: 10px;
 }
-h4{
+
+h5{
   margin: auto;
   font-weight: 400;
 }
@@ -24,7 +25,7 @@ tr{
   background-color: #fff !important;
   border: none;
   &:hover{
-    background-color: #efefef !important;
+    background-color: #FF9800 !important;
   }td{
     border: none !important;
     border-bottom: 1px solid #eee !important;
@@ -87,6 +88,10 @@ input, select{
 .largeBottomMargin{
   margin-bottom: 50px;
 }
+.sideMargin{
+  margin-left: 10px;
+  margin-right: 10px;
+}
 .centerText{
   text-align: center;
 }
@@ -97,5 +102,12 @@ input, select{
   cursor: pointer;
 }
 .bgOrange{
+  background-color: #FF9800 !important;
+}
+.largeButton{
+  padding: 5px 25px 5px 25px;
+}
+.styleThis{
+  color: #fff !important;
   background-color: #FF9800 !important;
 }
