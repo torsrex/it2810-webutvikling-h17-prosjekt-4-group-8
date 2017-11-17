@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { HttpModule } from '@angular/http'
 
+import { By } from '@angular/platform-browser';
 
 describe('MyProductsComponent', () => {
   let component: MyProductsComponent;
@@ -48,10 +49,37 @@ describe('MyProductsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MyProductsComponent);
     component = fixture.componentInstance;
+    component.isLoading = false
+    component.user = {
+      _id: "5a0ad886a0a7776c7403db14",
+      username: "testing",
+      role: "admin",
+      products: [
+        {
+          _id: "5a0c378c59167960b485f315",
+          name: "wall",
+          description: "very category wall",
+          price: 92929,
+          category: "Furniture",
+          user: "5a0ad886a0a7776c7403db14",
+          __v: 0,
+          createdAt: "2017-11-15T12:48:12.155Z"
+        }]
+      }
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('Should show a list of the products of the user', () => {
+    const el = fixture.debugElement.queryAll(By.css(".productList table tbody tr td"))
+    expect(el[0].nativeElement.textContent).toContain('wall')
+    expect(el[1].nativeElement.textContent).toContain('92929 NOK')
+  })
+  it('Should not show recent searches', () => {
+    fixture.detectChanges()
+    const el = fixture.debugElement.query(By.css(".card-block table tbody tr td"))
+    expect(el.nativeElement.textContent).toContain("You don't have any searches.")
+  })
 });
