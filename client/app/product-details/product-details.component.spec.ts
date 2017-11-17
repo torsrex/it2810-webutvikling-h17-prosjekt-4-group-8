@@ -127,4 +127,23 @@ describe('ProductDetailsComponent', () => {
     pencil.triggerEventHandler('click', null)
     expect(component.deleteProduct).toHaveBeenCalled()
   })
+  it('Should call remove detailscard function', () => {
+    component.product = {
+      _id: '1',
+      name: 'Testproductname',
+      description: 'Testproductdescription',
+      price: '3',
+      createdAt: '2017-11-15T13:29:01.332Z',
+      userId: '9',
+      category: 'Electronics',
+      user: {username: 'test', email: 'test@test.com'}
+    }
+    component.authenticated = true
+    spyOn(component, 'removeDetailsCard')
+    fixture.detectChanges()
+    const el = fixture.debugElement.queryAll(By.css('.cardHeader i'))
+    const close = el[2]
+    close.triggerEventHandler('click', null)
+    expect(component.removeDetailsCard).toHaveBeenCalled()
+  })
 });
