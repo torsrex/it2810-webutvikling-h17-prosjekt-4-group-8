@@ -31,7 +31,7 @@ export class MyProductsComponent implements OnInit {
 
   }
   getUserWithProducts() {
-    this.userService.getUserWithProducts(this.auth.currentUser).subscribe(
+    this.userService.getUserWithProducts(this.auth.currentUser._id).subscribe(
       data => this.user = data,
       error => console.log(error),
       () => this.isLoading = false
