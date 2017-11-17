@@ -43,6 +43,7 @@ export class ProductsComponent implements OnInit {
   totalPageNum = 0; //Total number of pages
   totalListings = 0; //Total number of productlistings
   listingsPerPage = 10; //How many to list pr. page
+  hidePagination= false
 
   //Used to handle search and sorting
   searching = false //Variable to indicate if we're in search mode
@@ -264,6 +265,7 @@ updateStyle($event){
 
   filterByUser(id) {
     //TODO: Need to handle pagination
+    this.hidePagination = true
     this.userService.getUserWithProducts(id).subscribe(
         data => {
           this.products = data.products,
@@ -274,6 +276,7 @@ updateStyle($event){
   }
   //code used to handle searches
   searchFromBox(){
+  this.hidePagination = false
   this.pageNum = 1
   this.searchProducts()
 }
