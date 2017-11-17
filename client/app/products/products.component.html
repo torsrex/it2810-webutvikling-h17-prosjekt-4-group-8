@@ -71,23 +71,23 @@
           <tr>
             <!-- name, not selected -->
             <th *ngIf="!nameSelected" class="clickable" (click)="sortBy('name'); toggleNameSort()">NAME
-              <i *ngIf="!ascName" class="fa fa-chevron-up" aria-hidden="true"></i>
-              <i *ngIf="ascName" class="fa fa-chevron-down" aria-hidden="true"></i>
+              <i *ngIf="!ascName" class="fa fa-chevron-up" aria-hidden></i>
+              <i *ngIf="ascName" class="fa fa-chevron-down" aria-hidden></i>
             </th>
             <!-- name, selected -->
             <th *ngIf="nameSelected" class="clickable bgOrange" (click)="sortBy('name'); toggleNameSort()">NAME
-              <i *ngIf="!ascName" class="fa fa-chevron-up" aria-hidden="true"></i>
-              <i *ngIf="ascName" class="fa fa-chevron-down" aria-hidden="true"></i>
+              <i *ngIf="!ascName" class="fa fa-chevron-up" aria-hidden></i>
+              <i *ngIf="ascName" class="fa fa-chevron-down" aria-hidden></i>
             </th>
             <!-- price, not selected -->
             <th *ngIf="!priceSelected" class="clickable" (click)="sortBy('price'); togglePriceSort()">PRICE
-              <i *ngIf="!ascPrice" class="fa fa-chevron-up" aria-hidden="true"></i>
-              <i *ngIf="ascPrice" class="fa fa-chevron-down" aria-hidden="true"></i>
+              <i *ngIf="!ascPrice" class="fa fa-chevron-up" aria-hidden></i>
+              <i *ngIf="ascPrice" class="fa fa-chevron-down" aria-hidden></i>
             </th>
             <!-- price, selected -->
             <th *ngIf="priceSelected" class="clickable bgOrange" (click)="sortBy('price'); togglePriceSort()">PRICE
-              <i *ngIf="!ascPrice" class="fa fa-chevron-up" aria-hidden="true"></i>
-              <i *ngIf="ascPrice" class="fa fa-chevron-down" aria-hidden="true"></i>
+              <i *ngIf="!ascPrice" class="fa fa-chevron-up" aria-hidden></i>
+              <i *ngIf="ascPrice" class="fa fa-chevron-down" aria-hidden></i>
             </th>
           </tr>
         </thead>
