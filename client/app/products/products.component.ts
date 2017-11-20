@@ -35,7 +35,6 @@ export class ProductsComponent implements OnInit {
   authenticated = false //Is the user authenticated?
   userId: string //What is the current userid?
   user = {} //List containing the current user's parameters
-  isCreateFormOpen = false
 
   //Used by pagination component
   pageNum = 1; //this must be >0, which page we are on

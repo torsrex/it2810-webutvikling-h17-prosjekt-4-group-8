@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastComponent } from '../shared/toast/toast.component';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
@@ -14,17 +15,43 @@ import { MyProductsComponent } from '../my-products/my-products.component';
 })
 export class MyPageComponent implements OnInit {
   //TODO: Add validation just like in register page
-  user = {
-    latitude: 0,
-    longitude: 0
-  };
   isLoading = true;
   subscription: Subscription;
   init_lat = 63.428024;
   init_lng = 10.393186;
   zoom = 4;
+  user = {}
+  userForm: FormGroup;
+  username = new FormControl('', [
+    Validators.required,
+    Validators.minLength(2),
+    Validators.maxLength(30),
+    Validators.pattern(/[a-zA-Z0-9_-\s]*/),
+  ]);
+  email = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+  ]);
+  role = new FormControl('', [
+    Validators.required,
+  ]);
+  phone = new FormControl('',[
+    Validators.required,
+    Validators.minLength(8),
+  ]);
+  latitude = new FormControl('', [
+    Validators.required,
+    Validators.min(57.8),
+    Validators.max(71.5),
+  ]);
+  longitude = new FormControl('', [
+    Validators.required,
+    Validators.min(3.5),
+    Validators.max(31.5)
+  ]);
 
-  constructor(private auth: AuthService,
+  constructor(private formBuilder: FormBuilder,
+              private auth: AuthService,
               public toast: ToastComponent,
               private userService: UserService,
               private messageService: MessageService) {
@@ -33,31 +60,61 @@ export class MyPageComponent implements OnInit {
 
   ngOnInit() {
     this.getUser();
+    this.userForm = this.formBuilder.group({
+      username: this.username,
+      email: this.email,
+      phone: this.phone,
+      role: this.role,
+      latitude: this.latitude,
+      longitude: this.longitude,
+    });
+  }
+
+  isValid = () => !this.userForm.valid
+
+  setClassUsername() {
+    return { 'has-danger': !this.username.pristine && !this.username.valid };
+  }
+  setClassEmail() {
+    return { 'has-danger': !this.email.pristine && !this.email.valid };
+  }
+  setPhone() {
+    return { 'has-danger': !this.phone.pristine && !this.phone.valid };
+  }
+  setClassLatitude() {
+    return {'has-danger': !this.latitude.pristine && !this.latitude.valid }
+  }
+  setClassLongitude() {
+    return {'has-danger': !this.longitude.pristine && !this.longitude.valid }
   }
 
   getUser() {
     this.userService.getUser(this.auth.currentUser).subscribe(
       data => {
         this.user = data
+        Object.keys(data).forEach(userField => {
+          this[userField] && this[userField].setValue(data[userField])
+        })
       },
       error => console.log(error),
       () => this.isLoading = false
     );
   }
 
-  save(user) {
-    this.userService.editUser(user).subscribe(
+  save() {
+    const updatedUser = this.user
+    Object.keys(this.userForm.value).forEach(updatedField => {
+      updatedUser[updatedField] = this.userForm.value[updatedField]
+    })
+    this.userService.editUser(updatedUser).subscribe(
       res => this.toast.setMessage('account settings saved!', 'success'),
       error => console.log(error)
     );
   }
 
-  mapClick = ({coords: {lat: latitude, lng: longitude}}) => {
-    this.user = {
-      ...this.user,
-      latitude,
-      longitude
-    }
+  mapClick = ({coords: {lat, lng}}) => {
+    this.latitude.setValue(lat)
+    this.longitude.setValue(lng)
   }
 
   // Updates the zoom level when the user zooms the map

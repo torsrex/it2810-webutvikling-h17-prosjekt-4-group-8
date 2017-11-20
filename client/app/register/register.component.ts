@@ -24,12 +24,11 @@ export class RegisterComponent implements OnInit {
     Validators.required,
     Validators.minLength(2),
     Validators.maxLength(30),
-    Validators.pattern('[a-zA-Z0-9_-\\s]*'),
+    Validators.pattern(/[a-zA-Z0-9_-\s]*/),
   ]);
   email = new FormControl('', [
     Validators.required,
-    Validators.minLength(3),
-    Validators.maxLength(100),
+    Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
   ]);
   phone = new FormControl('',[
     Validators.required,

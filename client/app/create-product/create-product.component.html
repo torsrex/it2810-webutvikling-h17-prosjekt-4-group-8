@@ -2,7 +2,7 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-
+<button *ngIf="authenticated" class="createProductButton largeBottomMargin" (click)="isEditing = !isEditing">Create product</button>
 <!-- Add new product  -->
 <div class="background" *ngIf="authenticated && isEditing && !isLoading">
   <div class="card addSomethingPopup">
