@@ -91,6 +91,16 @@ input, select{
   flex: 1;
   flex-grow: 1;
 }
+.topBar{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  background-color: #333;
+}
+.productPageContent{
+  position: relative;
+  top: 170px;
+}
 
 // End nav ------------
 .smallBottomMargin{
@@ -132,4 +142,8 @@ input, select{
     background-color: $color-2 !important;
     color: #000;
   }
+}
+
+.productsHeader{
+  color: #aaa;
 }
