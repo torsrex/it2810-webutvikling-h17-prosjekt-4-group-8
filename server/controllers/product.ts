@@ -47,7 +47,8 @@ export default class ProductCtrl extends BaseCtrl {
       {
         "category": { $regex: categorySearch}
       }
-    ]
+    ],
+    price: {$gte: req.params.min, $lte: req.params.max}
   }
 /*
 let filter = {}

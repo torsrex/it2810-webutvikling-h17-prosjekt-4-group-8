@@ -146,4 +146,22 @@ describe('ProductDetailsComponent', () => {
     close.triggerEventHandler('click', null)
     expect(component.removeDetailsCard).toHaveBeenCalled()
   })
+  it('Should change editing variable', () => {
+    component.product = {
+      _id: '1',
+      name: 'Testproductname',
+      description: 'Testproductdescription',
+      price: '3',
+      createdAt: '2017-11-15T13:29:01.332Z',
+      userId: '9',
+      category: 'Electronics',
+      user: {username: 'test', email: 'test@test.com'}
+    }
+    component.authenticated = true
+    fixture.detectChanges()
+    const el = fixture.debugElement.queryAll(By.css('.detailsCard div i'))
+    const pencil = el[0]
+    pencil.triggerEventHandler('click', null)
+    expect(component.isEditing).toBeTruthy()
+  })
 });
