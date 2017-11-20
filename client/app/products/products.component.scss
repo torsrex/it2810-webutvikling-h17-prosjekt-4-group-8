@@ -26,15 +26,13 @@ app-google-maps {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  input:first-child{
-    flex: 2;
-  }input{
+  input{
     flex: 1;
   }button{
     padding: 0px 12px 0px 12px;
   }select{
     margin-bottom: 0px; //had bottom margin for some reason
-    flex: 1;
+    flex: 2;
     height: 100%;
   }
 }

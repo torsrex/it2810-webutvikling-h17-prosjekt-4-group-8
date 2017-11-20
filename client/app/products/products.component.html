@@ -16,13 +16,6 @@
   <div class="form-inline">
     <!-- name search -->
     <div class="searchFields mediumBottomMargin">
-
-      <!-- Category filter. works outside of search, should be separated -->
-      <select class="form-control"  [(ngModel)]="selectedCategory">
-        <option selected value="default" >--Select a category--</option>
-        <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
-      </select>
-
       <input
       class="form-control"
       placeholder="Search for a product"
@@ -50,6 +43,13 @@
       [(ngModel)]="maxPrice"
       (keyup.enter)="searchFromBox()"
       >
+      
+      <!-- Category filter. works outside of search, should be separated -->
+      <select class="form-control"  [(ngModel)]="selectedCategory">
+        <option selected value="default" >--Select a category--</option>
+        <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
+      </select>
+
       <button (click)="searchFromBox()"><i class="fa fa-search"></i></button>
       <button (click)="clearFilter()">Clear filter <i class="fa fa-times"></i></button>
     </div>

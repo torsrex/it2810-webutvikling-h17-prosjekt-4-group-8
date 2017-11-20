@@ -307,6 +307,7 @@ toggleDetailsCard(){
       error => console.log(error),
   )
 }
+  //Resets (literally) all of the components state
   clearFilter(){
     this.pageNum = 1
     this.query = ""
@@ -314,17 +315,15 @@ toggleDetailsCard(){
     this.ascPrice = false;
     this.nameSelected = false;
     this.priceSelected = false;
-    this.minPrice = -Infinity
-    this.maxPrice = Infinity
     this.isEditing = false
     this.hidePagination = false
+    this.displayProductDetails = false;
+    this.minPrice = -Infinity
+    this.maxPrice = Infinity
     this.sortQuery = "?"
     this.selectedCategory = "default"
     this.lastSelected = null
-    this.ascName = false;
-    this.ascPrice = false;
-    this.nameSelected = false;
-    this.priceSelected = false;
-    this.displayProductDetails = false;
+    this.goToPage(1)
+    this.getProducts(this.pageNum, this.sortQuery)
   }
 }
