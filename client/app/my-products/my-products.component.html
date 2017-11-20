@@ -44,7 +44,6 @@
         <tr *ngFor="let element of searches"> <!-- Generates a tr for each product in the db. -->
           <td>{{element.query}}</td>
           <td>{{element.minPrice}}</td>
-          <td *ngIf="!element.maxPrice">Infinity</td>
           <td>{{element.maxPrice}}</td>
         </tr>
       </tbody>
