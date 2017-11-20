@@ -99,7 +99,10 @@ export class ProductsComponent implements OnInit {
     //Sets the userid
     this.userId = this.auth.currentUser['_id']
     //Gets other user paramters
-    this.getUser()
+    if(this.authenticated){
+      this.getUser()
+
+  }
   }
 
 updateDetailView(product){

@@ -57,7 +57,10 @@ export class CreateProductComponent implements OnInit{
     //Sets the userid
     this.userId = this.auth.currentUser['_id']
     //Gets other user paramters
+    if(this.authenticated){
+
     this.getUser()
+  }
   }
  //Adds a new product
   addProduct() {
