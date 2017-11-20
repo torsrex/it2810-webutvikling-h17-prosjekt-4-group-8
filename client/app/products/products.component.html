@@ -99,7 +99,7 @@
       </table>
 
       <!-- Pagination component -->
-      <div>
+      <div *ngIf="!hidePagination">
       <app-pagination
         (goPage)="goToPage($event)"
         (goNext)="onNext()"
