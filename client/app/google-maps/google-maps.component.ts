@@ -27,8 +27,15 @@ export class GoogleMapsComponent implements OnInit {
     this.getUsers();
   }
 
+
   updateMap($event) {
     this.zoom = $event;
+  }
+
+  // Updates center of map when it changes (i.e. user drags the map)
+  updateMapCenter($event) {
+    this.init_lat = $event.lat;
+    this.init_lng = $event.lng;
   }
 
   filterByUser(id) {
