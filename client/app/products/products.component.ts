@@ -326,5 +326,6 @@ toggleDetailsCard(){
     this.nameSelected = false;
     this.priceSelected = false;
     this.displayProductDetails = false;
+    this.getProducts(this.pageNum, this.sortQuery)
   }
 }
