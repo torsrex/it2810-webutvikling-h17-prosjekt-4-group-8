@@ -108,7 +108,14 @@ export class RegisterComponent implements OnInit {
     this.longitude.setValue(lng)
   }
 
-  updateMap($event) {
+  // Updates the zoom level when the user zooms the map
+  updateMapZoom($event) {
     this.zoom = $event;
+  }
+
+  // Updates center of map when it changes (i.e. user drags the map)
+  updateMapCenter($event) {
+    this.init_lat = $event.lat;
+    this.init_lng = $event.lng;
   }
 }
