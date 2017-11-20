@@ -4,6 +4,7 @@ $color-2: #FF9800;
 
 body {
   margin-bottom: 10px;
+  background-color: #fafafa;
 }
 
 h5{
@@ -73,6 +74,8 @@ input, select{
 }
 //Navigation styling-------------------
 .navbar{
+  z-index: 10;
+  box-shadow: 0px 3px 5px #222;
   border-radius: 0;
   max-width: 100%;
   background-color: #333 !important;
@@ -91,18 +94,27 @@ input, select{
   flex: 1;
   flex-grow: 1;
 }
+
+// End nav ------------
 .topBar{
   position: absolute;
   left: 0px;
   right: 0px;
   background-color: #333;
 }
+
 .productPageContent{
   position: relative;
-  top: 170px;
+  top: 270px;
+}
+.productsHeaderTitle{
+  padding: 40px 0;
+  color: #ddd;
+  font-weight: 600;
+  font-size: 40px;
+
 }
 
-// End nav ------------
 .smallBottomMargin{
   margin-bottom: 10px !important;
 }
@@ -137,13 +149,17 @@ input, select{
 .invisible{
   opacity: 0;
 }
+.active{
+  color: $color-2 !important;
+}
 .hoverHighlight{
   &:hover{
     background-color: $color-2 !important;
     color: #000;
   }
 }
-
-.productsHeader{
-  color: #aaa;
+.darkBg{
+  margin-left: 25px;
+  background-color: #bbb;
+  color: #333;
 }
