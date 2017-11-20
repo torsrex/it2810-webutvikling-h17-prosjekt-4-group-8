@@ -292,9 +292,6 @@ toggleDetailsCard(){
       this.query = ".*"
       this.pageNum = 1
     }
-    if(this.selectedCategory === "default"){
-      this.selectedCategory = ".*"
-    }
     let history = []
     let object = {query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice};
     if(JSON.parse(localStorage.getItem('searches'))){
@@ -320,6 +317,5 @@ toggleDetailsCard(){
       },
       error => console.log(error),
   )
-  this.selectedCategory = "default"
 }
 }

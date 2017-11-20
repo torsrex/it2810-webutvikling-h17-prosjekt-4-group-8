@@ -34,10 +34,10 @@ export default class ProductCtrl extends BaseCtrl {
   search = (req, res) => {
   const sortingParam = req.query.sortby ? req.query.sortby : "createdAt"
   const sortingOrder = req.query.increasing ? req.query.increasing: 1
-
+  const category = req.query.category === "default" ? ".*" : req.query.category
 
   let regexSearch = new RegExp("\\b^("+req.params.query+")+.*\\b", 'i')
-  let categorySearch = new RegExp("^"+req.query.category+"$", 'i')
+  let categorySearch = new RegExp("^"+category+"$", 'i')
 
   const filterQuery = {
     $and: [
@@ -50,17 +50,6 @@ export default class ProductCtrl extends BaseCtrl {
     ],
     price: {$gte: req.params.min, $lte: req.params.max}
   }
-/*
-let filter = {}
-if(req.query.filter){
-filter = {$where : "this.category == '"+req.query.category+"'" }
-}else{
-filter = {}
-}
-
-  const filterQuery = {$text: {$search: req.params.query},
-                      price: {$gte: req.params.min, $lte: req.params.max}}
-                      */
     const options = {
     page: req.params.pageNum,
     limit: 10,
