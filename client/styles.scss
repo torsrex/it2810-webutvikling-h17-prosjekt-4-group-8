@@ -79,13 +79,13 @@ input, select{
 }
 // End nav ------------
 .smallBottomMargin{
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
 }
 .mediumBottomMargin{
-  margin-bottom: 25px;
+  margin-bottom: 25px !important;
 }
 .largeBottomMargin{
-  margin-bottom: 50px;
+  margin-bottom: 50px !important;
 }
 .sideMargin{
   margin: 0 10px;
@@ -108,4 +108,7 @@ input, select{
 .styleThis{
   color: $color-1 !important;
   background-color: $color-2 !important;
+}
+.invisible{
+  opacity: 0;
 }
