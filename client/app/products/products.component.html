@@ -93,7 +93,8 @@
               <td colspan="4">There are no products in the DB. Add a new product below.</td>
             </tr>
           </tbody>
-          <tbody *ngIf="!isEditing">
+          <app-loading [condition]="isLoadingDynamic"></app-loading>
+          <tbody *ngIf="!isEditing && !isLoadingDynamic">
             <tr *ngFor="let product of filteredProducts" (click)="updateStyle($event); updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
               <td>{{product.name}}</td>
               <td>{{product.price}} kr</td>

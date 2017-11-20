@@ -53,6 +53,7 @@ export class ProductsComponent implements OnInit {
   ascPrice = false;
   nameSelected = false;
   priceSelected = false;
+  isLoadingDynamic = false;
 
   lastSelected = null;
   displayProductDetails = false;
@@ -131,7 +132,7 @@ toggleDetailsCard(){
         this.totalListings = data.total
       },
       error => console.log(error),
-      () => this.isLoading = false
+      () => {this.isLoading = false, this.isLoadingDynamic = false}
     );
   }
 
@@ -220,6 +221,7 @@ toggleDetailsCard(){
     if(this.searching){
       this.searchProducts()
     }else{
+      this.isLoadingDynamic = true
       this.getProducts(this.pageNum, this.sortQuery)
     }
   }
@@ -298,7 +300,7 @@ toggleDetailsCard(){
     //Code to fix minprice and maxPrice
     this.minPrice = !this.minPrice ? 0 : this.minPrice
     this.maxPrice = !this.maxPrice ? Infinity : this.maxPrice
-    this.isLoading = true
+    this.isLoadingDynamic = true
     this.productService.searchProduct(this.query, this.pageNum,
       this.minPrice, this.maxPrice+this.sortQuery+"&category="+this.selectedCategory).subscribe(
       data => {
@@ -308,7 +310,7 @@ toggleDetailsCard(){
         this.totalListings = data.total
       },
       error => console.log(error),
-      () => this.isLoading = false
+      () => this.isLoadingDynamic = false
   )
 }
   //Resets (literally) all of the components state
