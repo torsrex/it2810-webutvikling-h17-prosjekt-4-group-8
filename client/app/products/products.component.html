@@ -5,7 +5,7 @@
 <!-- PRODUCT COMPONENT _________________________________________________________ -->
 <div class="productsPage" *ngIf="!isLoading">
   <br>
-  <h2 class="centerText">Welcome to BestProducts Shopping</h2>
+  <h2 class="centerText largeBottomMargin">Welcome to BestProducts Shopping</h2>
   <!-- new product button-->
 
   <app-create-product [isEditing]="isCreateFormOpen"></app-create-product>
@@ -16,7 +16,7 @@
   <!-- Search component -->
   <div class="form-inline">
     <!-- name search -->
-    <div class="searchFields smallBottomMargin">
+    <div class="searchFields mediumBottomMargin">
 
       <!-- Category filter. works outside of search, should be separated -->
       <select class="form-control"  [(ngModel)]="selectedCategory">
@@ -117,6 +117,7 @@
       <!-- Product details card -->
       <app-product-details *ngIf="displayProductDetails" [authenticated]="authenticated" [product]="productDetails.product" class="detailsCard"></app-product-details>
       <!-- Google maps Map -->
+      <h4 class="centerText">Map of User Locations</h4>
       <app-google-maps></app-google-maps>
     </div>
 
