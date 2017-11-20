@@ -35,8 +35,9 @@ export default class ProductCtrl extends BaseCtrl {
   const sortingParam = req.query.sortby ? req.query.sortby : "createdAt"
   const sortingOrder = req.query.increasing ? req.query.increasing: 1
   const category = req.query.category === "default" ? ".*" : req.query.category
+  const searchParam = req.params.query === "" ? ".*" : req.params.query
 
-  let regexSearch = new RegExp("\\b^("+req.params.query+")+.*\\b", 'i')
+  let regexSearch = new RegExp("\\b^("+searchParam+")+.*\\b", 'i')
   let categorySearch = new RegExp("^"+category+"$", 'i')
 
   const filterQuery = {

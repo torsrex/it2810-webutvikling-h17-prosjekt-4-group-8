@@ -278,7 +278,7 @@ toggleDetailsCard(){
 }
   searchProducts(){
     if(this.query === ""){
-      this.query = ".*"
+      this.query = " "
       this.pageNum = 1
     }
     let history = []
