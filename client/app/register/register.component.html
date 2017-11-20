@@ -42,9 +42,10 @@
           [zoom]="zoom"
           [streetViewControl]="false">
           <agm-marker
-          [markerDraggable]="true"
-          [latitude]="latitude.value"
-          [longitude]="longitude.value"
+            (dragEnd)="mapClick($event)"
+            [markerDraggable]="true"
+            [latitude]="latitude.value"
+            [longitude]="longitude.value"
           ></agm-marker>
         </agm-map>
       </div>
