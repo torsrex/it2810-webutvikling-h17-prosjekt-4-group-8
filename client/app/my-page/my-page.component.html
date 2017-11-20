@@ -32,7 +32,11 @@
           [longitude]="init_lng"
           [zoom]="zoom"
           [streetViewControl]="false">
-          <agm-marker [latitude]="user.latitude" [longitude]="user.longitude"></agm-marker>
+          <agm-marker
+            [markerDraggable]="true"
+            [latitude]="user.latitude"
+            [longitude]="user.longitude"
+            ></agm-marker>
         </agm-map>
       </div>
       <br>

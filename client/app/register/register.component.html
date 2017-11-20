@@ -41,7 +41,11 @@
           [longitude]="init_lng"
           [zoom]="zoom"
           [streetViewControl]="false">
-          <agm-marker [latitude]="latitude.value" [longitude]="longitude.value"></agm-marker>
+          <agm-marker
+          [markerDraggable]="true"
+          [latitude]="latitude.value"
+          [longitude]="longitude.value"
+          ></agm-marker>
         </agm-map>
       </div>
       <button class="btn btn-primary" type="submit" [disabled]="isValid()"><i class="fa fa-user-plus"></i> Register</button>
