@@ -295,6 +295,7 @@ toggleDetailsCard(){
     //Code to fix minprice and maxPrice
     this.minPrice = !this.minPrice ? 0 : this.minPrice
     this.maxPrice = !this.maxPrice ? Infinity : this.maxPrice
+    this.isLoading = true
     this.productService.searchProduct(this.query, this.pageNum,
       this.minPrice, this.maxPrice+this.sortQuery+"&category="+this.selectedCategory).subscribe(
       data => {
@@ -304,6 +305,7 @@ toggleDetailsCard(){
         this.totalListings = data.total
       },
       error => console.log(error),
+      () => this.isLoading = false
   )
 }
   //Resets (literally) all of the components state

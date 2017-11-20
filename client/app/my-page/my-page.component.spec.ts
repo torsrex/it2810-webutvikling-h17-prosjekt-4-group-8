@@ -8,6 +8,8 @@ import { ToastComponent } from '../shared/toast/toast.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http'
+import { ReactiveFormsModule } from '@angular/forms'
+
 
 import { AuthService } from '../services/auth.service'
 import { UserService } from '../services/user.service'
@@ -30,7 +32,7 @@ describe('MyPageComponent', () => {
       currentUser: { username: 'Tester' }
     };
     TestBed.configureTestingModule({
-      imports: [ FormsModule, HttpModule, RouterTestingModule ],
+      imports: [ FormsModule, HttpModule, RouterTestingModule, ReactiveFormsModule ],
       declarations: [ MyPageComponent ],
       providers: [{provide: AuthService, useValue: authServiceStub}, UserService, MessageService, ToastComponent],
       schemas: [NO_ERRORS_SCHEMA]
