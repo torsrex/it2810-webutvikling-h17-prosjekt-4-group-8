@@ -307,6 +307,9 @@ toggleDetailsCard(){
     localStorage.setItem('searches', JSON.stringify(history));
 
     this.searching = true
+    //Code to fix minprice and maxPrice
+    this.minPrice = !this.minPrice ? 0 : this.minPrice
+    this.maxPrice = !this.maxPrice ? Infinity : this.maxPrice
     this.productService.searchProduct(this.query, this.pageNum,
       this.minPrice, this.maxPrice+this.sortQuery+"&category="+this.selectedCategory).subscribe(
       data => {
