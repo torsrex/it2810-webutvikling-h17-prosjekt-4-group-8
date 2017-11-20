@@ -17,7 +17,7 @@
         <i class="fa fa-user-plus"></i> Register
       </a>
       <a routerLink="/myPage" class="nav-item nav-link " routerLinkActive="active" *ngIf="auth.loggedIn">
-        <i class="fa fa-user"></i> My page ({{auth.currentUser.username}})
+        <i class="fa fa-user"></i> My page
       </a>
       <a routerLink="/admin" class="nav-item nav-link " routerLinkActive="active" *ngIf="auth.loggedIn && auth.isAdmin">
         <i class="fa fa-lock"></i> Admin

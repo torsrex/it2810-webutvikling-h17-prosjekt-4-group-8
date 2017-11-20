@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 $color-1 : #fcfcfc;
 $color-2: #FF9800;
+$max-width: 540px;
 
 body {
   margin-bottom: 10px;
@@ -87,7 +88,13 @@ input, select{
         color: $color-2 !important;
       }
       padding: 0 20px;
+    }.nav-item{
+      padding: 10px 20px;
+      @media screen and (max-width: $max-width) {
+        padding: 10px 0;
+      }
     }
+
   }
 }
 .flexSpacer{
