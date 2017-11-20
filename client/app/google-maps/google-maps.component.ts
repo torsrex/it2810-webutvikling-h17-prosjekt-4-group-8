@@ -27,8 +27,8 @@ export class GoogleMapsComponent implements OnInit {
     this.getUsers();
   }
 
-
-  updateMap($event) {
+  // Updates the zoom level when the user zooms the map
+  updateMapZoom($event) {
     this.zoom = $event;
   }
 
@@ -38,10 +38,12 @@ export class GoogleMapsComponent implements OnInit {
     this.init_lng = $event.lng;
   }
 
+  // Used to filter products by user id, sends id to products component
   filterByUser(id) {
     this.messageService.sendID(id);
   }
 
+  // Used to load the list of users, will then plot markers on the map
   getUsers() {
     this.userService.getUsers().subscribe(
       users => {this.users = users},

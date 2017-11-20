@@ -2,7 +2,7 @@
 
 <div class="map-loading" *ngIf="!isLoading">
   <div class="map-container">
-    <agm-map (centerChange)="updateMapCenter($event)" (zoomChange)="updateMap($event)" [latitude]="init_lat" [longitude]="init_lng" [zoom]="zoom" [streetViewControl]="false">
+    <agm-map (centerChange)="updateMapCenter($event)" (zoomChange)="updateMapZoom($event)" [latitude]="init_lat" [longitude]="init_lng" [zoom]="zoom" [streetViewControl]="false">
       <agm-marker *ngFor="let user of users" [latitude]="user.latitude" [longitude]="user.longitude">
         <agm-info-window>
           <div class="info-window-content">

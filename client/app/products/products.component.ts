@@ -258,18 +258,8 @@ toggleDetailsCard(){
     )
   }
 
-/*
-  filterByCategory(category){
-    if(category === "default"){
-      this.filteredProducts = this.products
-      this.totalListings = this.filteredProducts.length
-      return
-    }
-    this.filteredProducts = this.products.filter(product => product.category.includes(category))
-    this.totalListings = this.filteredProducts.length
-  }
-  */
-
+  // filters the list of products based on user id, can get id from both the
+  // GoogleMapsComponent and the ProductDetailsComponent
   filterByUser(id) {
     //TODO: Need to handle pagination
     this.hidePagination = true
