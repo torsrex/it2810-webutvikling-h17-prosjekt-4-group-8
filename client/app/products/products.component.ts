@@ -307,6 +307,7 @@ toggleDetailsCard(){
       error => console.log(error),
   )
 }
+  //Resets (literally) all of the components state
   clearFilter(){
     this.pageNum = 1
     this.query = ""
@@ -326,6 +327,7 @@ toggleDetailsCard(){
     this.nameSelected = false;
     this.priceSelected = false;
     this.displayProductDetails = false;
+    this.goToPage(1)
     this.getProducts(this.pageNum, this.sortQuery)
   }
 }
