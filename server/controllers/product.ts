@@ -36,7 +36,7 @@ export default class ProductCtrl extends BaseCtrl {
   const sortingOrder = req.query.increasing ? req.query.increasing: 1
 
 
-  let regexSearch = new RegExp("\\b"+req.params.query+"\\b", 'i')
+  let regexSearch = new RegExp("\\b^("+req.params.query+")+.*\\b", 'i')
   let categorySearch = new RegExp("^"+req.query.category+"$", 'i')
 
   const filterQuery = {
