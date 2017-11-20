@@ -33,6 +33,7 @@
           [zoom]="zoom"
           [streetViewControl]="false">
           <agm-marker
+            (dragEnd)="mapClick($event)"
             [markerDraggable]="true"
             [latitude]="user.latitude"
             [longitude]="user.longitude"
