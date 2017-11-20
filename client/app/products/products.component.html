@@ -5,11 +5,12 @@
 <!-- PRODUCT COMPONENT _________________________________________________________ -->
 <div class="productsPage" *ngIf="!isLoading">
   <br>
-  <h2 class="centerText largeBottomMargin">Welcome to BestProducts Shopping</h2>
+  <h2 class="centerText mediumBottomMargin">Welcome to BestProducts Shopping</h2>
   <!-- new product button-->
 
   <app-create-product></app-create-product>
 
+  <h3 class="centerText smallBottomMargin">Products</h3>
 
 
   <!-- Search component -->
@@ -18,7 +19,7 @@
     <div class="searchFields mediumBottomMargin">
       <input
       class="form-control"
-      placeholder="Search for a product"
+      placeholder="Search for a name"
       [(ngModel)]="query"
       (keyup.enter)="searchFromBox()"
       type="text"
@@ -43,14 +44,14 @@
       [(ngModel)]="maxPrice"
       (keyup.enter)="searchFromBox()"
       >
-      
+
       <!-- Category filter. works outside of search, should be separated -->
       <select class="form-control"  [(ngModel)]="selectedCategory">
         <option selected value="default" >--Select a category--</option>
         <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
       </select>
 
-      <button (click)="searchFromBox()"><i class="fa fa-search"></i></button>
+      <button (click)="searchFromBox()">Search <i class="fa fa-search"></i></button>
       <button (click)="clearFilter()">Clear filter <i class="fa fa-times"></i></button>
     </div>
   </div>
