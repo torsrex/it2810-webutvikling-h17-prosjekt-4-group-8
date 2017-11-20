@@ -133,4 +133,58 @@ describe('ProductsComponent', () => {
     button.triggerEventHandler('click', null)
     expect(component.searchFromBox).toHaveBeenCalled()
   })
+  it('Should set ascName and sortingParam correctly', () => {
+    component.isLoading = false
+    fixture.detectChanges()
+    const el = fixture.debugElement.queryAll(By.css('.productsColumn .clickable'))
+    el[0].triggerEventHandler('click', null)
+    expect(component.ascName).toBeTruthy()
+    expect(component.sortingParam).toContain("name")
+  })
+  it('Should set ascPrice and sortingParam correctly', () => {
+    component.isLoading = false
+    fixture.detectChanges()
+    const el = fixture.debugElement.queryAll(By.css('.productsColumn .clickable'))
+    el[1].triggerEventHandler('click', null)
+    expect(component.ascPrice).toBeTruthy()
+    expect(component.sortingParam).toContain("price")
+  })
+  it('Should call sortBy function with name', () => {
+    component.isLoading = false
+    fixture.detectChanges()
+    spyOn(component, 'sortBy')
+    const el = fixture.debugElement.queryAll(By.css('.productsColumn .clickable'))
+    el[0].triggerEventHandler('click', null)
+    expect(component.sortBy).toHaveBeenCalledWith('name')
+  })
+  it('Should call sortBy function with price', () => {
+    component.isLoading = false
+    fixture.detectChanges()
+    spyOn(component, 'sortBy')
+    const el = fixture.debugElement.queryAll(By.css('.productsColumn .clickable'))
+    el[1].triggerEventHandler('click', null)
+    expect(component.sortBy).toHaveBeenCalledWith('price')
+  })
+  it('Should call search function and set query correctly', () => {
+    component.isLoading = false
+    fixture.detectChanges()
+    const el = fixture.debugElement.queryAll(By.css('.searchFields input'))
+    el[0].nativeElement.value =  "test"
+    el[1].nativeElement.value =  20
+    el[2].nativeElement.value =  500
+    el[0].nativeElement.dispatchEvent(new Event('input'))
+    el[1].nativeElement.dispatchEvent(new Event('input'))
+    el[2].nativeElement.dispatchEvent(new Event('input'))
+    fixture.detectChanges()
+    const submit = fixture.debugElement.query(By.css(".searchFields button"))
+    submit.triggerEventHandler('click', null)
+    expect(el.length).toBe(3)
+    expect(component.query).toContain("test")
+    expect(component.minPrice).toEqual(20)
+    expect(component.maxPrice).toEqual(500)
+    expect(component.pageNum).toEqual(1)
+    expect(component.searching).toBeTruthy()
+    expect(localStorage.getItem('searches')).toBeTruthy()
+
+  })
 });

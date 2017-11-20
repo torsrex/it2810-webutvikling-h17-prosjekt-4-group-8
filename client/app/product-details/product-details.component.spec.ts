@@ -85,7 +85,7 @@ describe('ProductDetailsComponent', () => {
     component.authenticated = true
     component.isEditing = true
     fixture.detectChanges()
-    const el = fixture.debugElement.queryAll(By.css('.card form div input'))
+    const el = fixture.debugElement.queryAll(By.css('.cardContent form div input'))
     expect(el.length).toBe(3)
   })
   it('Should cancel editing', () => {
@@ -103,7 +103,7 @@ describe('ProductDetailsComponent', () => {
     component.isEditing = true
     spyOn(component, 'cancelEditing');
     fixture.detectChanges()
-    const el = fixture.debugElement.queryAll(By.css('.card button'))[1]
+    const el = fixture.debugElement.queryAll(By.css('.cardContent button'))[1]
     el.triggerEventHandler('click', null)
     expect(component.cancelEditing).toHaveBeenCalled()
   })

@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -31,7 +30,6 @@ import { MyProductsComponent } from './my-products/my-products.component';
     AppComponent,
     ProductsComponent,
     GoogleMapsComponent,
-    HomeComponent,
     RegisterComponent,
     LoginComponent,
     LogoutComponent,

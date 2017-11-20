@@ -2,12 +2,12 @@
   <div *ngIf="!isEditing"  class="detailsCard smallBottomMargin">
     <!-- Title & edit/delete btns -->
     <div class="cardHeader">
-      <i *ngIf="authenticated" (click)="enableEditing()" class="fa fa-pencil iconLeft clickable" aria-hidden></i>
-      <i *ngIf="authenticated" (click)="deleteProduct()" class="fa fa-trash-o iconLeft clickable " aria-hidden></i>
+      <i *ngIf="authenticated" (click)="enableEditing()" class="fa fa-pencil iconLeft clickable hoverHighlight" aria-hidden></i>
+      <i *ngIf="authenticated" (click)="deleteProduct()" class="fa fa-trash-o iconLeft clickable hoverHighlight" aria-hidden></i>
 
       <h5>{{product.name | uppercase}}</h5>
 
-      <i *ngIf="authenticated" (click)="removeDetailsCard()" class="fa fa-times iconRight clickable " aria-hidden></i> <!-- deleteProduct() -->
+      <i (click)="removeDetailsCard()" class="fa fa-times iconRight clickable hoverHighlight" aria-hidden></i> <!-- deleteProduct() -->
     </div>
 
     <div class="cardContent">
@@ -38,18 +38,25 @@
 
 <!-- _______________________________EDITING STATE______________________________ -->
 
-<div *ngIf="isEditing" class="card">
-  <form class="form-inline" [formGroup]="editProductForm"  (ngSubmit)="editProduct()" style="display:inline">
-    <div class="form-group">
-      <input class="form-control" type="text" formControlName="name" placeholder="Name" required>
-    </div>
-    <div class="form-group">
-      <input class="form-control" type="text" formControlName="description" placeholder="Description" min="0" required>
-    </div>
-    <div class="form-group">
-      <input class="form-control" type="number" formControlName="price" placeholder="Price" step="any" min="0" required>
-    </div>
-    <button class="btn btn-sm btn-primary" type="submit" [disabled]="!editProductForm.valid"><i class="fa fa-floppy-o"></i> Save</button>
-  </form>
-  <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
+<div *ngIf="isEditing"  class="detailsCard smallBottomMargin">
+  <div class="cardHeader"><i class="fa fa-times iconRight invisible"></i>
+  </div>
+  <div class="cardContent">
+    <form class="form-inline" [formGroup]="editProductForm"  (ngSubmit)="editProduct()" style="display:inline">
+      <div class="form-group mediumBottomMargin">
+        <p>Name:</p>
+        <input class="form-control" type="text" formControlName="name" placeholder="Name" required>
+      </div>
+      <div class="form-group mediumBottomMargin">
+        <p>Description:</p>
+        <input class="form-control" type="text" formControlName="description" placeholder="Description" min="0" required>
+      </div>
+      <div class="form-group mediumBottomMargin">
+        <p>Price:</p>
+        <input class="form-control" type="number" formControlName="price" placeholder="Price" step="any" min="0" required>
+      </div>
+      <button class="" type="submit" [disabled]="!editProductForm.valid"><i class="fa fa-floppy-o"></i> Save</button>
+    </form>
+    <button class="" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
+  </div>
 </div>

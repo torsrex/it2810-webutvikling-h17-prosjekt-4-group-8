@@ -257,18 +257,8 @@ toggleDetailsCard(){
     )
   }
 
-/*
-  filterByCategory(category){
-    if(category === "default"){
-      this.filteredProducts = this.products
-      this.totalListings = this.filteredProducts.length
-      return
-    }
-    this.filteredProducts = this.products.filter(product => product.category.includes(category))
-    this.totalListings = this.filteredProducts.length
-  }
-  */
-
+  // filters the list of products based on user id, can get id from both the
+  // GoogleMapsComponent and the ProductDetailsComponent
   filterByUser(id) {
     //TODO: Need to handle pagination
     this.hidePagination = true
@@ -291,9 +281,6 @@ toggleDetailsCard(){
       this.query = ".*"
       this.pageNum = 1
     }
-    if(this.selectedCategory === "default"){
-      this.selectedCategory = ".*"
-    }
     let history = []
     let object = {query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice};
     if(JSON.parse(localStorage.getItem('searches'))){
@@ -306,6 +293,9 @@ toggleDetailsCard(){
     localStorage.setItem('searches', JSON.stringify(history));
 
     this.searching = true
+    //Code to fix minprice and maxPrice
+    this.minPrice = !this.minPrice ? 0 : this.minPrice
+    this.maxPrice = !this.maxPrice ? Infinity : this.maxPrice
     this.productService.searchProduct(this.query, this.pageNum,
       this.minPrice, this.maxPrice+this.sortQuery+"&category="+this.selectedCategory).subscribe(
       data => {
@@ -316,6 +306,5 @@ toggleDetailsCard(){
       },
       error => console.log(error),
   )
-  this.selectedCategory = "default"
 }
 }
