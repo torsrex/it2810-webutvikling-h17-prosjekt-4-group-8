@@ -2,12 +2,12 @@
   <div *ngIf="!isEditing"  class="detailsCard smallBottomMargin">
     <!-- Title & edit/delete btns -->
     <div class="cardHeader">
-      <i *ngIf="authenticated" (click)="enableEditing()" class="fa fa-pencil iconLeft clickable" aria-hidden></i>
-      <i *ngIf="authenticated" (click)="deleteProduct()" class="fa fa-trash-o iconLeft clickable " aria-hidden></i>
+      <i *ngIf="authenticated" (click)="enableEditing()" class="fa fa-pencil iconLeft clickable hoverHighlight" aria-hidden></i>
+      <i *ngIf="authenticated" (click)="deleteProduct()" class="fa fa-trash-o iconLeft clickable hoverHighlight" aria-hidden></i>
 
       <h5>{{product.name | uppercase}}</h5>
 
-      <i (click)="removeDetailsCard()" class="fa fa-times iconRight clickable " aria-hidden></i> <!-- deleteProduct() -->
+      <i (click)="removeDetailsCard()" class="fa fa-times iconRight clickable hoverHighlight" aria-hidden></i> <!-- deleteProduct() -->
     </div>
 
     <div class="cardContent">
