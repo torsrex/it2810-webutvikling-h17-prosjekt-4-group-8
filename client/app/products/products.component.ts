@@ -47,7 +47,7 @@ export class ProductsComponent implements OnInit {
   searching = false //Variable to indicate if we're in search mode
   sortingParam: string //What to sort by
   sortingOrder = true //What order to sort by
-  sortQuery = "?" //Holds the search query
+  sortQuery = "?" //Holds the sort query
   selectedCategory = "default"
   ascName = false;
   ascPrice = false;
@@ -307,4 +307,24 @@ toggleDetailsCard(){
       error => console.log(error),
   )
 }
+  clearFilter(){
+    this.pageNum = 1
+    this.query = ""
+    this.ascName = false;
+    this.ascPrice = false;
+    this.nameSelected = false;
+    this.priceSelected = false;
+    this.minPrice = -Infinity
+    this.maxPrice = Infinity
+    this.isEditing = false
+    this.hidePagination = false
+    this.sortQuery = "?"
+    this.selectedCategory = "default"
+    this.lastSelected = null
+    this.ascName = false;
+    this.ascPrice = false;
+    this.nameSelected = false;
+    this.priceSelected = false;
+    this.displayProductDetails = false;
+  }
 }

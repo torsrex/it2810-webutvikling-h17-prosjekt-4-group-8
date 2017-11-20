@@ -6,14 +6,18 @@
   <h4 class="card-header">Account settings</h4>
   <div class="card-block">
     <form  [formGroup]="userForm" #accountForm="ngForm" (ngSubmit)="save(user)">
-      <label>Basic</label>
+      <label>User information</label>
       <div class="input-group" [ngClass]="setClassUsername()">
         <span class="input-group-addon"><i class="fa fa-user"></i></span>
         <input class="form-control" formControlName="username" type="text" name="username" placeholder="Username">
+        <span class="input-group-addon">Username</span>
+
       </div>
       <div class="input-group" [ngClass]="setClassEmail()">
         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-        <input class="form-control" formControlName="email" type="email" name="email" placeholder="Email">
+        <input class="form-control" formControlName="email" type="email" name="email" placeholder="E-mail">
+        <span class="input-group-addon">E-mail</span>
+
       </div>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
@@ -46,6 +50,17 @@
             ></agm-marker>
         </agm-map>
       </div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-map-marker"></i> </span>
+        <input class="form-control" type="number" name="latitude" formControlName="latitude" placeholder="Latitude" disabled>
+        <span class="input-group-addon">Latitude</span>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+        <input class="form-control" type="number" name="longitude" formControlName="longitude" placeholder="Longitude" disabled>
+        <span class="input-group-addon">Longitude</span>
+      </div>
+      <br>
       <button class="btn btn-primary" type="submit" [disabled]="isValid()">
         <i class="fa fa-save"></i> Save
       </button>
