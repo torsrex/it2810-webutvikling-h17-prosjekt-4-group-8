@@ -39,12 +39,12 @@ export class MyPageComponent implements OnInit {
     Validators.required,
     Validators.minLength(8),
   ]);
-  latitude = new FormControl('', [
+  latitude = new FormControl({value: '', disabled: true}, [
     Validators.required,
     Validators.min(57.8),
     Validators.max(71.5),
   ]);
-  longitude = new FormControl('', [
+  longitude = new FormControl({value: '', disabled: true}, [
     Validators.required,
     Validators.min(3.5),
     Validators.max(31.5)
