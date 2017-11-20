@@ -94,5 +94,4 @@ export class CreateProductComponent implements OnInit{
     error => console.log(error)
     )
   }
-
 }
