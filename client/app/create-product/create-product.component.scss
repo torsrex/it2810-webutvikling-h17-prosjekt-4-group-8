@@ -20,22 +20,3 @@
   display: flex;
   justify-content: space-between;
 }
-
-
-.createProductButton{
-  border-radius: 3px;
-  display: block;
-  margin: auto;
-  width: 170px;
-  height: 50px;
-  color: #000;
-  background-color: #FF9800;
-  h5{
-    font-weight: 200;
-  }
-
-  cursor: pointer;
-  &:hover{
-    color: #fff;
-  }
-}

@@ -55,14 +55,13 @@
         <input class="form-control" type="number" name="latitude" formControlName="latitude" placeholder="Latitude">
         <span class="input-group-addon">Latitude</span>
       </div>
-      <div class="input-group">
+      <div class="input-group mediumBottomMargin">
         <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
         <input class="form-control" type="number" name="longitude" formControlName="longitude" placeholder="Longitude">
         <span class="input-group-addon">Longitude</span>
       </div>
-      <br>
-      <button class="btn btn-primary" type="submit" [disabled]="isValid()">
-        <i class="fa fa-save"></i> Save
+      <button class="btn createProductButton spanWidth" type="submit" [disabled]="isValid()">
+        <i class="fa fa-save"></i> Save changes
       </button>
     </form>
   </div>
