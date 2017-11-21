@@ -284,6 +284,9 @@ toggleDetailsCard(){
   searchProducts(){
     if(this.query === ""){
       this.pageNum = 1
+      this.searching = false
+      this.getProducts(1,'?')
+      return
     }
     let history = []
     let object = {query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice};
