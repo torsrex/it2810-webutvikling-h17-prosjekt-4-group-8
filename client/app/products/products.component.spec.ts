@@ -76,11 +76,11 @@ describe('ProductsComponent', () => {
   it('Should have isLoading set to true upon pageload', () => {
     expect(component.isLoading).toBe(true)
   })
-  it('Should show Products in h2', () => {
+  it('Should show BestProducts Shopping in h2', () => {
     component.isLoading = false
     fixture.detectChanges()
-    const el = fixture. debugElement.query(By.css('h2')).nativeElement
-    expect(el.textContent).toContain("Products")
+    const el = fixture. debugElement.query(By.css('h1')).nativeElement
+    expect(el.textContent).toContain("BestProducts Shopping")
   })
   it('Should show 3 input forms', () => {
     component.isLoading = false
