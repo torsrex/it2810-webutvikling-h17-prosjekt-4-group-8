@@ -51,8 +51,7 @@ describe('MyPageComponent', () => {
   it('Should display headings in h4', () => {
     component.isLoading = false
     fixture.detectChanges()
-    const el = fixture.debugElement.queryAll(By.css('h4'))
-    expect(el[0].nativeElement.textContent).toContain("Account settings")
-    expect(el[1].nativeElement.textContent).toContain("My Products")
+    const el = fixture.debugElement.query(By.css('h4'))
+    expect(el.nativeElement.textContent).toContain("Account settings")
   })
 });

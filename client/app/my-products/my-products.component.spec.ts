@@ -73,13 +73,13 @@ describe('MyProductsComponent', () => {
     expect(component).toBeTruthy();
   });
   it('Should show a list of the products of the user', () => {
-    const el = fixture.debugElement.queryAll(By.css(".productList table tbody tr td"))
+    const el = fixture.debugElement.queryAll(By.css(".productsColumn table tbody tr td"))
     expect(el[0].nativeElement.textContent).toContain('wall')
     expect(el[1].nativeElement.textContent).toContain('92929 NOK')
   })
   it('Should not show recent searches', () => {
     fixture.detectChanges()
-    const el = fixture.debugElement.query(By.css(".card-block table tbody tr td"))
+    const el = fixture.debugElement.query(By.css(".rightColumn table tbody tr td"))
     expect(el.nativeElement.textContent).toContain("You don't have any searches.")
   })
 });

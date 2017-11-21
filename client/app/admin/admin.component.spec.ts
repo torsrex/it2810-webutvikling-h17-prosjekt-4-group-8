@@ -77,7 +77,7 @@ describe('AdminComponent', () => {
   it('Should display user details', () => {
     component.isLoading = false
     fixture.detectChanges()
-    const el = fixture.debugElement.queryAll(By.css(".card-block table tbody tr td"))
+    const el = fixture.debugElement.queryAll(By.css(".horizontalScroll table tbody tr td"))
     expect(el.length).toBe(8)
     expect(el[0].nativeElement.textContent).toContain("PositionTest")
     expect(el[1].nativeElement.textContent).toContain("positiontest@gmail.com")
