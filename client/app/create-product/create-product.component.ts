@@ -30,10 +30,21 @@ export class CreateProductComponent implements OnInit{
 
   //Creates the default formgroup for adding a new product
   addProductForm: FormGroup;
-  name = new FormControl('', Validators.required);
-  description = new FormControl('', Validators.required);
-  price = new FormControl('', Validators.required);
-  category = new FormControl('', Validators.required)
+  name = new FormControl('', [
+    Validators.required,
+    Validators.maxLength(30)
+  ]);
+  description = new FormControl('', [
+    Validators.required,
+    Validators.maxLength(250)
+  ]);
+  price = new FormControl('', [
+    Validators.required,
+    Validators.maxLength(30)
+  ]);
+  category = new FormControl('', [
+    Validators.required
+  ])
   categories = ["Electronics", "Household items", "Furniture", "Pets", "Sports", "Gardening"]
   selectedCategory = "default"
 

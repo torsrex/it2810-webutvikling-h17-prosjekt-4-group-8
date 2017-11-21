@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
     Validators.required,
     Validators.minLength(2),
     Validators.maxLength(30),
-    Validators.pattern(/[a-zA-Z0-9_-\s]*/),
+    Validators.pattern(/[a-zA-Z0-9_-\s]*/)
   ]);
   email = new FormControl('', [
     Validators.required,
@@ -33,10 +33,13 @@ export class RegisterComponent implements OnInit {
   phone = new FormControl('',[
     Validators.required,
     Validators.minLength(8),
+    Validators.maxLength(30)
   ]);
   password = new FormControl('', [
     Validators.required,
     Validators.minLength(6),
+    Validators.maxLength(30)
+
   ]);
   role = new FormControl('', [
     Validators.required,
@@ -45,11 +48,14 @@ export class RegisterComponent implements OnInit {
     Validators.required,
     Validators.min(57.8),
     Validators.max(71.5),
+    Validators.maxLength(30)
   ]);
   longitude = new FormControl({value: '', disabled: true}, [
     Validators.required,
     Validators.min(3.5),
-    Validators.max(31.5)
+    Validators.max(31.5),
+    Validators.maxLength(30)
+
   ]);
 
   constructor(private formBuilder: FormBuilder,

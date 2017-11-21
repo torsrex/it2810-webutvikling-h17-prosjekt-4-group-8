@@ -38,16 +38,19 @@ export class MyPageComponent implements OnInit {
   phone = new FormControl('',[
     Validators.required,
     Validators.minLength(8),
+    Validators.maxLength(30)
   ]);
   latitude = new FormControl({value: '', disabled: true}, [
     Validators.required,
     Validators.min(57.8),
     Validators.max(71.5),
+    Validators.maxLength(30)
   ]);
   longitude = new FormControl({value: '', disabled: true}, [
     Validators.required,
     Validators.min(3.5),
-    Validators.max(31.5)
+    Validators.max(31.5),
+    Validators.maxLength(30)
   ]);
 
   constructor(private formBuilder: FormBuilder,
