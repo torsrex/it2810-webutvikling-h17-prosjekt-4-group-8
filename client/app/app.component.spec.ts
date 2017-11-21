@@ -55,7 +55,7 @@ describe('Component: App', () => {
     const de = fixture.debugElement.queryAll(By.css('a'));
     expect(de.length).toBe(3);
     expect(de[0].nativeElement.textContent).toContain('Home');
-    expect(de[1].nativeElement.textContent).toContain('My page (Tester)');
+    expect(de[1].nativeElement.textContent).toContain('My page');
     expect(de[2].nativeElement.textContent).toContain('Logout');
     expect(de[0].attributes['routerLink']).toBe('/');
     expect(de[1].attributes['routerLink']).toBe('/myPage');
@@ -69,7 +69,7 @@ describe('Component: App', () => {
     const de = fixture.debugElement.queryAll(By.css('a'));
     expect(de.length).toBe(4);
     expect(de[0].nativeElement.textContent).toContain('Home');
-    expect(de[1].nativeElement.textContent).toContain('My page (Tester)');
+    expect(de[1].nativeElement.textContent).toContain('My page');
     expect(de[2].nativeElement.textContent).toContain('Admin');
     expect(de[3].nativeElement.textContent).toContain('Logout');
     expect(de[0].attributes['routerLink']).toBe('/');
