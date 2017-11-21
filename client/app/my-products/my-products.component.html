@@ -1,9 +1,10 @@
 <app-loading [condition]="isLoading"></app-loading>
 
 <div class="productsAllComponents">
-
   <!-- Product list component _________________________________________________________ -->
-  <div class="card-block" class="productList">
+
+  <div class="card-block productsColumn horizontalScroll">
+    <h4 class="card-header">My Products</h4>
     <table class="table table-bordered table-striped">
       <thead class="thead-default">
         <tr>
@@ -24,9 +25,9 @@
       </tbody>
     </table>
   </div>
-<div>
-  <h4>Your 10 recent searches: </h4>
-  <div class="card-block">
+
+  <div class="card-block rightColumn horizontalScroll">
+    <h4 class="card-header">Last 10 searches</h4>
     <table class="table table-bordered table-striped">
       <thead class="thead-default">
         <tr>
@@ -49,4 +50,5 @@
       </tbody>
     </table>
   </div>
+
 </div>

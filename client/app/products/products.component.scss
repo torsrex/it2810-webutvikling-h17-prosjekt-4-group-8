@@ -1,26 +1,26 @@
-.productsPage{
-  margin-bottom: 50px !important;
+
+.topBar{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  background-color: #eee;
 }
-.table td,
-.table th {
-  text-align: center;
-  width: 25%;
+
+.productPageContent{
+  position: relative;
+  top: 270px;
 }
-tr:hover {
-  cursor: pointer;
-}
-.table {
-  width: 50%;
-}
-.productsAllComponents{
-  display: flex;
+.productsHeaderTitle{
+  padding: 30px 0;
+  color: #333;
+  font-weight: 600;
+  font-size: 40px;
 }
 
 app-google-maps {
   flex-grow: 1;
   height: 0
 }
-
 .searchFields{
   max-width: 100%;
   display: flex;
@@ -28,9 +28,14 @@ app-google-maps {
   flex-wrap: wrap;
   input{
     flex: 1;
-  }button{
+    min-width: 160px;
+  }.price{
+    min-width: 110px !important;
+  }
+  button{
     padding: 0px 12px 0px 12px;
   }select{
+    min-width: 150px;
     margin-bottom: 0px; //had bottom margin for some reason
     flex: 2;
     height: 100%;

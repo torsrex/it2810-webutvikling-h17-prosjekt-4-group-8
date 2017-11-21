@@ -3,7 +3,7 @@
 
 
 <!-- PRODUCT COMPONENT _________________________________________________________ -->
-<div class="productsPage" *ngIf="!isLoading">
+<div class="productsPage largeBottomMargin" *ngIf="!isLoading">
   <div class="topBar">
     <div class="productsHeaderTitle">
       <h1 class="centerText ">BestProducts Shopping</h1>
@@ -28,7 +28,7 @@
         >
         <!-- min search -->
         <input
-        class="form-control"
+        class="form-control price"
         type="number"
         min="0"
         step="100"
@@ -38,7 +38,7 @@
         >
         <!-- max search -->
         <input
-        class="form-control"
+        class="form-control price"
         type="number"
         min="0"
         step="100"
@@ -53,13 +53,13 @@
           <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
         </select>
 
-        <button (click)="searchFromBox()">Search <i class="fa fa-search"></i></button>
-        <button class="darkBg" (click)="clearFilter()">Clear filter <i class="fa fa-times"></i></button>
+        <button class="inputBtn"(click)="searchFromBox()">Search <i class="fa fa-search"></i></button>
+        <button class="inputBtn darkBg" (click)="clearFilter()">Clear filter <i class="fa fa-times"></i></button>
       </div>
     </div>
 
     <div class="productsAllComponents">
-      <div class="card-block" class="productsColumn">
+      <div class="horizontalScroll productsColumn">
 
 
         <!-- PRODUCT LIST -->
