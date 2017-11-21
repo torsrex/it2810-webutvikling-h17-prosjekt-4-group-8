@@ -3,7 +3,7 @@
     <!-- Title & edit/delete btns -->
     <div class="cardHeader">
       <i *ngIf="authenticated" (click)="enableEditing()" class="fa fa-pencil iconLeft clickable hoverHighlight" aria-hidden></i>
-      <i *ngIf="authenticated" (click)="deleteProduct()" class="fa fa-trash-o iconLeft clickable hoverHighlight" aria-hidden></i>
+      <i *ngIf="authenticated" (click)="deleteProduct(); removeDetailsCard()" class="fa fa-trash-o iconLeft clickable hoverHighlight" aria-hidden></i>
 
       <h5>{{product.name | uppercase}}</h5>
 
