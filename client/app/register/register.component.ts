@@ -63,7 +63,13 @@ export class RegisterComponent implements OnInit {
     public toast: ToastComponent,
     private userService: UserService,
     private messageService: MessageService) {
-    this.subscription = this.messageService.getMessage().subscribe(msg => { this.init_lat = msg.text[0]; this.init_lng = msg.text[1]; this.zoom = 10; });
+    this.subscription = this.messageService.getMessage()
+      .subscribe(
+        msg => {
+          this.init_lat = msg.text[0];
+          this.init_lng = msg.text[1];
+          this.zoom = 10;
+        });
   }
 
   ngOnInit() {
@@ -78,7 +84,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  isValid = () => !this.registerForm.valid
+  isValid = () => !this.registerForm.valid;
 
   setClassUsername() {
     return { 'has-danger': !this.username.pristine && !this.username.valid };
@@ -93,10 +99,10 @@ export class RegisterComponent implements OnInit {
     return { 'has-danger': !this.password.pristine && !this.password.valid };
   }
   setClassLatitude() {
-    return { 'has-danger': !this.latitude.pristine && !this.latitude.valid }
+    return { 'has-danger': !this.latitude.pristine && !this.latitude.valid };
   }
   setClassLongitude() {
-    return { 'has-danger': !this.longitude.pristine && !this.longitude.valid }
+    return { 'has-danger': !this.longitude.pristine && !this.longitude.valid };
   }
 
   register() {
@@ -110,8 +116,8 @@ export class RegisterComponent implements OnInit {
   }
 
   mapClick = ({ coords: { lat, lng } }) => {
-    this.registerForm.controls["latitude"].setValue(lat)
-    this.registerForm.controls["longitude"].setValue(lng)
+    this.registerForm.controls['latitude'].setValue(lat);
+    this.registerForm.controls['longitude'].setValue(lng);
   }
 
   // Updates the zoom level when the user zooms the map

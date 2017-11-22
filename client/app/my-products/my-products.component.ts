@@ -11,22 +11,22 @@ import { UserService } from '../services/user.service';
 })
 export class MyProductsComponent implements OnInit {
 
-  productList = []
+  productList = [];
   user = { _id: '', username: '', role: '', products: [] };
   isLoading = true;
-  searches = []
+  searches = [];
   constructor(private auth: AuthService,
     private userService: UserService
   ) { }
 
   ngOnInit() {
     this.getUserWithProducts();
-    this.getFromLocalStorage()
+    this.getFromLocalStorage();
   }
 
   getFromLocalStorage() {
     if (JSON.parse(localStorage.getItem('searches'))) {
-      this.searches = JSON.parse(localStorage.getItem('searches'))
+      this.searches = JSON.parse(localStorage.getItem('searches'));
     }
 
   }

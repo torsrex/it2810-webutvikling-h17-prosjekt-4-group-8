@@ -1,8 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
-import { UserService } from './user.service'
-import { HttpModule } from '@angular/http'
+import { UserService } from './user.service';
+import { HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AuthService', () => {

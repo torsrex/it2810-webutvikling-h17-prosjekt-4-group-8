@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { MessageService } from '../services/message.service'
+import { MessageService } from '../services/message.service';
 import { ProductService } from '../services/product.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { AuthService } from '../services/auth.service';
-import { AuthGuardAdmin } from '../services/auth-guard-admin.service'
+import { AuthGuardAdmin } from '../services/auth-guard-admin.service';
 
 
 @Component({
@@ -14,8 +14,8 @@ import { AuthGuardAdmin } from '../services/auth-guard-admin.service'
 })
 
 
-export class ProductDetailsComponent {
-  //Needed to bind the product from the parent class to this class.
+export class ProductDetailsComponent implements OnInit {
+  // Needed to bind the product from the parent class to this class.
   @Input() product = {
     _id: '',
     name: '',
@@ -25,21 +25,21 @@ export class ProductDetailsComponent {
     userId: '',
     category: '',
     user: { _id: '', username: '', email: '' }
-  }
-  @Input() authenticated: boolean
-  @Output() productDeleted = new EventEmitter()
-  @Output() productEdited = new EventEmitter()
-  @Output() hideProductDetails = new EventEmitter()
-  //Local variables
+  };
+  @Input() authenticated: boolean;
+  @Output() productDeleted = new EventEmitter();
+  @Output() productEdited = new EventEmitter();
+  @Output() hideProductDetails = new EventEmitter();
+  // Local variables
   isEditing = false;
-  //Form variables
+  // Form variables
   editProductForm: FormGroup;
   name = new FormControl('', Validators.required);
   description = new FormControl('', Validators.required);
   price = new FormControl('', Validators.required);
-  //Userid to handle permissions
-  userId: string
-  isAdmin: boolean
+  // Userid to handle permissions
+  userId: string;
+  isAdmin: boolean;
 
   constructor(private productService: ProductService,
     private message: MessageService,
@@ -49,15 +49,15 @@ export class ProductDetailsComponent {
     private authGuardAdmin: AuthGuardAdmin) { }
   ngOnInit() {
     this.editProductForm = this.formBuilder.group({
-      name: "",
-      description: "",
+      name: '',
+      description: '',
       price: null,
     });
-    this.userId = this.auth.currentUser['_id']
-    this.isAdmin = this.authGuardAdmin.canActivate()
+    this.userId = this.auth.currentUser['_id'];
+    this.isAdmin = this.authGuardAdmin.canActivate();
   }
 
-  //sets the current component values to the clicked product.
+  // sets the current component values to the clicked product.
   setProduct(product) {
     this.product = product;
   }
@@ -78,36 +78,36 @@ export class ProductDetailsComponent {
   }
 
 
-  //Start editing
+  // Start editing
   enableEditing() {
     this.editProductForm.setValue({ name: this.product.name, description: this.product.description, price: this.product.price });
     this.isEditing = true;
   }
-  //Discard changes
+  // Discard changes
   cancelEditing() {
     this.isEditing = false;
     this.toast.setMessage('item editing cancelled.', 'warning');
   }
-  //Save changes, end editing
+  // Save changes, end editing
   editProduct() {
-    //In case of error, don't update product values.
-    let editproduct = this.product
-    //Update product values based on form fields before saving
+    // In case of error, don't update product values.
+    const editproduct = this.product;
+    // Update product values based on form fields before saving
     editproduct.name = this.editProductForm.value.name;
     editproduct.description = this.editProductForm.value.description;
     editproduct.price = this.editProductForm.value.price;
-    this.productEdited.emit(editproduct)
-    this.isEditing = false
+    this.productEdited.emit(editproduct);
+    this.isEditing = false;
   }
 
-  //Delete product
+  // Delete product
   deleteProduct() {
     if (window.confirm('Are you sure you want to permanently delete this item?')) {
-      this.productDeleted.emit(this.product)
-      this.hideProductDetails.emit(false)
+      this.productDeleted.emit(this.product);
+      this.hideProductDetails.emit(false);
     }
   }
   hideDetailWindow() {
-    this.hideProductDetails.emit(false)
+    this.hideProductDetails.emit(false);
   }
 }

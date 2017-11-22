@@ -14,13 +14,12 @@ import { MyProductsComponent } from '../my-products/my-products.component';
 
 })
 export class MyPageComponent implements OnInit {
-  //TODO: Add validation just like in register page
   isLoading = true;
   subscription: Subscription;
   init_lat = 63.428024;
   init_lng = 10.393186;
   zoom = 4;
-  user = {}
+  user = {};
   userForm: FormGroup;
   username = new FormControl('', [
     Validators.required,
@@ -58,7 +57,13 @@ export class MyPageComponent implements OnInit {
     public toast: ToastComponent,
     private userService: UserService,
     private messageService: MessageService) {
-    this.subscription = this.messageService.getMessage().subscribe(msg => { this.init_lat = msg.text[0]; this.init_lng = msg.text[1]; this.zoom = 10; });
+    this.subscription = this.messageService.getMessage()
+      .subscribe(
+        msg => {
+          this.init_lat = msg.text[0];
+          this.init_lng = msg.text[1];
+          this.zoom = 10; }
+        );
   }
 
   ngOnInit() {
@@ -73,7 +78,7 @@ export class MyPageComponent implements OnInit {
     });
   }
 
-  isValid = () => !this.userForm.valid
+  isValid = () => !this.userForm.valid;
 
   setClassUsername() {
     return { 'has-danger': !this.username.pristine && !this.username.valid };
@@ -85,19 +90,19 @@ export class MyPageComponent implements OnInit {
     return { 'has-danger': !this.phone.pristine && !this.phone.valid };
   }
   setClassLatitude() {
-    return { 'has-danger': !this.latitude.pristine && !this.latitude.valid }
+    return { 'has-danger': !this.latitude.pristine && !this.latitude.valid };
   }
   setClassLongitude() {
-    return { 'has-danger': !this.longitude.pristine && !this.longitude.valid }
+    return { 'has-danger': !this.longitude.pristine && !this.longitude.valid };
   }
 
   getUser() {
     this.userService.getUser(this.auth.currentUser).subscribe(
       data => {
-        this.user = data
+        this.user = data;
         Object.keys(data).forEach(userField => {
-          this[userField] && this[userField].setValue(data[userField])
-        })
+          (this[userField] && this[userField]).setValue(data[userField]);
+        });
       },
       error => console.log(error),
       () => this.isLoading = false
@@ -105,10 +110,10 @@ export class MyPageComponent implements OnInit {
   }
 
   save() {
-    const updatedUser = this.user
+    const updatedUser = this.user;
     Object.keys(this.userForm.value).forEach(updatedField => {
-      updatedUser[updatedField] = this.userForm.value[updatedField]
-    })
+      updatedUser[updatedField] = this.userForm.value[updatedField];
+    });
     this.userService.editUser(updatedUser).subscribe(
       res => this.toast.setMessage('account settings saved!', 'success'),
       error => console.log(error)
@@ -116,8 +121,8 @@ export class MyPageComponent implements OnInit {
   }
 
   mapClick = ({ coords: { lat, lng } }) => {
-    this.userForm.controls["latitude"].setValue(lat)
-    this.userForm.controls["longitude"].setValue(lng)
+    this.userForm.controls['latitude'].setValue(lat);
+    this.userForm.controls['longitude'].setValue(lng);
   }
 
   // Updates the zoom level when the user zooms the map

@@ -2,20 +2,20 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 
-import { CreateProductComponent } from './create-product.component'
-import { ProductDetailsComponent } from '../product-details/product-details.component'
+import { CreateProductComponent } from './create-product.component';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { ToastComponent } from '../shared/toast/toast.component';
 
 
 import { UserService } from '../services/user.service';
-import { ProductService } from '../services/product.service'
-import { MessageService } from '../services/message.service'
-import { AuthService } from '../services/auth.service'
+import { ProductService } from '../services/product.service';
+import { MessageService } from '../services/message.service';
+import { AuthService } from '../services/auth.service';
 
-import { HttpModule } from '@angular/http'
+import { HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { By } from '@angular/platform-browser';
 
@@ -74,20 +74,20 @@ describe('CreateProductComponent', () => {
     expect(component).toBeTruthy();
   });
   it('Should display a form if authenticated, not loading and in editing mode', () => {
-    component.isEditing = true
-    component.isLoading = false
-    component.authenticated = true
-    fixture.detectChanges()
-    const el = fixture.debugElement.query(By.css(".centerText"))
-    expect(el.nativeElement.textContent).toContain("New product")
-  })
+    component.isEditing = true;
+    component.isLoading = false;
+    component.authenticated = true;
+    fixture.detectChanges();
+    const el = fixture.debugElement.query(By.css('.centerText'));
+    expect(el.nativeElement.textContent).toContain('New product');
+  });
   it('Should close when close button is pressed', () => {
-    component.isEditing = true
-    component.isLoading = false
-    component.authenticated = true
-    fixture.detectChanges()
-    const el = fixture.debugElement.queryAll(By.css(".largeButton"))
-    el[1].triggerEventHandler('click', null)
-    expect(component.isEditing).toBe(false)
-  })
+    component.isEditing = true;
+    component.isLoading = false;
+    component.authenticated = true;
+    fixture.detectChanges();
+    const el = fixture.debugElement.queryAll(By.css('.largeButton'));
+    el[1].triggerEventHandler('click', null);
+    expect(component.isEditing).toBe(false);
+  });
 });

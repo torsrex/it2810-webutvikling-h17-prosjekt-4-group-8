@@ -16,7 +16,7 @@ export class GoogleMapsComponent implements OnInit {
   init_lng = 10.393186;
   zoom = 4;
   users = [];
-  isLoading = true
+  isLoading = true;
 
   constructor(private userService: UserService,
     private messageService: MessageService) {
@@ -47,9 +47,9 @@ export class GoogleMapsComponent implements OnInit {
   // Used to load the list of users, will then plot markers on the map
   getUsers() {
     this.userService.getUsers().subscribe(
-      users => { this.users = users },
+      users => { this.users = users; },
       error => console.log(error),
-      () => { this.isLoading = false }
+      () => { this.isLoading = false; }
     );
   }
 }

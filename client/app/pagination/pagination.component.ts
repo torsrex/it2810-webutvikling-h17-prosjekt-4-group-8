@@ -6,20 +6,20 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent {
-  //Receives input from parent component
+  // Receives input from parent component
   @Input() page: number;
   @Input() count: number;
   @Input() perPage: number;
   @Input() loading: boolean;
   @Input() pagesToShow: number;
-  //Sends output to parent component
+  // Sends output to parent component
   @Output() goPrev = new EventEmitter<boolean>();
   @Output() goNext = new EventEmitter<boolean>();
   @Output() goPage = new EventEmitter<number>();
 
   constructor() { }
 
-  //Logic for calculating pagenumbers etc
+  // Logic for calculating pagenumbers etc
   getMin(): number {
     return ((this.perPage * this.page) - this.perPage) + 1;
   }
@@ -62,15 +62,15 @@ export class PaginationComponent {
     pages.sort((a, b) => a - b);
     return pages;
   }
-  //Go to particular page
+  // Go to particular page
   onPage(n: number): void {
     this.goPage.emit(n);
   }
-  //Go to previous page
+  // Go to previous page
   onPrev(): void {
     this.goPrev.emit(true);
   }
-  //Go to next page
+  // Go to next page
   onNext(next: boolean): void {
     this.goNext.emit(next);
   }

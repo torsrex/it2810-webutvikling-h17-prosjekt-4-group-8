@@ -7,18 +7,18 @@ import { ToastComponent } from '../shared/toast/toast.component';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http'
-import { ReactiveFormsModule } from '@angular/forms'
+import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
-import { AuthService } from '../services/auth.service'
-import { UserService } from '../services/user.service'
-import { MessageService } from '../services/message.service'
+import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
+import { MessageService } from '../services/message.service';
 
 describe('MyPageComponent', () => {
   let component: MyPageComponent;
   let fixture: ComponentFixture<MyPageComponent>;
-  let authService: AuthService
+  let authService: AuthService;
   let authServiceStub: {
     loggedIn: boolean,
     isAdmin: boolean,
@@ -49,9 +49,9 @@ describe('MyPageComponent', () => {
     expect(component).toBeTruthy();
   });
   it('Should display headings in h4', () => {
-    component.isLoading = false
-    fixture.detectChanges()
-    const el = fixture.debugElement.query(By.css('h4'))
-    expect(el.nativeElement.textContent).toContain("Account settings")
-  })
+    component.isLoading = false;
+    fixture.detectChanges();
+    const el = fixture.debugElement.query(By.css('h4'));
+    expect(el.nativeElement.textContent).toContain('Account settings');
+  });
 });

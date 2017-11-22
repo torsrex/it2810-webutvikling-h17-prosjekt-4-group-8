@@ -3,10 +3,10 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { UserService } from '../services/user.service';
-import { HttpModule } from '@angular/http'
-import { MessageService } from '../services/message.service'
+import { HttpModule } from '@angular/http';
+import { MessageService } from '../services/message.service';
 import { By } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { RegisterComponent } from './register.component';
 
@@ -39,7 +39,7 @@ describe('RegisterComponent', () => {
     expect(el.textContent).toContain('Register');
   });
   it('Should display register button', () => {
-    const el = fixture.debugElement.query(By.css('Button')).nativeElement
-    expect(el.textContent).toContain('Register')
-  })
+    const el = fixture.debugElement.query(By.css('Button')).nativeElement;
+    expect(el.textContent).toContain('Register');
+  });
 });
