@@ -90,14 +90,14 @@ describe('CreateProductComponent', () => {
     el[1].triggerEventHandler('click', null);
     expect(component.isEditing).toBe(false);
   });
-  it("Should create a productform", () => {
-    component.authenticated = true
-    component.isEditing = true
-    component.isLoading = false
-    component.addProductForm.setValue({name:"yolo",description:"Wee", price:1,category:"default"})
-    component.addProduct()
-    fixture.detectChanges()
-    expect(component.addProductForm.value).toEqual({name:"yolo",description:"Wee", price:1,category:"default"})
+  it('Should create a productform', () => {
+    component.authenticated = true;
+    component.isEditing = true;
+    component.isLoading = false;
+    component.addProductForm.setValue({name: 'yolo', description: 'Wee', price: 1, category: 'default'});
+    component.addProduct();
+    fixture.detectChanges();
+    expect(component.addProductForm.value).toEqual({name: 'yolo', description: 'Wee', price: 1, category: 'default'});
 
-  })
+  });
 });

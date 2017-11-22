@@ -49,14 +49,10 @@ export class RegisterComponent implements OnInit {
   ]);
   latitude = new FormControl('', [
     Validators.required,
-    Validators.min(57.8),
-    Validators.max(71.5),
     Validators.maxLength(30)
   ]);
   longitude = new FormControl('', [
     Validators.required,
-    Validators.min(3.5),
-    Validators.max(31.5),
     Validators.maxLength(30)
   ]);
 

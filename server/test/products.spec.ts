@@ -104,7 +104,7 @@ describe('Product', () => {
     });
     it('should get all ten products', done => {
     const product = new Product({ name: 'FancyProduct', description: 'yolo desc', price: 4 });
-    product.save((err) => {done()})
+    product.save((err) => {done(); });
     chai.request(app)
       .get('/products/getsome/1')
       .end((err, res) => {

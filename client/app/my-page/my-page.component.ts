@@ -45,14 +45,10 @@ export class MyPageComponent implements OnInit {
   ]);
   latitude = new FormControl('', [
     Validators.required,
-    Validators.min(57.8),
-    Validators.max(71.5),
     Validators.maxLength(30)
   ]);
   longitude = new FormControl('', [
     Validators.required,
-    Validators.min(3.5),
-    Validators.max(31.5),
     Validators.maxLength(30)
   ]);
 
@@ -129,7 +125,7 @@ export class MyPageComponent implements OnInit {
   }
 
   mapClick = ({ coords: { lat, lng } }) => {
-    console.log({ coords: { lat, lng } })
+    console.log({ coords: { lat, lng } });
     this.userForm.controls['latitude'].setValue(lat);
     this.userForm.controls['longitude'].setValue(lng);
   }
