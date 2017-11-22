@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
-import { Subscription } from "rxjs/Rx";
+import { Subscription } from 'rxjs/Rx';
 import { MyProductsComponent } from '../my-products/my-products.component';
 
 @Component({
@@ -23,7 +23,7 @@ export class MyPageComponent implements OnInit {
   zoom = 4;
   user = {};
   userForm: FormGroup;
-  authenticated: boolean
+  authenticated: boolean;
   username = new FormControl('', [
     Validators.required,
     Validators.minLength(2),
@@ -106,10 +106,10 @@ export class MyPageComponent implements OnInit {
   getUser() {
     this.userService.getUser(this.auth.currentUser).subscribe(
       data => {
-        this.user = data
+        this.user = data;
         Object.keys(data).forEach(userField => {
-          this[userField] && this[userField].setValue(data[userField])
-        })
+          this[userField] && this[userField].setValue(data[userField]);
+        });
       },
       error => console.log(error),
       () => this.isLoading = false

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
-import { Subscription } from "rxjs/Rx";
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-google-maps',

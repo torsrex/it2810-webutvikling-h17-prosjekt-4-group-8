@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
-import { Subscription } from "rxjs/Rx";
+import { Subscription } from 'rxjs/Rx';
 import { ToastComponent } from '../shared/toast/toast.component';
 
 @Component({
