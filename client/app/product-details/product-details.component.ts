@@ -4,6 +4,7 @@ import { ProductService } from '../services/product.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { AuthService } from '../services/auth.service';
+import { AuthGuardAdmin } from '../services/auth-guard-admin.service'
 
 
 @Component({
@@ -16,7 +17,7 @@ import { AuthService } from '../services/auth.service';
 export class ProductDetailsComponent {
   //Needed to bind the product from the parent class to this class.
   @Input() product = {_id: '', name: '', description: '', price: '',
-    createdAt: '', userId: '', category: '', 
+    createdAt: '', userId: '', category: '',
     user: {_id: '', username: '', email: ''}};
   @Input() authenticated: boolean
   //Local variables
@@ -28,6 +29,7 @@ export class ProductDetailsComponent {
   price = new FormControl('', Validators.required);
   //Userid to handle permissions
   userId: string
+  isAdmin: boolean
 
 
 
@@ -36,7 +38,8 @@ export class ProductDetailsComponent {
               private message: MessageService,
               public toast: ToastComponent,
               private formBuilder: FormBuilder,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private authGuardAdmin: AuthGuardAdmin) { }
   ngOnInit() {
     this.editProductForm = this.formBuilder.group({
       name: "",
@@ -44,6 +47,7 @@ export class ProductDetailsComponent {
       price: null,
     });
     this.userId = this.auth.currentUser['_id']
+    this.isAdmin = this.authGuardAdmin.canActivate()
   }
 
   removeDetailsCard(){

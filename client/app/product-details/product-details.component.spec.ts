@@ -9,6 +9,7 @@ import { ProductService } from '../services/product.service'
 import { MessageService } from '../services/message.service'
 import { AuthService } from '../services/auth.service'
 import { UserService } from '../services/user.service'
+import { AuthGuardAdmin } from '../services/auth-guard-admin.service'
 import { HttpModule } from '@angular/http'
 
 import { By } from '@angular/platform-browser';
@@ -22,7 +23,13 @@ describe('ProductDetailsComponent', () => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, HttpModule, RouterTestingModule],
       declarations: [ ProductDetailsComponent ],
-      providers: [ProductService, MessageService, AuthService, UserService, ToastComponent]
+      providers: [
+        ProductService,
+        MessageService,
+        AuthService,
+        UserService,
+        ToastComponent,
+        AuthGuardAdmin]
     })
     .compileComponents();
   }));

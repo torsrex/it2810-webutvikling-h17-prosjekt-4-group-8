@@ -11,6 +11,7 @@ import { UserService } from '../services/user.service';
 import { ProductService } from '../services/product.service'
 import { MessageService } from '../services/message.service'
 import { AuthService } from '../services/auth.service'
+import { AuthGuardAdmin } from '../services/auth-guard-admin.service'
 
 import { HttpModule } from '@angular/http'
 import { RouterTestingModule } from '@angular/router/testing';
@@ -33,6 +34,7 @@ describe('ProductsComponent', () => {
         ProductService,
         MessageService,
         AuthService,
+        AuthGuardAdmin, 
         ProductDetailsComponent,
         ToastComponent
       ],
