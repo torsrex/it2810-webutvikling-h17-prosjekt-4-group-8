@@ -27,7 +27,6 @@ export class ProductsComponent implements OnInit {
   query = ""; //Searchquery
   product = {}; //A single product, used when updating detailview and editing
   products = []; //List containing all products fetched from api
-  filteredProducts = [] //Used when filtering by category
   minPrice = -Infinity; //Minprice in search filter
   maxPrice = Infinity; //Maxprice in search filter
   isLoading = true;
@@ -127,7 +126,6 @@ toggleDetailsCard(){
     this.productService.getProducts(pageNum+sortQuery).subscribe(
       data => {
         this.products = data.docs
-        this.filteredProducts = data.docs
         this.totalPageNum = data.pages
         this.totalListings = data.total
       },
@@ -267,10 +265,7 @@ toggleDetailsCard(){
   filterByUser(id) {
     this.hidePagination = true
     this.userService.getUserWithProducts(id).subscribe(
-        data => {
-          this.products = data.products,
-          this.filteredProducts = data.products
-        },
+        data => this.products = data.products,
         error => console.log(error)
     )
   }
@@ -308,7 +303,6 @@ toggleDetailsCard(){
       this.minPrice, this.maxPrice+this.sortQuery+"&category="+this.selectedCategory).subscribe(
       data => {
         this.products = data.docs
-        this.filteredProducts = data.docs
         this.totalPageNum = data.pages
         this.totalListings = data.total
       },

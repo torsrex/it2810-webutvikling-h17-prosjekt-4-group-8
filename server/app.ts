@@ -18,7 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 let mongodbURI;
 if (process.env.NODE_ENV === 'test') {
   mongodbURI = process.env.MONGODB_TEST_URI;
-} else if(process.env.NODE_ENV === 'easy'){
+}
+else if(process.env.NODE_ENV === 'easy'){
   mongodbURI = process.env.MONGODB_EASY_URI;
 }
 else {
