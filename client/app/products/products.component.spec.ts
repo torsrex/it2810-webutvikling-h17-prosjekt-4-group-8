@@ -128,14 +128,14 @@ describe('ProductsComponent', () => {
   });
   it('Search should call search function', () => {
     component.isLoading = false;
-    spyOn(component, 'searchProducts');
+    spyOn(component, 'changedQuery');
     fixture.detectChanges();
     const el = fixture.debugElement.queryAll(By.css('.searchFields input'));
     const query = el[0].nativeElement;
     query.value = 'test';
     query.dispatchEvent(new Event('input'));
     fixture.detectChanges();
-    expect(component.searchProducts).toHaveBeenCalled();
+    expect(component.changedQuery).toHaveBeenCalled();
   });
   it('Should set ascName and sortingParam correctly', () => {
     component.isLoading = false;
@@ -185,7 +185,5 @@ describe('ProductsComponent', () => {
     expect(component.minPrice).toEqual(20);
     expect(component.maxPrice).toEqual(500);
     expect(component.pageNum).toEqual(1);
-    expect(component.searching).toBeTruthy();
-    expect(localStorage.getItem('searches')).toBeTruthy();
   });
 });
