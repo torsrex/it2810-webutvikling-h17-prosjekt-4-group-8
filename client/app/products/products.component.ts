@@ -171,9 +171,9 @@ export class ProductsComponent implements OnInit {
   handleProductAdded(product) {
     this.nameSelected = false;
     this.priceSelected = false;
-    this.sortingParam="createdAt"
-    this.sortingOrder=true
-    this.sortBy('createdAt')
+    this.sortingParam = 'createdAt';
+    this.sortingOrder = true;
+    this.sortBy('createdAt');
   }
   handleHideProductDetails(param) {
     this.displayProductDetails = param;
