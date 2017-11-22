@@ -265,7 +265,6 @@ toggleDetailsCard(){
   // filters the list of products based on user id, can get id from both the
   // GoogleMapsComponent and the ProductDetailsComponent
   filterByUser(id) {
-    //TODO: Need to handle pagination
     this.hidePagination = true
     this.userService.getUserWithProducts(id).subscribe(
         data => {
