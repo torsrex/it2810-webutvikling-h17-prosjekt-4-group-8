@@ -34,7 +34,7 @@ describe('ProductsComponent', () => {
         ProductService,
         MessageService,
         AuthService,
-        AuthGuardAdmin, 
+        AuthGuardAdmin,
         ProductDetailsComponent,
         ToastComponent
       ],
@@ -128,11 +128,13 @@ describe('ProductsComponent', () => {
   })
   it('Search should call search function', () => {
     component.isLoading = false
-    fixture.detectChanges()
     spyOn(component, 'searchFromBox');
-    const el = fixture.debugElement.queryAll(By.css('Button'))
-    const button = el[0]
-    button.triggerEventHandler('click', null)
+    fixture.detectChanges()
+    const el = fixture.debugElement.queryAll(By.css('.searchFields input'))
+    const query = el[0].nativeElement
+    query.value = "test"
+    query.dispatchEvent(new Event('input'))
+    fixture.detectChanges()
     expect(component.searchFromBox).toHaveBeenCalled()
   })
   it('Should set ascName and sortingParam correctly', () => {
@@ -178,8 +180,6 @@ describe('ProductsComponent', () => {
     el[1].nativeElement.dispatchEvent(new Event('input'))
     el[2].nativeElement.dispatchEvent(new Event('input'))
     fixture.detectChanges()
-    const submit = fixture.debugElement.query(By.css(".searchFields button"))
-    submit.triggerEventHandler('click', null)
     expect(el.length).toBe(3)
     expect(component.query).toContain("test")
     expect(component.minPrice).toEqual(20)
@@ -187,6 +187,5 @@ describe('ProductsComponent', () => {
     expect(component.pageNum).toEqual(1)
     expect(component.searching).toBeTruthy()
     expect(localStorage.getItem('searches')).toBeTruthy()
-
   })
 });
