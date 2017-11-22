@@ -102,6 +102,19 @@ describe('Product', () => {
           });
       });
     });
+    it('should get all ten products', done => {
+    const product = new Product({ name: 'FancyProduct', description: 'yolo desc', price: 4 });
+    product.save((err) => {done()})
+    chai.request(app)
+      .get('/products/getsome/1')
+      .end((err, res) => {
+        should.not.exist(err);
+        res.should.have.status(200);
+        res.body.should.be.a('array');
+        res.body.length.should.be.eql(1);
+        done();
+      });
+  });
   });
 
 });
