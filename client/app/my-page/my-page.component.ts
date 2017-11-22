@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from "rxjs/Rx";
 import { MyProductsComponent } from '../my-products/my-products.component';
 
 @Component({

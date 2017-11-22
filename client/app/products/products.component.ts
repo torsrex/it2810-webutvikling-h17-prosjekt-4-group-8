@@ -12,7 +12,7 @@ import { AuthService } from '../services/auth.service';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
-import { Subscription } from 'rxjs/subscription';
+import { Subscription } from "rxjs/Rx";
 
 @Component({
   selector: 'app-products',
