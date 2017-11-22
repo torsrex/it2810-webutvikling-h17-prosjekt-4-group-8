@@ -282,7 +282,8 @@ toggleDetailsCard(){
   this.searchProducts()
 }
   searchProducts(){
-    if(this.query === ""){
+    if(this.query === "" && this.minPrice === (-Infinity) &&
+    this.maxPrice === Infinity && this.selectedCategory === "default"){
       this.pageNum = 1
       this.searching = false
       this.getProducts(1,'?')
