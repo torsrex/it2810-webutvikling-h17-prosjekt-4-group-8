@@ -108,7 +108,8 @@ export class ProductDetailsComponent {
 
    //Delete product
    deleteProduct() {
-     if (window.confirm('Are you sure you want to permanently delete this item?')) {
+     if (window.confirm('Are you sure you want to permanently delete this item?'))
+     {
        this.productService.deleteProduct(this.product).subscribe(
          res => {
            //const pos = this.product.map(elem => elem._id).indexOf(product._id);
@@ -116,7 +117,8 @@ export class ProductDetailsComponent {
            this.sendMessage("deleted");
            this.toast.setMessage('item deleted successfully.', 'success');
          },
-         error => console.log(error)
+         error => console.log(error),
+         () => this.removeDetailsCard()
        );
      }
    }
