@@ -40,13 +40,13 @@ export class MyPageComponent implements OnInit {
     Validators.minLength(8),
     Validators.maxLength(30)
   ]);
-  latitude = new FormControl({value: '', disabled: true}, [
+  latitude = new FormControl('', [
     Validators.required,
     Validators.min(57.8),
     Validators.max(71.5),
     Validators.maxLength(30)
   ]);
-  longitude = new FormControl({value: '', disabled: true}, [
+  longitude = new FormControl('', [
     Validators.required,
     Validators.min(3.5),
     Validators.max(31.5),
@@ -69,7 +69,7 @@ export class MyPageComponent implements OnInit {
       phone: this.phone,
       role: this.role,
       latitude: this.latitude,
-      longitude: this.longitude,
+      longitude: this.longitude
     });
   }
 
@@ -116,8 +116,8 @@ export class MyPageComponent implements OnInit {
   }
 
   mapClick = ({coords: {lat, lng}}) => {
-    this.latitude.setValue(lat)
-    this.longitude.setValue(lng)
+    this.userForm.controls["latitude"].setValue(lat)
+    this.userForm.controls["longitude"].setValue(lng)
   }
 
   // Updates the zoom level when the user zooms the map
