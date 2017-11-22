@@ -129,6 +129,7 @@ export class MyPageComponent implements OnInit {
   }
 
   mapClick = ({ coords: { lat, lng } }) => {
+    console.log({ coords: { lat, lng } })
     this.userForm.controls['latitude'].setValue(lat);
     this.userForm.controls['longitude'].setValue(lng);
   }

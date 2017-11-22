@@ -161,6 +161,37 @@ describe('ProductsComponent', () => {
     el[0].triggerEventHandler('click', null);
     expect(component.sortBy).toHaveBeenCalledWith('name');
   });
+  it('handleProductAdded should refresh and update vars', () => {
+    const before = component.sortingParam
+    component.handleProductAdded({})
+    const after = component.sortingParam
+    expect(before).not.toBe(after)
+  })
+  it('Should hide productdetails', () =>{
+    const before = component.displayProductDetails
+    component.handleHideProductDetails(true)
+    const after = component.displayProductDetails
+    expect(before).not.toBe(after)
+  })
+  it('Should handle product selection', () => {
+    component.isLoading = false
+    component.isLoadingDynamic = false
+    const product = [{
+      _id: "5a0c3d1029497e42b42bc59c",
+      name:"yolo",
+      description:"yo",
+      price:10,
+      category: "default"
+    }]
+    component.products = product
+    fixture.detectChanges()
+    const el = fixture.debugElement.query(By.css('.productsColumn table tbody tr'))
+    el.triggerEventHandler('click', product);
+    component.updateDetailView(product)
+    expect(component.displayProductDetails).toBeTruthy()
+    expect(component.lastSelected).toBe(null)
+    // expect(component.displayProductDetails).toBeTruthy()
+  })
   it('Should call sortBy function with price', () => {
     component.isLoading = false;
     fixture.detectChanges();
@@ -185,5 +216,22 @@ describe('ProductsComponent', () => {
     expect(component.minPrice).toEqual(20);
     expect(component.maxPrice).toEqual(500);
     expect(component.pageNum).toEqual(1);
+    expect(component.selectedCategory).toContain("default")
   });
+  it("Should call clearfilter", () => {
+    component.isLoading = false
+    spyOn(component, 'clearFilter')
+    fixture.detectChanges()
+    const el = fixture.debugElement.query(By.css('.inputBtn'))
+    el.triggerEventHandler('click', null);
+    expect(component.clearFilter).toHaveBeenCalled()
+  })
+  it('Should reset parameters correctly when clearFilter is called', () => {
+    component.isLoading = false
+    fixture.detectChanges()
+    const el = fixture.debugElement.query(By.css('.inputBtn'))
+    el.triggerEventHandler('click', null);
+    expect(component.pageNum).toEqual(1)
+    expect(component.selectedCategory).toContain("default")
+  })
 });

@@ -54,4 +54,27 @@ describe('MyPageComponent', () => {
     const el = fixture.debugElement.query(By.css('h4'));
     expect(el.nativeElement.textContent).toContain('Account settings');
   });
+  it('Should update zoom level', () => {
+    component.isLoading = false
+    const before = component.zoom
+    component.updateMapZoom(20)
+    const after = component.zoom
+    expect(before).not.toBe(after)
+  })
+  it('Should update map center',  () => {
+    component.isLoading = false
+    const before = component.init_lat
+    component.updateMapCenter([20,20])
+    const after = component.init_lat
+    expect(before).not.toBe(after)
+  })
+
+  it('Should update mapclick values', () =>{
+    component.isLoading = false
+    const before = component.userForm.value['latitude']
+    const event = {coords:{lat: 60.45721779774395, lng: 8.5693359375}}
+    component.mapClick(event)
+    const after = component.userForm.value['latitude']
+    expect(before).not.toBe(after)
+  })
 });
