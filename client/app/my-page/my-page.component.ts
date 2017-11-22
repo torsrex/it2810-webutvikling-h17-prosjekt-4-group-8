@@ -23,6 +23,7 @@ export class MyPageComponent implements OnInit {
   zoom = 4;
   user = {};
   userForm: FormGroup;
+  authenticated: boolean
   username = new FormControl('', [
     Validators.required,
     Validators.minLength(2),
@@ -69,7 +70,8 @@ export class MyPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUser();
+    // Gets user logged in status
+    this.authenticated = this.auth.loggedIn;
     this.userForm = this.formBuilder.group({
       username: this.username,
       email: this.email,
@@ -78,6 +80,9 @@ export class MyPageComponent implements OnInit {
       latitude: this.latitude,
       longitude: this.longitude
     });
+    if (this.authenticated) {
+      this.getUser();
+    }
   }
 
   isValid = () => !this.userForm.valid;
@@ -101,10 +106,10 @@ export class MyPageComponent implements OnInit {
   getUser() {
     this.userService.getUser(this.auth.currentUser).subscribe(
       data => {
-        this.user = data;
+        this.user = data
         Object.keys(data).forEach(userField => {
-          (this[userField] && this[userField]).setValue(data[userField]);
-        });
+          this[userField] && this[userField].setValue(data[userField])
+        })
       },
       error => console.log(error),
       () => this.isLoading = false
