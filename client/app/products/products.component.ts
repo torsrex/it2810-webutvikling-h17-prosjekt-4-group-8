@@ -40,7 +40,7 @@ export class ProductsComponent implements OnInit {
   totalPageNum = 0; //Total number of pages
   totalListings = 0; //Total number of productlistings
   listingsPerPage = 10; //How many to list pr. page
-  hidePagination= false
+  hidePagination = false
 
   //Used to handle search and sorting
   searching = false //Variable to indicate if we're in search mode
@@ -66,23 +66,23 @@ export class ProductsComponent implements OnInit {
   categories = ["Electronics", "Household items", "Furniture", "Pets", "Sports", "Gardening"]
 
   constructor(private productService: ProductService,
-              private messageService: MessageService,
-              private formBuilder: FormBuilder,
-              public productDetails: ProductDetailsComponent,
-              public toast: ToastComponent,
-              private auth: AuthService,
-              private userService: UserService
-              ) {
-                //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
-                this.subscription = this.messageService.getMessage().subscribe(message => {
-                  this.getProducts(this.pageNum, this.sortQuery);
-                  //hide product details component if message says so
-                  if(message.text === "hide product details"){
-                    this.displayProductDetails = false;
-                  }
-                });
-                this.subscription = this.messageService.getID().subscribe(id => { this.filterByUser(id.text); })
-              }
+    private messageService: MessageService,
+    private formBuilder: FormBuilder,
+    public productDetails: ProductDetailsComponent,
+    public toast: ToastComponent,
+    private auth: AuthService,
+    private userService: UserService
+  ) {
+    //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
+    this.subscription = this.messageService.getMessage().subscribe(message => {
+      this.getProducts(this.pageNum, this.sortQuery);
+      //hide product details component if message says so
+      if (message.text === "hide product details") {
+        this.displayProductDetails = false;
+      }
+    });
+    this.subscription = this.messageService.getID().subscribe(id => { this.filterByUser(id.text); })
+  }
 
   ngOnInit() {
     //Initial fetch of products
@@ -99,66 +99,37 @@ export class ProductsComponent implements OnInit {
     //Sets the userid
     this.userId = this.auth.currentUser['_id']
     //Gets other user paramters
-    if(this.authenticated){
+    if (this.authenticated) {
       this.getUser()
 
-  }
+    }
   }
 
-updateDetailView(product){
-  this.productDetails.setProduct(product);
-  this.displayProductDetails = true;
-}
-updateStyle($event){
-  if (this.lastSelected){
-    this.lastSelected.classList.remove('styleThis');
+  updateDetailView(product) {
+    this.productDetails.setProduct(product);
+    this.displayProductDetails = true;
   }
-  this.lastSelected = $event.target.parentNode
-  $event.target.parentNode.classList.add('styleThis');
-}
+  updateStyle($event) {
+    if (this.lastSelected) {
+      this.lastSelected.classList.remove('styleThis');
+    }
+    this.lastSelected = $event.target.parentNode
+    $event.target.parentNode.classList.add('styleThis');
+  }
 
-toggleDetailsCard(){
-  this.displayProductDetails = !this.displayProductDetails;
-}
-
+  toggleDetailsCard() {
+    this.displayProductDetails = !this.displayProductDetails;
+  }
   //Fetches products and stores in products list
   getProducts(pageNum, sortQuery) {
-    this.productService.getProducts(pageNum+sortQuery).subscribe(
+    this.productService.getProducts(pageNum + sortQuery).subscribe(
       data => {
         this.products = data.docs
         this.totalPageNum = data.pages
         this.totalListings = data.total
       },
       error => console.log(error),
-      () => {this.isLoading = false, this.isLoadingDynamic = false}
-    );
-  }
-
- //Adds a new product
-  addProduct() {
-    //Code to add userid to product
-    let productToAdd = this.addProductForm.value
-    productToAdd.user = this.userId
-    //Adds product to the database
-    this.productService.addProduct(productToAdd).subscribe(
-      res => {
-        const newProduct = res.json();
-        //Code to add the new product to current listings
-        this.products.push(newProduct);
-        this.addProductForm.reset();
-        this.toast.setMessage('item added successfully.', 'success');
-        //Creates a list of the current user details
-        let newList = this.user
-        //pushes product id onto the list
-        newList['products'].push(newProduct._id)
-        //sets the current user to the list
-        this.user = newList
-        //updates current user to this.user
-        this.userService.editUser(this.user).subscribe(
-          error => console.log(error)
-        )
-      },
-      error => console.log(error)
+      () => { this.isLoading = false, this.isLoadingDynamic = false }
     );
   }
 
@@ -167,6 +138,10 @@ toggleDetailsCard(){
     this.product = product;
   }
 
+  handleProductAdded(product){
+    this.products.push(product)
+    this.totalListings++
+  }
   cancelEditing() {
     this.isEditing = false;
     this.product = {};
@@ -199,26 +174,26 @@ toggleDetailsCard(){
     }
   }
 
-  toggleNameSort(){
+  toggleNameSort() {
     this.ascName = !this.ascName;
     this.ascPrice = true;
     this.nameSelected = true;
     this.priceSelected = false;
   }
-  togglePriceSort(){
+  togglePriceSort() {
     this.ascPrice = !this.ascPrice;
     this.ascName = true;
     this.nameSelected = false;
     this.priceSelected = true;
   }
 
-  sortBy(value){
+  sortBy(value) {
     this.sortingParam = value
     this.sortingOrder = !this.sortingOrder
-    this.sortQuery = `?sortby=${this.sortingParam}&increasing=${this.sortingOrder?1:-1}`
-    if(this.searching){
+    this.sortQuery = `?sortby=${this.sortingParam}&increasing=${this.sortingOrder ? 1 : -1}`
+    if (this.searching) {
       this.searchProducts()
-    }else{
+    } else {
       this.isLoadingDynamic = true
       this.getProducts(this.pageNum, this.sortQuery)
     }
@@ -226,37 +201,37 @@ toggleDetailsCard(){
 
   //Functions called by pagination component
   goToPage(n: number): void {
-      this.pageNum = n;
-      if (this.searching){
-        this.searchProducts()
-      }else{
-        this.getProducts(this.pageNum, this.sortQuery);
-      }
+    this.pageNum = n;
+    if (this.searching) {
+      this.searchProducts()
+    } else {
+      this.getProducts(this.pageNum, this.sortQuery);
     }
+  }
 
-    onNext(): void {
-      this.pageNum++;
-      if (this.searching){
-        this.searchProducts()
-      }else{
-        this.getProducts(this.pageNum, this.sortQuery);
-      }
+  onNext(): void {
+    this.pageNum++;
+    if (this.searching) {
+      this.searchProducts()
+    } else {
+      this.getProducts(this.pageNum, this.sortQuery);
     }
+  }
 
-    onPrev(): void {
-      this.pageNum--;
-      if (this.searching){
-        this.searchProducts()
-      }else{
-        this.getProducts(this.pageNum, this.sortQuery);
-      }
+  onPrev(): void {
+    this.pageNum--;
+    if (this.searching) {
+      this.searchProducts()
+    } else {
+      this.getProducts(this.pageNum, this.sortQuery);
     }
+  }
 
   //Code used to add productId to user
-  getUser(){
-  this.userService.getUser(this.auth.currentUser).subscribe(
-    data => this.user = data,
-    error => console.log(error)
+  getUser() {
+    this.userService.getUser(this.auth.currentUser).subscribe(
+      data => this.user = data,
+      error => console.log(error)
     )
   }
 
@@ -265,30 +240,30 @@ toggleDetailsCard(){
   filterByUser(id) {
     this.hidePagination = true
     this.userService.getUserWithProducts(id).subscribe(
-        data => this.products = data.products,
-        error => console.log(error)
+      data => this.products = data.products,
+      error => console.log(error)
     )
   }
   //code used to handle searches
-  searchFromBox(){
-  this.hidePagination = false
-  this.pageNum = 1
-  this.searchProducts()
-}
-  searchProducts(){
-    if(this.query === "" && this.minPrice === (-Infinity) &&
-    this.maxPrice === Infinity && this.selectedCategory === "default"){
+  searchFromBox() {
+    this.hidePagination = false
+    this.pageNum = 1
+    this.searchProducts()
+  }
+  searchProducts() {
+    if (this.query === "" && this.minPrice === (-Infinity) &&
+      this.maxPrice === Infinity && this.selectedCategory === "default") {
       this.pageNum = 1
       this.searching = false
-      this.getProducts(1,'?')
+      this.getProducts(1, '?')
       return
     }
     let history = []
-    let object = {query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice};
-    if(JSON.parse(localStorage.getItem('searches'))){
+    let object = { query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice };
+    if (JSON.parse(localStorage.getItem('searches'))) {
       history = JSON.parse(localStorage.getItem('searches'))
       history.unshift(object)
-    }else{
+    } else {
       history.unshift(object)
     }
     history.splice(10)
@@ -300,7 +275,7 @@ toggleDetailsCard(){
     this.maxPrice = !this.maxPrice ? Infinity : this.maxPrice
     this.isLoadingDynamic = true
     this.productService.searchProduct(this.query, this.pageNum,
-      this.minPrice, this.maxPrice+this.sortQuery+"&category="+this.selectedCategory).subscribe(
+      this.minPrice, this.maxPrice + this.sortQuery + "&category=" + this.selectedCategory).subscribe(
       data => {
         this.products = data.docs
         this.totalPageNum = data.pages
@@ -308,10 +283,10 @@ toggleDetailsCard(){
       },
       error => console.log(error),
       () => this.isLoadingDynamic = false
-  )
-}
+      )
+  }
   //Resets (literally) all of the components state
-  clearFilter(){
+  clearFilter() {
     this.pageNum = 1
     this.query = ""
     this.ascName = false;

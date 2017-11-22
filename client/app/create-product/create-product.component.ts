@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 
@@ -27,6 +27,7 @@ export class CreateProductComponent implements OnInit{
   userId: string //What is the current userid?
   user = {} //List containing the current user's parameters
   @Input() isEditing: boolean //Used to show or hide the form
+  @Output() productAdded = new EventEmitter()
 
   //Creates the default formgroup for adding a new product
   addProductForm: FormGroup;
@@ -83,8 +84,8 @@ export class CreateProductComponent implements OnInit{
     this.productService.addProduct(productToAdd).subscribe(
       res => {
         const newProduct = res.json();
+        this.productAdded.emit(newProduct)
         //Code to add the new product to current listings
-        // this.products.push(newProduct);
         this.addProductForm.reset();
         this.toast.setMessage('item added successfully.', 'success');
         //Creates a list of the current user details
@@ -98,7 +99,8 @@ export class CreateProductComponent implements OnInit{
           error => console.log(error)
         )
       },
-      error => console.log(error)
+      error => console.log(error),
+      () => this.isEditing = false
     );
   }
 

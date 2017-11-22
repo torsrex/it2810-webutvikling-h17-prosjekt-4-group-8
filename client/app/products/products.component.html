@@ -9,7 +9,7 @@
       <h1 class="centerText ">BestProducts Shopping</h1>
       <h5 class="centerText">Sell or buy stuff..</h5>
     </div>
-    <app-create-product></app-create-product>
+    <app-create-product (productAdded)="handleProductAdded($event)"></app-create-product>
   </div>
   <div class="productPageContent largeBottomMargin">
     <!-- <h3 class="centerText smallBottomMargin">Products</h3> -->
