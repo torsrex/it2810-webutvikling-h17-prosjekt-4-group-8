@@ -39,6 +39,7 @@ export class MyPageComponent implements OnInit {
   ]);
   phone = new FormControl('', [
     Validators.required,
+    Validators.pattern(/\d+/),
     Validators.minLength(8),
     Validators.maxLength(30)
   ]);
