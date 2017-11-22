@@ -1,3 +1,5 @@
+[![MongoDB](https://img.shields.io/badge/MongoDB-3.6-brightgreen.svg)](https://www.mongodb.com/)
+[![NPM](https://img.shields.io/badge/NPM-%5E5.3.0-brightgreen.svg)](https://www.npmjs.com/)
 # Group 8 project 4
 
 # Dokumentasjon
@@ -21,8 +23,15 @@ Oppgaven ble løst ved å:
 ## Howto teste backend:
 Backendtestene krever en lokal mongodb server kjørende. Kjør kommandoen ```npm run testbe```. Denne kjører alle testene og gir deg code coverage.
 
+Coverage as of 22.11.17:
+
+![alt text](https://i.imgur.com/FeqPe0S.png "Backend coverage")
+
 ## Howto teste frontend:
 Frontend testene kjøres ved å skrive ```npm test``` evt. ```ng test``` om det er ønskelig. For å få code coverage skriv ```ng test --code-coverage```. Code coverage vil da dukke opp i en egen “coverage” mappe i prosjektmappen.
+
+Coverage as of 22.11.17:
+![alt text](https://i.imgur.com/4JmKWmz.png "Frontend coverage")
 
 ## Howto kjøre prosjektet:
 Klon repoet. Kjør ```npm i```. Nå har du 2 valg, enten kjør ```npm run easy``` og bruk vår online database, eller sørg for at du har en lokal instans av mongodb kjørende og kjør ```npm run dev```. Et nytt nettleservindu med nettsiden vil da åpnes.
