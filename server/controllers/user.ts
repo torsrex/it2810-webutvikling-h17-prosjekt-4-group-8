@@ -3,6 +3,7 @@ import * as jwt from 'jsonwebtoken';
 
 import User from '../models/user';
 import BaseCtrl from './base';
+import Product from '../models/product'
 
 export default class UserCtrl extends BaseCtrl {
   model = User;
@@ -27,4 +28,12 @@ export default class UserCtrl extends BaseCtrl {
     });
   }
 
+  delete = (req, res) => {
+    this.model.findOneAndRemove({ _id: req.params.id }).exec((err, removed) =>{
+      Product.find({user:req.params.id}).remove().exec()
+      if (err) { return console.error(err); }
+      res.sendStatus(200);
+    });
+
+  }
 }
