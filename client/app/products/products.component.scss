@@ -4,11 +4,12 @@
   left: 0px;
   right: 0px;
   background-color: #eee;
+  padding-bottom: 10px;
 }
 
 .productPageContent{
   position: relative;
-  top: 270px;
+  top: 260px;
 }
 .productsHeaderTitle{
   padding: 30px 0;
@@ -31,13 +32,15 @@ app-google-maps {
     min-width: 160px;
   }.price{
     min-width: 110px !important;
-  }
-  button{
-    padding: 0px 12px 0px 12px;
   }select{
     min-width: 150px;
     margin-bottom: 0px; //had bottom margin for some reason
     flex: 2;
     height: 100%;
+  }button{
+    flex: 1;
+    min-width: 120px;
+    padding: 0 12px;
+    margin: 0 3%;
   }
 }
