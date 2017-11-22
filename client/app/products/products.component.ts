@@ -76,10 +76,6 @@ export class ProductsComponent implements OnInit {
     //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
     this.subscription = this.messageService.getMessage().subscribe(message => {
       this.getProducts(this.pageNum, this.sortQuery);
-      //hide product details component if message says so
-      if (message.text === "hide product details") {
-        this.displayProductDetails = false;
-      }
     });
     this.subscription = this.messageService.getID().subscribe(id => { this.filterByUser(id.text); })
   }
