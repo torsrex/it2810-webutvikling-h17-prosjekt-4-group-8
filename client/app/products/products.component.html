@@ -23,6 +23,7 @@
         class="form-control"
         placeholder="Search for a name"
         [(ngModel)]="query"
+        (ngModelChange)="searchFromBox()"
         (keyup.enter)="searchFromBox()"
         type="text"
         >
@@ -34,6 +35,7 @@
         step="100"
         placeholder="min price"
         [(ngModel)]="minPrice"
+        (ngModelChange)="searchFromBox()"
         (keyup.enter)="searchFromBox()"
         >
         <!-- max search -->
@@ -44,11 +46,12 @@
         step="100"
         placeholder="max price"
         [(ngModel)]="maxPrice"
+        (ngModelChange)="searchFromBox()"
         (keyup.enter)="searchFromBox()"
         >
 
         <!-- Category filter. works outside of search, should be separated -->
-        <select class="form-control"  [(ngModel)]="selectedCategory">
+        <select class="form-control"  [(ngModel)]="selectedCategory" (ngModelChange)="searchFromBox()">
           <option selected value="default" >--Select a category--</option>
           <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
         </select>
