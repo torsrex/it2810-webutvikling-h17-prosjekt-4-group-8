@@ -1,6 +1,8 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-3.6-brightgreen.svg)](https://www.mongodb.com/)
 [![NPM](https://img.shields.io/badge/NPM-%5E5.3.0-brightgreen.svg)](https://www.npmjs.com/)
 # Group 8 project 4
+Live version: http://it2810-08.idi.ntnu.no:8084
+MERK: Admin registrering har blitt deaktivert på live versjonen. Klon repoet og kjør lokalt for å teste denne funksjonaliteten.
 
 # Dokumentasjon
 Oppgaven gikk ut på å lage en større webapplikasjon i Angular. Vi tok utgangspunkt i en salgsside, noe ala finn.no.
