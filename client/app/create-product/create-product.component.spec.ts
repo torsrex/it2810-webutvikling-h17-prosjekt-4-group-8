@@ -38,7 +38,7 @@ describe('CreateProductComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
     let store = {};
     const mockLocalStorage = {
       getItem: (key: string): string => {

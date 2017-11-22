@@ -10,9 +10,9 @@ describe('PaginationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaginationComponent ]
+      declarations: [PaginationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -31,7 +31,7 @@ describe('PaginationComponent', () => {
   });
   it('Should display correct page counts', () => {
     const el = fixture.debugElement.query(By.css('.page-counts')).nativeElement
-    expect(el.textContent).toBe(component.getMin()+ ' - '+component.getMax()+ ' of '+component.count+' | ')
+    expect(el.textContent).toBe(component.getMin() + ' - ' + component.getMax() + ' of ' + component.count + ' | ')
   })
   it('Should display total pages', () => {
     const el = fixture.debugElement.query(By.css('.page-totals')).nativeElement
@@ -41,7 +41,7 @@ describe('PaginationComponent', () => {
     const el = fixture.debugElement.queryAll(By.css('.description span'))[2].nativeElement
     expect(el.textContent).toContain('Current page: 1')
   })
-  it('Should call prev function',() => {
+  it('Should call prev function', () => {
     const el = fixture.debugElement.queryAll(By.css('.numbers button'))[0]
     spyOn(component, 'onPrev');
     el.triggerEventHandler('click', null)

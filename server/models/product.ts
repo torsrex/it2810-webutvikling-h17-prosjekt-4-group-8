@@ -18,9 +18,9 @@ const productSchema = new mongoose.Schema({
 productSchema.plugin(mongoosePaginate)
 
 //Adds an index to make search faster
-productSchema.index({'name': 'text', 'description': 'text', 'category': 'text'},
-                    {weights: {name: 2, description: 1}}
-                  )
+productSchema.index({ 'name': 'text', 'description': 'text', 'category': 'text' },
+  { weights: { name: 2, description: 1 } }
+)
 
 
 const Product = mongoose.model('Product', productSchema);

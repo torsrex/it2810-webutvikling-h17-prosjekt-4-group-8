@@ -18,7 +18,8 @@
         </tr>
       </tbody>
       <tbody>
-        <tr *ngFor="let product of user.products"> <!-- Generates a tr for each product in the db. -->
+        <tr *ngFor="let product of user.products">
+          <!-- Generates a tr for each product in the db. -->
           <td>{{product.name}}</td>
           <td>{{product.price}} NOK</td>
         </tr>
@@ -42,7 +43,8 @@
         </tr>
       </tbody>
       <tbody>
-        <tr *ngFor="let element of searches"> <!-- Generates a tr for each product in the db. -->
+        <tr *ngFor="let element of searches">
+          <!-- Generates a tr for each product in the db. -->
           <td>{{element.query}}</td>
           <td>{{element.minPrice}}</td>
           <td>{{element.maxPrice}}</td>

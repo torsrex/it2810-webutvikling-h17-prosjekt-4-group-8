@@ -30,40 +30,40 @@ describe('AdminComponent', () => {
     };
     TestBed.configureTestingModule({
       imports: [HttpModule, RouterTestingModule],
-      declarations: [ AdminComponent ],
+      declarations: [AdminComponent],
       providers: [AuthService, UserService, ToastComponent],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents().then(() => {
-      fixture = TestBed.createComponent(AdminComponent);
-      component = fixture.componentInstance;
-      authService = fixture.debugElement.injector.get(AuthService);
-      component.users = [
-        {
-          _id: "5a0cb6756a60402154b7c724",
-          username: "PositionTest",
-          email: "positiontest@gmail.com",
-          phone: "99288571",
-          role: "admin",
-          latitude: 60,
-          longitude: 4,
-          __v: 0,
-          products: [ ]
-        },
-        {
-          _id: "5a0ca7fc6a60402154b7c723",
-          username: "posTest",
-          email: "postest@gmail.com",
-          phone: "99288571",
-          role: "admin",
-          latitude: 60.4344545,
-          longitude: 10.456765,
-          __v: 0,
-          products: [ ]
-        }
-      ]
-      fixture.detectChanges();
-    });
+      .compileComponents().then(() => {
+        fixture = TestBed.createComponent(AdminComponent);
+        component = fixture.componentInstance;
+        authService = fixture.debugElement.injector.get(AuthService);
+        component.users = [
+          {
+            _id: "5a0cb6756a60402154b7c724",
+            username: "PositionTest",
+            email: "positiontest@gmail.com",
+            phone: "99288571",
+            role: "admin",
+            latitude: 60,
+            longitude: 4,
+            __v: 0,
+            products: []
+          },
+          {
+            _id: "5a0ca7fc6a60402154b7c723",
+            username: "posTest",
+            email: "postest@gmail.com",
+            phone: "99288571",
+            role: "admin",
+            latitude: 60.4344545,
+            longitude: 10.456765,
+            __v: 0,
+            products: []
+          }
+        ]
+        fixture.detectChanges();
+      });
   }));
   it('should create', () => {
     expect(component).toBeTruthy();

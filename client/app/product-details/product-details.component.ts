@@ -107,7 +107,7 @@ export class ProductDetailsComponent {
       this.hideProductDetails.emit(false)
     }
   }
-  hideDetailWindow(){
+  hideDetailWindow() {
     this.hideProductDetails.emit(false)
   }
 }

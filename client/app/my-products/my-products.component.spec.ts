@@ -15,12 +15,12 @@ describe('MyProductsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyProductsComponent ],
+      declarations: [MyProductsComponent],
       imports: [HttpModule, RouterTestingModule],
-      providers: [ AuthService, UserService ],
+      providers: [AuthService, UserService],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
     let store = {};
     const mockLocalStorage = {
       getItem: (key: string): string => {
@@ -65,7 +65,7 @@ describe('MyProductsComponent', () => {
           __v: 0,
           createdAt: "2017-11-15T12:48:12.155Z"
         }]
-      }
+    }
     fixture.detectChanges();
   });
 

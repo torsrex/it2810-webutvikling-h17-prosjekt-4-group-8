@@ -12,11 +12,11 @@ import { UserService } from '../services/user.service';
 export class MyProductsComponent implements OnInit {
 
   productList = []
-  user = { _id: '', username: '', role: '', products: []};
+  user = { _id: '', username: '', role: '', products: [] };
   isLoading = true;
   searches = []
   constructor(private auth: AuthService,
-  private userService: UserService
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -24,8 +24,8 @@ export class MyProductsComponent implements OnInit {
     this.getFromLocalStorage()
   }
 
-  getFromLocalStorage(){
-    if(JSON.parse(localStorage.getItem('searches'))){
+  getFromLocalStorage() {
+    if (JSON.parse(localStorage.getItem('searches'))) {
       this.searches = JSON.parse(localStorage.getItem('searches'))
     }
 

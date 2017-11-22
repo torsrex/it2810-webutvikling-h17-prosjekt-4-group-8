@@ -19,11 +19,11 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule, RouterTestingModule, ReactiveFormsModule],
-      declarations: [ LoginComponent ],
+      declarations: [LoginComponent],
       providers: [AuthService, UserService, ToastComponent],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

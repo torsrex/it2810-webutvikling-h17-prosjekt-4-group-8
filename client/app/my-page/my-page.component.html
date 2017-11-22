@@ -5,7 +5,7 @@
 <div class="card" *ngIf="!isLoading">
   <h4 class="card-header">Account settings</h4>
   <div class="card-block">
-    <form  [formGroup]="userForm" #accountForm="ngForm" (ngSubmit)="save(user)">
+    <form [formGroup]="userForm" #accountForm="ngForm" (ngSubmit)="save(user)">
       <label>User information</label>
       <div class="input-group" [ngClass]="setClassUsername()">
         <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -34,20 +34,8 @@
       </div>
       <label>Address (drag and drop the pointer)</label>
       <div class="input-group">
-        <agm-map
-          (centerChange)="updateMapCenter($event)"
-          (zoomChange)="updateMapZoom($event)"
-          (mapClick)="mapClick($event)"
-          [latitude]="init_lat"
-          [longitude]="init_lng"
-          [zoom]="zoom"
-          [streetViewControl]="false">
-          <agm-marker
-            (dragEnd)="mapClick($event)"
-            [markerDraggable]="true"
-            [latitude]="latitude.value"
-            [longitude]="longitude.value"
-            ></agm-marker>
+        <agm-map (centerChange)="updateMapCenter($event)" (zoomChange)="updateMapZoom($event)" (mapClick)="mapClick($event)" [latitude]="init_lat" [longitude]="init_lng" [zoom]="zoom" [streetViewControl]="false">
+          <agm-marker (dragEnd)="mapClick($event)" [markerDraggable]="true" [latitude]="latitude.value" [longitude]="longitude.value"></agm-marker>
         </agm-map>
       </div>
       <div class="input-group">

@@ -31,7 +31,7 @@ export class PaginationComponent {
     }
     return max;
   }
-  
+
   totalPages(): number {
     return Math.ceil(this.count / this.perPage) || 0;
   }

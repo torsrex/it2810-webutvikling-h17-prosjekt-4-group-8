@@ -1,5 +1,7 @@
-.map-loading, .map-container, agm-map {
+.map-container,
+.map-loading,
+agm-map {
   height: 100%;
   min-height: 250px;
-  max-height: 500px
+  max-height: 500px;
 }

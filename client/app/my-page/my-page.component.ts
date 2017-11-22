@@ -35,7 +35,7 @@ export class MyPageComponent implements OnInit {
   role = new FormControl('', [
     Validators.required,
   ]);
-  phone = new FormControl('',[
+  phone = new FormControl('', [
     Validators.required,
     Validators.minLength(8),
     Validators.maxLength(30)
@@ -54,12 +54,12 @@ export class MyPageComponent implements OnInit {
   ]);
 
   constructor(private formBuilder: FormBuilder,
-              private auth: AuthService,
-              public toast: ToastComponent,
-              private userService: UserService,
-              private messageService: MessageService) {
-                  this.subscription = this.messageService.getMessage().subscribe(msg => { this.init_lat = msg.text[0]; this.init_lng = msg.text[1]; this.zoom = 10; });
-    }
+    private auth: AuthService,
+    public toast: ToastComponent,
+    private userService: UserService,
+    private messageService: MessageService) {
+    this.subscription = this.messageService.getMessage().subscribe(msg => { this.init_lat = msg.text[0]; this.init_lng = msg.text[1]; this.zoom = 10; });
+  }
 
   ngOnInit() {
     this.getUser();
@@ -85,10 +85,10 @@ export class MyPageComponent implements OnInit {
     return { 'has-danger': !this.phone.pristine && !this.phone.valid };
   }
   setClassLatitude() {
-    return {'has-danger': !this.latitude.pristine && !this.latitude.valid }
+    return { 'has-danger': !this.latitude.pristine && !this.latitude.valid }
   }
   setClassLongitude() {
-    return {'has-danger': !this.longitude.pristine && !this.longitude.valid }
+    return { 'has-danger': !this.longitude.pristine && !this.longitude.valid }
   }
 
   getUser() {
@@ -115,7 +115,7 @@ export class MyPageComponent implements OnInit {
     );
   }
 
-  mapClick = ({coords: {lat, lng}}) => {
+  mapClick = ({ coords: { lat, lng } }) => {
     this.userForm.controls["latitude"].setValue(lat)
     this.userForm.controls["longitude"].setValue(lng)
   }

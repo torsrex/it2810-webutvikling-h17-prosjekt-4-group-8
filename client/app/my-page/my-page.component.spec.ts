@@ -6,7 +6,7 @@ import { MyPageComponent } from './my-page.component';
 import { ToastComponent } from '../shared/toast/toast.component';
 
 import { RouterTestingModule } from '@angular/router/testing';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http'
 import { ReactiveFormsModule } from '@angular/forms'
 
@@ -32,17 +32,17 @@ describe('MyPageComponent', () => {
       currentUser: { username: 'Tester' }
     };
     TestBed.configureTestingModule({
-      imports: [ FormsModule, HttpModule, RouterTestingModule, ReactiveFormsModule ],
-      declarations: [ MyPageComponent ],
-      providers: [{provide: AuthService, useValue: authServiceStub}, UserService, MessageService, ToastComponent],
+      imports: [FormsModule, HttpModule, RouterTestingModule, ReactiveFormsModule],
+      declarations: [MyPageComponent],
+      providers: [{ provide: AuthService, useValue: authServiceStub }, UserService, MessageService, ToastComponent],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents().then(() => {
-      fixture = TestBed.createComponent(MyPageComponent);
-      component = fixture.componentInstance;
-      authService = fixture.debugElement.injector.get(AuthService);
-      fixture.detectChanges();
-    });
+      .compileComponents().then(() => {
+        fixture = TestBed.createComponent(MyPageComponent);
+        component = fixture.componentInstance;
+        authService = fixture.debugElement.injector.get(AuthService);
+        fixture.detectChanges();
+      });
   }));
 
   it('should create', () => {

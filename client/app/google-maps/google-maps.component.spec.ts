@@ -17,11 +17,11 @@ describe('GoogleMapsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
-      declarations: [ GoogleMapsComponent ],
+      declarations: [GoogleMapsComponent],
       providers: [UserService, MessageService],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

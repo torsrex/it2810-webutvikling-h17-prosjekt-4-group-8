@@ -40,7 +40,7 @@ describe('ProductsComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
     let store = {};
     const mockLocalStorage = {
       getItem: (key: string): string => {
@@ -81,7 +81,7 @@ describe('ProductsComponent', () => {
   it('Should show BestProducts Shopping in h2', () => {
     component.isLoading = false
     fixture.detectChanges()
-    const el = fixture. debugElement.query(By.css('h1')).nativeElement
+    const el = fixture.debugElement.query(By.css('h1')).nativeElement
     expect(el.textContent).toContain("BestProducts Shopping")
   })
   it('Should show 3 input forms', () => {
@@ -105,7 +105,7 @@ describe('ProductsComponent', () => {
     fixture.detectChanges()
     const el = fixture.debugElement.queryAll(By.css('input'))
     const inputEl = el[1].nativeElement
-    inputEl.value =  3
+    inputEl.value = 3
     inputEl.dispatchEvent(new Event('input'))
     fixture.detectChanges()
     expect(fixture.componentInstance.minPrice).toEqual(3)
@@ -115,7 +115,7 @@ describe('ProductsComponent', () => {
     fixture.detectChanges()
     const el = fixture.debugElement.queryAll(By.css('input'))
     const inputEl = el[2].nativeElement
-    inputEl.value =  99
+    inputEl.value = 99
     inputEl.dispatchEvent(new Event('input'))
     fixture.detectChanges()
     expect(fixture.componentInstance.maxPrice).toEqual(99)
@@ -173,9 +173,9 @@ describe('ProductsComponent', () => {
     component.isLoading = false
     fixture.detectChanges()
     const el = fixture.debugElement.queryAll(By.css('.searchFields input'))
-    el[0].nativeElement.value =  "test"
-    el[1].nativeElement.value =  20
-    el[2].nativeElement.value =  500
+    el[0].nativeElement.value = "test"
+    el[1].nativeElement.value = 20
+    el[2].nativeElement.value = 500
     el[0].nativeElement.dispatchEvent(new Event('input'))
     el[1].nativeElement.dispatchEvent(new Event('input'))
     el[2].nativeElement.dispatchEvent(new Event('input'))

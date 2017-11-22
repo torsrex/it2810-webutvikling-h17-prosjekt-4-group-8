@@ -6,22 +6,22 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class MessageService {
-    private subject = new Subject<any>();
-    private idSubject = new Subject<any>();
+  private subject = new Subject<any>();
+  private idSubject = new Subject<any>();
 
-    sendCoords(lat, lng) {
-      this.subject.next({ text: [lat, lng] });
-    }
+  sendCoords(lat, lng) {
+    this.subject.next({ text: [lat, lng] });
+  }
 
-    sendID(id) {
-      this.idSubject.next({ text: id });
-    }
+  sendID(id) {
+    this.idSubject.next({ text: id });
+  }
 
-    getMessage(): Observable<any> {
-        return this.subject.asObservable();
-    }
+  getMessage(): Observable<any> {
+    return this.subject.asObservable();
+  }
 
-    getID(): Observable<any> {
-      return this.idSubject.asObservable();
-    }
+  getID(): Observable<any> {
+    return this.idSubject.asObservable();
+  }
 }

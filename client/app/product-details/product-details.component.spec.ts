@@ -22,7 +22,7 @@ describe('ProductDetailsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, HttpModule, RouterTestingModule],
-      declarations: [ ProductDetailsComponent ],
+      declarations: [ProductDetailsComponent],
       providers: [
         ProductService,
         MessageService,
@@ -31,7 +31,7 @@ describe('ProductDetailsComponent', () => {
         ToastComponent,
         AuthGuardAdmin]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -44,23 +44,23 @@ describe('ProductDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
   it('Should display product details ', () => {
-     component.product = {
-       _id: '1',
-       name: 'Testproductname',
-       description: 'Testproductdescription',
-       price: '3',
-       createdAt: '2017-11-15T13:29:01.332Z',
-       userId: '9',
-       category: 'Electronics',
-       user: {_id: '1', username: 'test', email: 'test@test.com'}
-     }
-     fixture.detectChanges()
-     const el = fixture.debugElement.queryAll(By.css('.productCardInfo div p'))
-     expect(el[0].nativeElement.textContent).toContain("PRICE: 3")
-     expect(el[1].nativeElement.textContent).toContain("TYPE: Electronics")
-     expect(el[2].nativeElement.textContent).toContain("ADDED: 2017-11-15T13:29:01.332Z")
-     expect(el[3].nativeElement.textContent).toContain("NAME: test")
-     expect(el[4].nativeElement.textContent).toContain("EMAIL: test@test.com")
+    component.product = {
+      _id: '1',
+      name: 'Testproductname',
+      description: 'Testproductdescription',
+      price: '3',
+      createdAt: '2017-11-15T13:29:01.332Z',
+      userId: '9',
+      category: 'Electronics',
+      user: { _id: '1', username: 'test', email: 'test@test.com' }
+    }
+    fixture.detectChanges()
+    const el = fixture.debugElement.queryAll(By.css('.productCardInfo div p'))
+    expect(el[0].nativeElement.textContent).toContain("PRICE: 3")
+    expect(el[1].nativeElement.textContent).toContain("TYPE: Electronics")
+    expect(el[2].nativeElement.textContent).toContain("ADDED: 2017-11-15T13:29:01.332Z")
+    expect(el[3].nativeElement.textContent).toContain("NAME: test")
+    expect(el[4].nativeElement.textContent).toContain("EMAIL: test@test.com")
   })
   it('Should display editing state', () => {
     component.product = {
@@ -71,7 +71,7 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {_id: '1', username: 'test', email: 'test@test.com'}
+      user: { _id: '1', username: 'test', email: 'test@test.com' }
     }
     component.userId = '1'
     component.authenticated = true
@@ -91,7 +91,7 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {_id: '1', username: 'test', email: 'test@test.com'}
+      user: { _id: '1', username: 'test', email: 'test@test.com' }
     }
     component.authenticated = true
     component.userId = '1'
@@ -109,7 +109,7 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {_id: '1', username: 'test', email: 'test@test.com'}
+      user: { _id: '1', username: 'test', email: 'test@test.com' }
     }
     component.authenticated = true
     component.isEditing = true
@@ -130,7 +130,7 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {_id: '1', username: 'test', email: 'test@test.com'}
+      user: { _id: '1', username: 'test', email: 'test@test.com' }
     }
     component.authenticated = true
     spyOn(component, 'deleteProduct');
@@ -150,7 +150,7 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {_id: '1', username: 'test', email: 'test@test.com'}
+      user: { _id: '1', username: 'test', email: 'test@test.com' }
     }
     component.authenticated = true
     component.userId = '1'
@@ -170,7 +170,7 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {_id: '1', username: 'test', email: 'test@test.com'}
+      user: { _id: '1', username: 'test', email: 'test@test.com' }
     }
     component.userId = '1'
     component.authenticated = true

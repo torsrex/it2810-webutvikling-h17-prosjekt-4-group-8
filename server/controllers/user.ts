@@ -29,8 +29,8 @@ export default class UserCtrl extends BaseCtrl {
   }
 
   delete = (req, res) => {
-    this.model.findOneAndRemove({ _id: req.params.id }).exec((err, removed) =>{
-      Product.find({user:req.params.id}).remove().exec()
+    this.model.findOneAndRemove({ _id: req.params.id }).exec((err, removed) => {
+      Product.find({ user: req.params.id }).remove().exec()
       if (err) { return console.error(err); }
       res.sendStatus(200);
     });

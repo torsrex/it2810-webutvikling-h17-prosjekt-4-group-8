@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
     Validators.required,
     Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
   ]);
-  phone = new FormControl('',[
+  phone = new FormControl('', [
     Validators.required,
     Validators.minLength(8),
     Validators.maxLength(30)
@@ -44,13 +44,13 @@ export class RegisterComponent implements OnInit {
   role = new FormControl('', [
     Validators.required,
   ]);
-  latitude = new FormControl({value: '', disabled: true}, [
+  latitude = new FormControl({ value: '', disabled: true }, [
     Validators.required,
     Validators.min(57.8),
     Validators.max(71.5),
     Validators.maxLength(30)
   ]);
-  longitude = new FormControl({value: '', disabled: true}, [
+  longitude = new FormControl({ value: '', disabled: true }, [
     Validators.required,
     Validators.min(3.5),
     Validators.max(31.5),
@@ -59,11 +59,11 @@ export class RegisterComponent implements OnInit {
   ]);
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              public toast: ToastComponent,
-              private userService: UserService,
-              private messageService: MessageService) {
-                this.subscription = this.messageService.getMessage().subscribe(msg => { this.init_lat = msg.text[0]; this.init_lng = msg.text[1]; this.zoom = 10; });
+    private router: Router,
+    public toast: ToastComponent,
+    private userService: UserService,
+    private messageService: MessageService) {
+    this.subscription = this.messageService.getMessage().subscribe(msg => { this.init_lat = msg.text[0]; this.init_lng = msg.text[1]; this.zoom = 10; });
   }
 
   ngOnInit() {
@@ -93,10 +93,10 @@ export class RegisterComponent implements OnInit {
     return { 'has-danger': !this.password.pristine && !this.password.valid };
   }
   setClassLatitude() {
-    return {'has-danger': !this.latitude.pristine && !this.latitude.valid }
+    return { 'has-danger': !this.latitude.pristine && !this.latitude.valid }
   }
   setClassLongitude() {
-    return {'has-danger': !this.longitude.pristine && !this.longitude.valid }
+    return { 'has-danger': !this.longitude.pristine && !this.longitude.valid }
   }
 
   register() {
@@ -109,7 +109,7 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  mapClick = ({coords: {lat, lng}}) => {
+  mapClick = ({ coords: { lat, lng } }) => {
     this.registerForm.controls["latitude"].setValue(lat)
     this.registerForm.controls["longitude"].setValue(lng)
   }

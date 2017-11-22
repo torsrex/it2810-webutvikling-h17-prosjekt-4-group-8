@@ -59,24 +59,24 @@ describe('Product', () => {
       });
     });
 
-    it("Get some should return an object", done =>{
+    it("Get some should return an object", done => {
       chai.request(app)
         .get('/api/products/getsome/1')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           done();
+        })
     })
-  })
-  it("Search should return an object", done =>{
-    chai.request(app)
-      .get('/api/products/search/FancyProduct/1/0/Infinity')
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.a('object');
-        done();
-  })
-})
+    it("Search should return an object", done => {
+      chai.request(app)
+        .get('/api/products/search/FancyProduct/1/0/Infinity')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        })
+    })
 
     it('should update a product by its id', done => {
       const product = new Product({ name: 'FancyProduct', description: "yolo desc", price: 4 });

@@ -1,56 +1,65 @@
 $color-2: #FF9800;
 
-.detailsCard{
+.detailsCard {
   border: 2px solid #ddd;
   background-color: #fcfcfc;
 }
 
-.cardHeader{
+.cardHeader {
   background-color: #555;
   color: #fff !important;
   display: flex;
   text-align: center;
-  p{
+
+  p {
     flex: 1;
-  }h5{
+  }
+
+  h5 {
     flex: 8;
     text-align: center !important;
   }
 }
-.cardContent{
+
+.cardContent {
   padding: 15px;
 }
-.card{
-  div{
-    img{
+
+.card {
+  div {
+    img {
       width: 150px;
       height: 150px;
     }
   }
 }
 
-.productsColumn{
+.productsColumn {
   display: flex;
   flex: 1;
-  table{
+
+  table {
     width: 100%; //nice
   }
 }
-.productCardInfo{
+
+.productCardInfo {
   display: flex;
   flex-direction: row;
-  div{
+
+  div {
     flex: 1;
   }
 }
 
-.iconLeft{
+.iconLeft {
   flex: 0.5;
   color: #fff;
-  padding: 8px 10px 8px 10px;
+  padding: 8px 10px;
 }
-.iconRight{
+
+.iconRight {
   flex: 1;
   color: #fff;
-  padding: 8px 10px 8px 10px;
+  padding: 8px 10px;
 }

@@ -1,36 +1,31 @@
 <div>
-  <div *ngIf="!isEditing"  class="detailsCard smallBottomMargin">
+  <div *ngIf="!isEditing" class="detailsCard smallBottomMargin">
     <!-- Title & edit/delete btns -->
     <div class="cardHeader">
-      <i
-      *ngIf="authenticated && (product.user._id === userId ||isAdmin)"
-      (click)="enableEditing()"
-      class="fa fa-pencil iconLeft clickable hoverHighlight"
-      aria-hidden>
+      <i *ngIf="authenticated && (product.user._id === userId ||isAdmin)" (click)="enableEditing()" class="fa fa-pencil iconLeft clickable hoverHighlight" aria-hidden>
       </i>
-      <i
-      *ngIf="authenticated && (product.user._id === userId ||isAdmin)"
-      (click)="deleteProduct()"
-      class="fa fa-trash-o iconLeft clickable hoverHighlight"
-      aria-hidden>
+      <i *ngIf="authenticated && (product.user._id === userId ||isAdmin)" (click)="deleteProduct()" class="fa fa-trash-o iconLeft clickable hoverHighlight" aria-hidden>
       </i>
 
       <h5>{{product.name | uppercase}}</h5>
 
-      <i (click)="hideDetailWindow()" class="fa fa-times iconRight clickable hoverHighlight" aria-hidden></i> <!-- deleteProduct() -->
+      <i (click)="hideDetailWindow()" class="fa fa-times iconRight clickable hoverHighlight" aria-hidden></i>
+      <!-- deleteProduct() -->
     </div>
 
     <div class="cardContent">
       <div class="productCardInfo mediumBottomMargin">
 
-        <div> <!-- Info fields -->
+        <div>
+          <!-- Info fields -->
           <strong>DETAILS</strong>
           <p>PRICE: {{product.price}} kr</p>
           <p>TYPE: {{product.category}}</p>
           <p>ADDED: {{product.createdAt}}</p>
         </div>
 
-        <div> <!-- User fields -->
+        <div>
+          <!-- User fields -->
           <strong>SELLER</strong>
           <p>NAME: {{product.user.username}}</p>
           <p>EMAIL: {{product.user.email}}</p>
@@ -47,11 +42,11 @@
 
 <!-- _______________________________EDITING STATE______________________________ -->
 
-<div *ngIf="isEditing"  class="detailsCard smallBottomMargin">
+<div *ngIf="isEditing" class="detailsCard smallBottomMargin">
   <div class="cardHeader"><i class="fa fa-times iconRight invisible"></i>
   </div>
   <div class="cardContent">
-    <form class="form-inline" [formGroup]="editProductForm"  (ngSubmit)="editProduct()" style="display:inline">
+    <form class="form-inline" [formGroup]="editProductForm" (ngSubmit)="editProduct()" style="display:inline">
       <div class="form-group mediumBottomMargin">
         <p>Name:</p>
         <input class="form-control" type="text" formControlName="name" placeholder="Name" required>

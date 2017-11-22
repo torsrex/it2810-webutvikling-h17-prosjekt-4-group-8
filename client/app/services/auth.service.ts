@@ -14,7 +14,7 @@ export class AuthService {
   currentUser = { _id: '', username: '', role: '', products: [] };
 
   constructor(private userService: UserService,
-              private router: Router) {
+    private router: Router) {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedUser = this.decodeUserFromToken(token);

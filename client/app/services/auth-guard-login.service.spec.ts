@@ -12,7 +12,7 @@ describe('AuthGuardLogin', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AuthGuardLogin, AuthService, UserService],
-      imports: [ HttpModule, RouterTestingModule ]
+      imports: [HttpModule, RouterTestingModule]
     });
   });
 

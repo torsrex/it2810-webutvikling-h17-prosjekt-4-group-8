@@ -20,10 +20,10 @@ describe('LogoutComponent', () => {
       })
     };
     TestBed.configureTestingModule({
-      declarations: [ LogoutComponent ],
-      providers: [ { provide: AuthService, useValue: authServiceStub } ],
+      declarations: [LogoutComponent],
+      providers: [{ provide: AuthService, useValue: authServiceStub }],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

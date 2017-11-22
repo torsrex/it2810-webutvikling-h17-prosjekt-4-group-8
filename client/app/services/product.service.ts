@@ -33,7 +33,7 @@ export class ProductService {
   }
 
   searchProduct(query, pageNum, min, max): Observable<any> {
-    if(query === ""){
+    if (query === "") {
       query = ".*"
     }
     return this.http.get(`/api/products/search/${query}/${pageNum}/${min}/${max}`,

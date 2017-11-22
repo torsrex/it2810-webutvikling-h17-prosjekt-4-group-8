@@ -2,8 +2,12 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-<button *ngIf="authenticated" class="createProductButton mediumBottomMargin" (click)="isEditing = !isEditing">Create product</button>
-<button *ngIf="!authenticated" class="createProductButton mediumBottomMargin" routerLink="/register">Register</button>
+<button *ngIf="authenticated" class="createProductButton mediumBottomMargin" (click)="isEditing = !isEditing">
+Create product
+</button>
+<button *ngIf="!authenticated" class="createProductButton mediumBottomMargin" routerLink="/register">
+Register
+</button>
 <!-- Add new product  -->
 <div class="background" *ngIf="authenticated && isEditing && !isLoading">
   <div class="card addSomethingPopup">
@@ -20,14 +24,16 @@
           <input class="form-control" type="number" name="price" formControlName="price" placeholder="Price" step="any" min="0">
         </div>
         <div class="form-group">
-        <select class="form-control" [(ngModel)]="selectedCategory" formControlName="category">
+          <select class="form-control" [(ngModel)]="selectedCategory" formControlName="category">
           <option selected value="default">--Select a category--</option>
           <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
         </select>
         </div>
         <br><br>
-        <button class="largeButton sideMargin" type="submit" [disabled]="!addProductForm.valid">add <i class="fa fa-plus"></i></button>
-        <button class="largeButton sideMargin" (click)="isEditing = !isEditing" >close <i class="fa fa-times"></i></button>
+        <button class="largeButton sideMargin" type="submit" [disabled]="!addProductForm.valid">
+        add<i class="fa fa-plus"></i></button>
+        <button class="largeButton sideMargin" (click)="isEditing = !isEditing">close <i class="fa fa-times"></i>
+      </button>
       </form>
     </div>
   </div>

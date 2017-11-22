@@ -6,7 +6,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 
 import { ProductService } from '../services/product.service';
 import { AuthService } from '../services/auth.service';
-import {MessageService} from '../services/message.service'
+import { MessageService } from '../services/message.service'
 import { UserService } from '../services/user.service'
 
 import { Subscription } from 'rxjs/Subscription';
@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./create-product.component.scss'],
 })
 
-export class CreateProductComponent implements OnInit{
+export class CreateProductComponent implements OnInit {
   //Observer vars
   message: any;
   subscription: Subscription;
@@ -50,12 +50,12 @@ export class CreateProductComponent implements OnInit{
   selectedCategory = "default"
 
   constructor(private productService: ProductService,
-              private messageService: MessageService,
-              private formBuilder: FormBuilder,
-              public toast: ToastComponent,
-              private auth: AuthService,
-              private userService: UserService
-            ) { }
+    private messageService: MessageService,
+    private formBuilder: FormBuilder,
+    public toast: ToastComponent,
+    private auth: AuthService,
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
     //Creates the add productform
@@ -70,12 +70,12 @@ export class CreateProductComponent implements OnInit{
     //Sets the userid
     this.userId = this.auth.currentUser['_id']
     //Gets other user paramters
-    if(this.authenticated){
+    if (this.authenticated) {
 
-    this.getUser()
+      this.getUser()
+    }
   }
-  }
- //Adds a new product
+  //Adds a new product
   addProduct() {
     //Code to add userid to product
     let productToAdd = this.addProductForm.value
@@ -105,10 +105,10 @@ export class CreateProductComponent implements OnInit{
   }
 
   //Code used to add productId to user
-  getUser(){
-  this.userService.getUser(this.auth.currentUser).subscribe(
-    data => this.user = data,
-    error => console.log(error)
+  getUser() {
+    this.userService.getUser(this.auth.currentUser).subscribe(
+      data => this.user = data,
+      error => console.log(error)
     )
   }
 }
