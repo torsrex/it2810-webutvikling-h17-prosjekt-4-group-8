@@ -110,8 +110,8 @@ export class RegisterComponent implements OnInit {
   }
 
   mapClick = ({coords: {lat, lng}}) => {
-    this.latitude.setValue(lat)
-    this.longitude.setValue(lng)
+    this.registerForm.controls["latitude"].setValue(lat)
+    this.registerForm.controls["longitude"].setValue(lng)
   }
 
   // Updates the zoom level when the user zooms the map
