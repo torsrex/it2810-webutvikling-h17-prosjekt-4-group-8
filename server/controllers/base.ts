@@ -7,7 +7,7 @@ abstract class BaseCtrl {
     this.model.find({}, (err, docs) => {
       if (err) { return console.error(err); }
       res.json(docs);
-    }).sort({ createdAt: -1 }).exec(); //Sorts by newest first
+    }).sort({ createdAt: -1 }).exec(); // sorts by newest first
   }
 
   // Count all

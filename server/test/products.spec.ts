@@ -29,7 +29,7 @@ describe('Product', () => {
     });
 
     it('should create new product', done => {
-      const product = { name: 'Fluffy', description: "yolo product", price: 2 };
+      const product = { name: 'Fluffy', description: 'yolo product', price: 2 };
       chai.request(app)
         .post('/api/product')
         .send(product)
@@ -43,7 +43,7 @@ describe('Product', () => {
         });
     });
     it('should get a product by its id', done => {
-      const product = new Product({ name: 'FancyProduct', description: "yolo desc", price: 4 });
+      const product = new Product({ name: 'FancyProduct', description: 'yolo desc', price: 4 });
       product.save((error, newProduct) => {
         chai.request(app)
           .get(`/api/product/${newProduct.id}`)
@@ -59,27 +59,27 @@ describe('Product', () => {
       });
     });
 
-    it("Get some should return an object", done => {
+    it('Get some should return an object', done => {
       chai.request(app)
         .get('/api/products/getsome/1')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           done();
-        })
-    })
-    it("Search should return an object", done => {
+        });
+    });
+    it('Search should return an object', done => {
       chai.request(app)
         .get('/api/products/search/FancyProduct/1/0/Infinity')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           done();
-        })
-    })
+        });
+    });
 
     it('should update a product by its id', done => {
-      const product = new Product({ name: 'FancyProduct', description: "yolo desc", price: 4 });
+      const product = new Product({ name: 'FancyProduct', description: 'yolo desc', price: 4 });
       product.save((error, newProduct) => {
         chai.request(app)
           .put(`/api/product/${newProduct.id}`)
@@ -92,7 +92,7 @@ describe('Product', () => {
     });
 
     it('should delete a product by its id', done => {
-      const product = new Product({ name: 'FancyProduct', description: "yolo desc", price: 4 });
+      const product = new Product({ name: 'FancyProduct', description: 'yolo desc', price: 4 });
       product.save((error, newProduct) => {
         chai.request(app)
           .delete(`/api/product/${newProduct.id}`)

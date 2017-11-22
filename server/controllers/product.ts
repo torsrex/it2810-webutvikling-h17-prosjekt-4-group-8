@@ -4,55 +4,55 @@ import BaseCtrl from './base';
 export default class ProductCtrl extends BaseCtrl {
   model = Product;
 
-  // Get all
+  //  Get all
   getAll = (req, res) => {
     this.model.find({}, (err, docs) => {
       if (err) { return console.error(err); }
       res.json(docs);
-    }).populate("user").sort({ createdAt: -1 }).exec() //Sorts by newest first
-    //Populate fetches from the other collection
+    }).populate('user').sort({ createdAt: -1 }).exec(); // Sorts by newest first
+    // Populate fetches from the other collection
   }
 
-  //pagination function
+  // pagination function
   getSomeProducts = (req, res) => {
-    const sortingParam = req.query.sortby ? req.query.sortby : "createdAt"
-    const sortingOrder = req.query.increasing ? req.query.increasing : 1
-    let filter = {}
+    const sortingParam = req.query.sortby ? req.query.sortby : 'createdAt';
+    const sortingOrder = req.query.increasing ? req.query.increasing : 1;
+    let filter = {};
     if (req.query.filter) {
-      filter = { $where: "this.category == '" + req.query.category + "'" }
+      filter = { $where: 'this.category == \'' + req.query.category + '\'' };
     } else {
-      filter = {}
+      filter = {};
     }
     this.model.paginate(filter, {
       page: req.params.pageNum, limit: 10,
-      sort: { [sortingParam]: +sortingOrder }, populate: "user"
+      sort: { [sortingParam]: +sortingOrder }, populate: 'user'
     }, (err, docs) => {
       if (err) { return console.error(err); }
       res.json(docs);
-    })
+    });
   }
 
-  //search function
+  // search function
   search = (req, res) => {
-    const sortingParam = req.query.sortby ? req.query.sortby : "createdAt"
-    const sortingOrder = req.query.increasing ? req.query.increasing : 1
-    const category = req.query.category === "default" ? ".*" : req.query.category
-    const searchParam = req.params.query === "" ? ".*" : req.params.query
+    const sortingParam = req.query.sortby ? req.query.sortby : 'createdAt';
+    const sortingOrder = req.query.increasing ? req.query.increasing : 1;
+    const category = req.query.category === 'default' ? '.*' : req.query.category;
+    const searchParam = req.params.query === '' ? '.*' : req.params.query;
 
-    let regexSearch = new RegExp("\\b^(" + searchParam + ")+.*\\b", 'i')
-    let categorySearch = new RegExp("^" + category + "$", 'i')
+    const regexSearch = new RegExp('\\b^(' + searchParam + ')+.*\\b', 'i');
+    const categorySearch = new RegExp('^' + category + '$', 'i');
 
     const filterQuery = {
       $and: [
         {
-          "name": { $regex: regexSearch }
+          'name': { $regex: regexSearch }
         },
         {
-          "category": { $regex: categorySearch }
+          'category': { $regex: categorySearch }
         }
       ],
       price: { $gte: req.params.min, $lte: req.params.max }
-    }
+    };
     const options = {
       page: req.params.pageNum,
       limit: 10,
@@ -67,7 +67,7 @@ export default class ProductCtrl extends BaseCtrl {
           $meta: 'textScore'
         },
       },
-      populate: "user",
+      populate: 'user',
       lean: false,
       leanWithId: true,
     };
@@ -76,6 +76,6 @@ export default class ProductCtrl extends BaseCtrl {
       (err, docs) => {
         if (err) { return console.error(err); }
         res.json(docs);
-      })
+      });
   }
 }

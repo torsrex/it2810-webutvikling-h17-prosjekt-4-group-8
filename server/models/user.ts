@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   longitude: Number,
   latitude: Number,
   phone: String,
-  //Sets to product array which references the products collection
+  // Sets to product array which references the products collection
   products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
   name: String,
 });
