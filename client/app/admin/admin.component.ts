@@ -1,3 +1,6 @@
+/* Component for the admin page, which lists all users,
+and has the ability to delete them */
+
 import { Component, OnInit } from '@angular/core';
 
 import { ToastComponent } from '../shared/toast/toast.component';

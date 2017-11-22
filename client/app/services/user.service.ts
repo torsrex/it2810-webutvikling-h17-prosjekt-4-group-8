@@ -1,3 +1,5 @@
+/* Service for working with the users in the database */
+
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 

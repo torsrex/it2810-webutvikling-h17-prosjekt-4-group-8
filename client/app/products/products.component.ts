@@ -1,3 +1,8 @@
+/* Component for the Products page, which displays the list of products,
+products details, map, seach field, and button for creating a new product.
+This component contains the functionality for searhcing and filtering the
+list, as well as sorting it by different values */
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 

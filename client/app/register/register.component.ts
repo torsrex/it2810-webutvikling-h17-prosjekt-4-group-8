@@ -1,3 +1,6 @@
+/* Component for the Register page, which handles registering a new user
+with the required information */
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';

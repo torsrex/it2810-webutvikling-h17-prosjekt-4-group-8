@@ -1,3 +1,6 @@
+/* Component for the My Products page, which displays all the users
+products, as well as the ten most recent searches */
+
 import { Component, OnInit, NgModule } from '@angular/core';
 
 import { AuthService } from '../services/auth.service';

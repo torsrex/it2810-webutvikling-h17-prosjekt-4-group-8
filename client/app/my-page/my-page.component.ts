@@ -1,3 +1,5 @@
+/* Component for My Page, where the user can update the personal information */
+
 import { Component, OnInit } from '@angular/core';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';

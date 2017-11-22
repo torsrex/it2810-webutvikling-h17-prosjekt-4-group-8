@@ -1,3 +1,5 @@
+/* Component for the Not Found page */
+
 import { Component } from '@angular/core';
 
 @Component({

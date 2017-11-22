@@ -1,3 +1,5 @@
+/* Service for working with the products in the databse */
+
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 

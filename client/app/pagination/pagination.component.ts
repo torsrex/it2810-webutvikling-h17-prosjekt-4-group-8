@@ -1,3 +1,6 @@
+/* Component for the pagination on the Products page, which splits the
+list of search results into smaller lists of size ten */
+
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({

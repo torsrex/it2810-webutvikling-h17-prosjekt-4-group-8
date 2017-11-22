@@ -1,3 +1,8 @@
+/* Component for the box containing product details that show ut when
+the user clicks a products in the list. The box also contains buttons for
+sorting the list by user and showing user location on the map, as well as
+editing and deleting. */
+
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { ProductService } from '../services/product.service';

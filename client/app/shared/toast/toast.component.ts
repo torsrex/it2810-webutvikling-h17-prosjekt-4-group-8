@@ -1,3 +1,5 @@
+/* Component for the toast message the appears on the bottom of the page */
+
 import { Component, Input } from '@angular/core';
 
 @Component({

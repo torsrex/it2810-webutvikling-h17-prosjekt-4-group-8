@@ -1,3 +1,5 @@
+/* Component for the loading icon that appears when loading */
+
 import { Component, Input } from '@angular/core';
 
 @Component({

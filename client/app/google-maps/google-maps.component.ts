@@ -1,3 +1,7 @@
+/* Component for the google map on the products page that displays user
+locations, show a selected product's location, and can be used to
+filter the list of products based on the selected user */
+
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../services/user.service';

@@ -1,3 +1,5 @@
+/* Component for creating a new product and adding it to the database */
+
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
