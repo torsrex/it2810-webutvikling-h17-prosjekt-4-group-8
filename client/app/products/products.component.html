@@ -35,8 +35,8 @@
         step="100"
         placeholder="min price"
         [(ngModel)]="minPrice"
-        (ngModelChange)="changedQuery(query)"
-        (keyup.enter)="changedQuery(query)"
+        (ngModelChange)="changedMinPrice(minPrice)"
+        (keyup.enter)="changedMinPrice(minPrice)"
         >
         <!-- max search -->
         <input
@@ -46,12 +46,12 @@
         step="100"
         placeholder="max price"
         [(ngModel)]="maxPrice"
-        (ngModelChange)="changedQuery(query)"
-        (keyup.enter)="changedQuery(query)"
+        (ngModelChange)="changedMaxPrice(maxPrice)"
+        (keyup.enter)="changedMaxPrice(maxPrice)"
         >
 
         <!-- Category filter. works outside of search, should be separated -->
-        <select class="form-control"  [(ngModel)]="selectedCategory" (ngModelChange)="changedQuery(query)">
+        <select class="form-control"  [(ngModel)]="selectedCategory" (ngModelChange)="changedSelection(selectedCategory)">
           <option selected value="default" >--Select a category--</option>
           <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
         </select>

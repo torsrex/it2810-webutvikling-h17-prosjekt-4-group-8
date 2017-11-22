@@ -34,7 +34,9 @@ export class ProductsComponent implements OnInit {
   product = {}; // A single product, used when updating detailview and editing
   products = []; // List containing all products fetched from api
   minPrice = -Infinity; // Minprice in search filter
+  minPriceChanged: Subject<number> = new Subject<number>();
   maxPrice = Infinity; // Maxprice in search filter
+  maxPriceChanged: Subject<number> = new Subject<number>();
   isLoading = true;
   authenticated = false; // Is the user authenticated?
   userId: string; // What is the current userid?
@@ -55,6 +57,7 @@ export class ProductsComponent implements OnInit {
   sortingOrder = true; // What order to sort by
   sortQuery = '?'; // Holds the sort query
   selectedCategory = 'default';
+  categoryChanged: Subject<string> = new Subject<string>();
   ascName = false;
   ascPrice = false;
   nameSelected = false;
@@ -82,8 +85,24 @@ export class ProductsComponent implements OnInit {
     this.queryChanged
             .debounceTime(500) // wait 300ms after the last event before emitting last event
             .distinctUntilChanged() // only emit if value is different from previous value
-            .subscribe(query => {this.query = query, this.searchProducts()},
-              (err) => (console.log(this.query)));
+            .subscribe(query => {this.query = query, this.searchProducts(); },
+              (err) => console.log(err)
+            );
+    this.minPriceChanged
+            .debounceTime(500)
+            .distinctUntilChanged()
+            .subscribe(price => {this.minPrice = price, this.searchProducts(); },
+              (err) => console.log(err));
+    this.maxPriceChanged
+            .debounceTime(500)
+            .distinctUntilChanged()
+            .subscribe(price => {this.minPrice = price, this.searchProducts(); },
+              (err) => console.log(err));
+    this.categoryChanged
+            .debounceTime(500)
+            .distinctUntilChanged()
+            .subscribe(cat => {this.selectedCategory = cat, this.searchProducts(); },
+              (err) => console.log(err));
     }
 
   ngOnInit() {
@@ -104,7 +123,18 @@ export class ProductsComponent implements OnInit {
 
   changedQuery(text: string) {
     this.queryChanged.next(text);
-}
+  }
+  changedMinPrice(num: number) {
+    this.minPriceChanged.next(num);
+  }
+  changedMaxPrice(num: number) {
+    this.maxPriceChanged.next(num);
+
+  }
+
+  changedSelection(cat: string) {
+    this.categoryChanged.next(cat);
+  }
 
   // Fetches products and stores in products list
   getProducts(pageNum, sortQuery) {

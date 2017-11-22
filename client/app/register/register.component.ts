@@ -114,7 +114,7 @@ export class RegisterComponent implements OnInit {
         this.toast.setMessage('you successfully registered!', 'success');
         this.router.navigate(['/login']);
       },
-      error => this.toast.setMessage('Some bug', 'danger')
+      error => this.toast.setMessage('Email already exists', 'danger')
     );
   }
 
