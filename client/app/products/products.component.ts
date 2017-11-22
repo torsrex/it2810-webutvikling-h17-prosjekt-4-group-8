@@ -96,7 +96,7 @@ export class ProductsComponent implements OnInit {
     this.maxPriceChanged
             .debounceTime(500)
             .distinctUntilChanged()
-            .subscribe(price => {this.minPrice = price, this.searchProducts(); },
+            .subscribe(price => {this.maxPrice = price, this.searchProducts(); },
               (err) => console.log(err));
     this.categoryChanged
             .debounceTime(500)
@@ -169,8 +169,11 @@ export class ProductsComponent implements OnInit {
   }
 
   handleProductAdded(product) {
-    this.products.push(product);
-    this.totalListings++;
+    this.nameSelected = false;
+    this.priceSelected = false;
+    this.sortingParam="createdAt"
+    this.sortingOrder=true
+    this.sortBy('createdAt')
   }
   handleHideProductDetails(param) {
     this.displayProductDetails = param;
@@ -283,7 +286,6 @@ export class ProductsComponent implements OnInit {
     // Handles default search variables
     this.searching = true;
     this.hidePagination = false;
-    this.pageNum = 1;
     // Code to fix minprice and maxPrice
     this.minPrice = !this.minPrice ? 0 : this.minPrice;
     this.maxPrice = !this.maxPrice ? Infinity : this.maxPrice;
