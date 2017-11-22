@@ -18,6 +18,9 @@ import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
 import { Subscription } from 'rxjs/Rx';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-products',
@@ -28,7 +31,6 @@ export class ProductsComponent implements OnInit {
   // Observer vars
   subscription: Subscription;
 
-  query = ''; // Searchquery
   product = {}; // A single product, used when updating detailview and editing
   products = []; // List containing all products fetched from api
   minPrice = -Infinity; // Minprice in search filter
@@ -46,6 +48,8 @@ export class ProductsComponent implements OnInit {
   hidePagination = false;
 
   // Used to handle search and sorting
+  query = ''; // Searchquery
+  queryChanged: Subject<string> = new Subject<string>();
   searching = false; // Variable to indicate if we're in search mode
   sortingParam: string; // What to sort by
   sortingOrder = true; // What order to sort by
@@ -75,7 +79,12 @@ export class ProductsComponent implements OnInit {
     private auth: AuthService,
     private userService: UserService
   ) {
-  }
+    this.queryChanged
+            .debounceTime(500) // wait 300ms after the last event before emitting last event
+            .distinctUntilChanged() // only emit if value is different from previous value
+            .subscribe(query => {this.query = query, this.searchProducts()},
+              (err) => (console.log(this.query)));
+    }
 
   ngOnInit() {
     // OBSERVER: Subscription function, is run when productDetails runs sendMessage();
@@ -92,6 +101,10 @@ export class ProductsComponent implements OnInit {
       this.getUser();
     }
   }
+
+  changedQuery(text: string) {
+    this.queryChanged.next(text);
+}
 
   // Fetches products and stores in products list
   getProducts(pageNum, sortQuery) {
