@@ -20,7 +20,8 @@ export class GoogleMapsComponent implements OnInit {
 
   constructor(private userService: UserService,
               private messageService: MessageService) {
-                this.subscription = this.messageService.getMessage().subscribe(msg => { this.init_lat = msg.text[0]; this.init_lng = msg.text[1]; this.zoom = 10; });
+                this.subscription = this.messageService.getMessage().
+                subscribe(msg => { this.init_lat = msg.text[0]; this.init_lng = msg.text[1]; this.zoom = 10; });
   }
 
   ngOnInit() {

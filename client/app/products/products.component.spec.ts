@@ -128,14 +128,14 @@ describe('ProductsComponent', () => {
   })
   it('Search should call search function', () => {
     component.isLoading = false
-    spyOn(component, 'searchFromBox');
+    spyOn(component, 'searchProducts');
     fixture.detectChanges()
     const el = fixture.debugElement.queryAll(By.css('.searchFields input'))
     const query = el[0].nativeElement
     query.value = "test"
     query.dispatchEvent(new Event('input'))
     fixture.detectChanges()
-    expect(component.searchFromBox).toHaveBeenCalled()
+    expect(component.searchProducts).toHaveBeenCalled()
   })
   it('Should set ascName and sortingParam correctly', () => {
     component.isLoading = false

@@ -1,5 +1,5 @@
 <div>
-  <div *ngIf="!isEditing && displayProductDetails"  class="detailsCard smallBottomMargin">
+  <div *ngIf="!isEditing"  class="detailsCard smallBottomMargin">
     <!-- Title & edit/delete btns -->
     <div class="cardHeader">
       <i
@@ -17,7 +17,7 @@
 
       <h5>{{product.name | uppercase}}</h5>
 
-      <i (click)="displayProductDetails = !displayProductDetails " class="fa fa-times iconRight clickable hoverHighlight" aria-hidden></i> <!-- deleteProduct() -->
+      <i (click)="hideDetailWindow()" class="fa fa-times iconRight clickable hoverHighlight" aria-hidden></i> <!-- deleteProduct() -->
     </div>
 
     <div class="cardContent">

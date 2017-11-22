@@ -12,8 +12,7 @@ import { AuthService } from '../services/auth.service';
 import { MessageService } from '../services/message.service'
 import { UserService } from '../services/user.service'
 
-import { Subscription } from 'rxjs/Subscription';
-
+import { Subscription } from 'rxjs/subscription'
 
 @Component({
   selector: 'app-products',
@@ -30,7 +29,6 @@ export class ProductsComponent implements OnInit {
   minPrice = -Infinity; //Minprice in search filter
   maxPrice = Infinity; //Maxprice in search filter
   isLoading = true;
-  isEditing = false;
   authenticated = false //Is the user authenticated?
   userId: string //What is the current userid?
   user = {} //List containing the current user's parameters
@@ -58,7 +56,6 @@ export class ProductsComponent implements OnInit {
   displayProductDetails = false;
 
   //Creates the default formgroup for adding a new product
-  addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
   description = new FormControl('', Validators.required);
   price = new FormControl('', Validators.required);
@@ -73,23 +70,14 @@ export class ProductsComponent implements OnInit {
     private auth: AuthService,
     private userService: UserService
   ) {
-    //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
-    this.subscription = this.messageService.getMessage().subscribe(message => {
-      this.getProducts(this.pageNum, this.sortQuery);
-    });
-    this.subscription = this.messageService.getID().subscribe(id => { this.filterByUser(id.text); })
   }
 
   ngOnInit() {
+    //OBSERVER: Subscription function, is run when productDetails runs sendMessage();
+    this.subscription = this.messageService.getID()
+      .subscribe(id => { this.filterByUser(id.text); })
     //Initial fetch of products
     this.getProducts(this.pageNum, this.sortQuery);
-    //Creates the add productform
-    this.addProductForm = this.formBuilder.group({
-      name: this.name,
-      description: this.description,
-      price: this.price,
-      category: this.category
-    });
     //Gets user logged in status
     this.authenticated = this.auth.loggedIn
     //Sets the userid
@@ -97,8 +85,27 @@ export class ProductsComponent implements OnInit {
     //Gets other user paramters
     if (this.authenticated) {
       this.getUser()
-
     }
+  }
+
+  //Fetches products and stores in products list
+  getProducts(pageNum, sortQuery) {
+    this.productService.getProducts(pageNum + sortQuery).subscribe(
+      data => {
+        this.products = data.docs
+        this.totalPageNum = data.pages
+        this.totalListings = data.total
+      },
+      error => console.log(error),
+      () => { this.isLoading = false, this.isLoadingDynamic = false }
+    );
+  }
+  //Code used to add productId to user
+  getUser() {
+    this.userService.getUser(this.auth.currentUser).subscribe(
+      data => this.user = data,
+      error => console.log(error)
+    )
   }
 
   updateDetailView(product) {
@@ -113,43 +120,17 @@ export class ProductsComponent implements OnInit {
     $event.target.parentNode.classList.add('styleThis');
   }
 
-  toggleDetailsCard() {
-    this.displayProductDetails = !this.displayProductDetails;
-  }
-  //Fetches products and stores in products list
-  getProducts(pageNum, sortQuery) {
-    this.productService.getProducts(pageNum + sortQuery).subscribe(
-      data => {
-        this.products = data.docs
-        this.totalPageNum = data.pages
-        this.totalListings = data.total
-      },
-      error => console.log(error),
-      () => { this.isLoading = false, this.isLoadingDynamic = false }
-    );
-  }
-
-  enableEditing(product) {
-    this.isEditing = true;
-    this.product = product;
-  }
-
-  handleProductAdded(product){
+  handleProductAdded(product) {
     this.products.push(product)
     this.totalListings++
   }
-  cancelEditing() {
-    this.isEditing = false;
-    this.product = {};
-    this.toast.setMessage('item editing cancelled.', 'warning');
-    // reload the products to reset the editing
-    this.getProducts(this.pageNum, this.sortQuery);
+  handleHideProductDetails(param) {
+    this.displayProductDetails = param
   }
 
-  editProduct(product) {
+  handleProductEdited(product) {
     this.productService.editProduct(product).subscribe(
       res => {
-        this.isEditing = false;
         this.product = product;
         this.toast.setMessage('item edited successfully.', 'success');
       },
@@ -157,19 +138,18 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  deleteProduct(product) {
-    if (window.confirm('Are you sure you want to permanently delete this item?')) {
-      this.productService.deleteProduct(product).subscribe(
-        res => {
-          const pos = this.products.map(elem => elem._id).indexOf(product._id);
-          this.products.splice(pos, 1);
-          this.toast.setMessage('item deleted successfully.', 'success');
-        },
-        error => console.log(error)
-      );
-    }
+  handleProductDeleted(product) {
+    this.productService.deleteProduct(product).subscribe(
+      res => {
+        const pos = this.products.map(elem => elem._id).indexOf(product._id);
+        this.products.splice(pos, 1);
+        this.toast.setMessage('item deleted successfully.', 'success');
+      },
+      error => console.log(error)
+    );
   }
 
+  //Sorting functions
   toggleNameSort() {
     this.ascName = !this.ascName;
     this.ascPrice = true;
@@ -182,7 +162,6 @@ export class ProductsComponent implements OnInit {
     this.nameSelected = false;
     this.priceSelected = true;
   }
-
   sortBy(value) {
     this.sortingParam = value
     this.sortingOrder = !this.sortingOrder
@@ -223,14 +202,6 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  //Code used to add productId to user
-  getUser() {
-    this.userService.getUser(this.auth.currentUser).subscribe(
-      data => this.user = data,
-      error => console.log(error)
-    )
-  }
-
   // filters the list of products based on user id, can get id from both the
   // GoogleMapsComponent and the ProductDetailsComponent
   filterByUser(id) {
@@ -241,11 +212,6 @@ export class ProductsComponent implements OnInit {
     )
   }
   //code used to handle searches
-  searchFromBox() {
-    this.hidePagination = false
-    this.pageNum = 1
-    this.searchProducts()
-  }
   searchProducts() {
     if (this.query === "" && this.minPrice === (-Infinity) &&
       this.maxPrice === Infinity && this.selectedCategory === "default") {
@@ -254,6 +220,7 @@ export class ProductsComponent implements OnInit {
       this.getProducts(1, '?')
       return
     }
+    //Creates search history
     let history = []
     let object = { query: this.query, minPrice: this.minPrice, maxPrice: this.maxPrice };
     if (JSON.parse(localStorage.getItem('searches'))) {
@@ -265,7 +232,10 @@ export class ProductsComponent implements OnInit {
     history.splice(10)
     localStorage.setItem('searches', JSON.stringify(history));
 
+    //Handles default search variables
     this.searching = true
+    this.hidePagination = false
+    this.pageNum = 1
     //Code to fix minprice and maxPrice
     this.minPrice = !this.minPrice ? 0 : this.minPrice
     this.maxPrice = !this.maxPrice ? Infinity : this.maxPrice
@@ -289,7 +259,6 @@ export class ProductsComponent implements OnInit {
     this.ascPrice = false;
     this.nameSelected = false;
     this.priceSelected = false;
-    this.isEditing = false
     this.hidePagination = false
     this.displayProductDetails = false;
     this.minPrice = -Infinity

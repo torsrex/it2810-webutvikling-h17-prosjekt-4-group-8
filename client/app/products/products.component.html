@@ -23,8 +23,8 @@
         class="form-control"
         placeholder="Search for a name"
         [(ngModel)]="query"
-        (ngModelChange)="searchFromBox()"
-        (keyup.enter)="searchFromBox()"
+        (ngModelChange)="searchProducts()"
+        (keyup.enter)="searchProducts()"
         type="text"
         >
         <!-- min search -->
@@ -35,8 +35,8 @@
         step="100"
         placeholder="min price"
         [(ngModel)]="minPrice"
-        (ngModelChange)="searchFromBox()"
-        (keyup.enter)="searchFromBox()"
+        (ngModelChange)="searchProducts()"
+        (keyup.enter)="searchProducts()"
         >
         <!-- max search -->
         <input
@@ -46,17 +46,17 @@
         step="100"
         placeholder="max price"
         [(ngModel)]="maxPrice"
-        (ngModelChange)="searchFromBox()"
-        (keyup.enter)="searchFromBox()"
+        (ngModelChange)="searchProducts()"
+        (keyup.enter)="searchProducts()"
         >
 
         <!-- Category filter. works outside of search, should be separated -->
-        <select class="form-control"  [(ngModel)]="selectedCategory" (ngModelChange)="searchFromBox()">
+        <select class="form-control"  [(ngModel)]="selectedCategory" (ngModelChange)="searchProducts()">
           <option selected value="default" >--Select a category--</option>
           <option *ngFor="let c of categories" [ngValue]="c">{{c}}</option>
         </select>
 
-        <!-- <button class="inputBtn"(click)="searchFromBox()">Search <i class="fa fa-search"></i></button> -->
+        <!-- <button class="inputBtn"(click)="searchProducts()">Search <i class="fa fa-search"></i></button> -->
         <button class="inputBtn darkBg" (click)="clearFilter()">Clear filter <i class="fa fa-times"></i></button>
       </div>
     </div>
@@ -97,7 +97,7 @@
             </tr>
           </tbody>
           <app-loading [condition]="isLoadingDynamic"></app-loading>
-          <tbody *ngIf="!isEditing && !isLoadingDynamic">
+          <tbody *ngIf="!isLoadingDynamic">
             <tr *ngFor="let product of products" (click)="updateStyle($event); updateDetailView(product)"> <!-- Generates a tr for each product in the db. -->
               <td>{{product.name}}</td>
               <td>{{product.price}} kr</td>
@@ -122,7 +122,10 @@
       <!-- GOOGLE MAPS + card details (right column)________________________ -->
       <div class="rightColumn">
         <!-- Product details card -->
-        <app-product-details *ngIf="displayProductDetails" [authenticated]="authenticated" [product]="productDetails.product" class="detailsCard"></app-product-details>
+        <app-product-details (productDeleted)="handleProductDeleted($event)"
+        (productEdited)="handleProductEdited($event)"
+        (hideProductDetails)="handleHideProductDetails($event)"
+        *ngIf="displayProductDetails" [authenticated]="authenticated" [product]="productDetails.product" class="detailsCard"></app-product-details>
         <!-- Google maps Map -->
         <h4 *ngIf="!displayProductDetails" class="centerText">Map of User Locations</h4>
         <app-google-maps></app-google-maps>

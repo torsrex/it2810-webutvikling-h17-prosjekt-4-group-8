@@ -154,12 +154,12 @@ describe('ProductDetailsComponent', () => {
     }
     component.authenticated = true
     component.userId = '1'
-    spyOn(component, 'removeDetailsCard')
+    spyOn(component, 'hideDetailWindow')
     fixture.detectChanges()
     const el = fixture.debugElement.queryAll(By.css('.cardHeader i'))
     const close = el[2]
     close.triggerEventHandler('click', null)
-    expect(component.removeDetailsCard).toHaveBeenCalled()
+    expect(component.hideDetailWindow).toHaveBeenCalled()
   })
   it('Should change editing variable', () => {
     component.product = {
