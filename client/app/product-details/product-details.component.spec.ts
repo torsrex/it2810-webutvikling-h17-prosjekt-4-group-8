@@ -3,9 +3,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ToastComponent } from '../shared/toast/toast.component';
 
 import { ProductDetailsComponent } from './product-details.component';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms'
 import { ProductService } from '../services/product.service'
 import { MessageService } from '../services/message.service'
+import { AuthService } from '../services/auth.service'
+import { UserService } from '../services/user.service'
 import { HttpModule } from '@angular/http'
 
 import { By } from '@angular/platform-browser';
@@ -17,9 +20,9 @@ describe('ProductDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, HttpModule],
+      imports: [ReactiveFormsModule, HttpModule, RouterTestingModule],
       declarations: [ ProductDetailsComponent ],
-      providers: [ProductService, MessageService, ToastComponent]
+      providers: [ProductService, MessageService, AuthService, UserService, ToastComponent]
     })
     .compileComponents();
   }));
@@ -42,7 +45,7 @@ describe('ProductDetailsComponent', () => {
        createdAt: '2017-11-15T13:29:01.332Z',
        userId: '9',
        category: 'Electronics',
-       user: {username: 'test', email: 'test@test.com'}
+       user: {_id: '1', username: 'test', email: 'test@test.com'}
      }
      fixture.detectChanges()
      const el = fixture.debugElement.queryAll(By.css('.productCardInfo div p'))
@@ -61,8 +64,9 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {username: 'test', email: 'test@test.com'}
+      user: {_id: '1', username: 'test', email: 'test@test.com'}
     }
+    component.userId = '1'
     component.authenticated = true
     spyOn(component, 'enableEditing');
     fixture.detectChanges()
@@ -80,9 +84,10 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {username: 'test', email: 'test@test.com'}
+      user: {_id: '1', username: 'test', email: 'test@test.com'}
     }
     component.authenticated = true
+    component.userId = '1'
     component.isEditing = true
     fixture.detectChanges()
     const el = fixture.debugElement.queryAll(By.css('.cardContent form div input'))
@@ -97,10 +102,11 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {username: 'test', email: 'test@test.com'}
+      user: {_id: '1', username: 'test', email: 'test@test.com'}
     }
     component.authenticated = true
     component.isEditing = true
+    component.userId = '1'
     spyOn(component, 'cancelEditing');
     fixture.detectChanges()
     const el = fixture.debugElement.queryAll(By.css('.cardContent button'))[1]
@@ -117,10 +123,11 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {username: 'test', email: 'test@test.com'}
+      user: {_id: '1', username: 'test', email: 'test@test.com'}
     }
     component.authenticated = true
     spyOn(component, 'deleteProduct');
+    component.userId = '1'
     fixture.detectChanges()
     const el = fixture.debugElement.queryAll(By.css('.detailsCard div i'))
     const pencil = el[1]
@@ -136,9 +143,10 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {username: 'test', email: 'test@test.com'}
+      user: {_id: '1', username: 'test', email: 'test@test.com'}
     }
     component.authenticated = true
+    component.userId = '1'
     spyOn(component, 'removeDetailsCard')
     fixture.detectChanges()
     const el = fixture.debugElement.queryAll(By.css('.cardHeader i'))
@@ -155,8 +163,9 @@ describe('ProductDetailsComponent', () => {
       createdAt: '2017-11-15T13:29:01.332Z',
       userId: '9',
       category: 'Electronics',
-      user: {username: 'test', email: 'test@test.com'}
+      user: {_id: '1', username: 'test', email: 'test@test.com'}
     }
+    component.userId = '1'
     component.authenticated = true
     fixture.detectChanges()
     const el = fixture.debugElement.queryAll(By.css('.detailsCard div i'))

@@ -3,6 +3,8 @@ import {MessageService} from '../services/message.service'
 import { ProductService } from '../services/product.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ToastComponent } from '../shared/toast/toast.component';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'app-product-details',
@@ -13,7 +15,9 @@ import { ToastComponent } from '../shared/toast/toast.component';
 
 export class ProductDetailsComponent {
   //Needed to bind the product from the parent class to this class.
-  @Input() product = {_id: '', name: '', description: '', price: '', createdAt: '', userId: '', category: '', user: {username: '', email: ''}};
+  @Input() product = {_id: '', name: '', description: '', price: '',
+    createdAt: '', userId: '', category: '', 
+    user: {_id: '', username: '', email: ''}};
   @Input() authenticated: boolean
   //Local variables
   isEditing = false;
@@ -22,6 +26,8 @@ export class ProductDetailsComponent {
   name = new FormControl('', Validators.required);
   description = new FormControl('', Validators.required);
   price = new FormControl('', Validators.required);
+  //Userid to handle permissions
+  userId: string
 
 
 
@@ -29,13 +35,15 @@ export class ProductDetailsComponent {
   constructor(private productService: ProductService,
               private message: MessageService,
               public toast: ToastComponent,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private auth: AuthService) { }
   ngOnInit() {
     this.editProductForm = this.formBuilder.group({
       name: "",
       description: "",
       price: null,
     });
+    this.userId = this.auth.currentUser['_id']
   }
 
   removeDetailsCard(){
